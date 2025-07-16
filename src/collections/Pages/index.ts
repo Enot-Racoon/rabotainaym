@@ -22,6 +22,10 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 
 export const Pages: CollectionConfig<'pages'> = {
+  labels: {
+    plural: 'Страницы',
+    singular: 'Страница',
+  },
   slug: 'pages',
   access: {
     create: authenticated,
@@ -59,6 +63,7 @@ export const Pages: CollectionConfig<'pages'> = {
   },
   fields: [
     {
+      label: 'Заголовок',
       name: 'title',
       type: 'text',
       required: true,
@@ -66,23 +71,28 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       type: 'tabs',
       tabs: [
-        {
-          fields: [hero],
-          label: 'Hero',
-        },
+        // {
+        //   fields: [hero],
+        //   label: 'Hero',
+        // },
         {
           fields: [
             {
+              labels: {
+                plural: 'блоки',
+                singular: 'блок',
+              },
+              label: 'Блоки',
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [Content, MediaBlock, FormBlock, CallToAction, Archive],
               required: true,
               admin: {
                 initCollapsed: true,
               },
             },
           ],
-          label: 'Content',
+          label: 'Контент',
         },
         {
           name: 'meta',
@@ -114,6 +124,7 @@ export const Pages: CollectionConfig<'pages'> = {
       ],
     },
     {
+      label: 'Опубликовано',
       name: 'publishedAt',
       type: 'date',
       admin: {

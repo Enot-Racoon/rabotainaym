@@ -9,11 +9,11 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 
 const blockComponents = {
-  archive: ArchiveBlock,
   content: ContentBlock,
-  cta: CallToActionBlock,
-  formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  formBlock: FormBlock,
+  archive: ArchiveBlock,
+  cta: CallToActionBlock,
 }
 
 export const RenderBlocks: React.FC<{

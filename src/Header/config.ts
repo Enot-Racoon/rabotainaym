@@ -4,6 +4,7 @@ import { link } from '@/fields/link'
 import { revalidateHeader } from './hooks/revalidateHeader'
 
 export const Header: GlobalConfig = {
+  label: 'Хедер',
   slug: 'header',
   access: {
     read: () => true,
