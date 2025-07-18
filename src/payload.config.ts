@@ -12,8 +12,8 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
+import { Footer } from '@/entities/Footer/config'
+import { Header } from '@/entities/Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -27,7 +27,14 @@ export default buildConfig({
     supportedLanguages: { ru },
   },
   admin: {
+    dateFormat: 'do MMMM yyyy, H:mm',
     components: {
+      views: {
+        login: {
+          Component: '@/views/Login/index#LoginView',
+          path: '/signin',
+        },
+      },
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
       beforeLogin: ['@/components/BeforeLogin'],
@@ -84,10 +91,10 @@ export default buildConfig({
   jobs: {
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {
-        // Allow logged in users to execute this endpoint (default)
+        // Allow logged-in users to execute this endpoint (default)
         if (req.user) return true
 
-        // If there is no logged in user, then check
+        // If there is no logged-in user, then check
         // for the Vercel Cron secret to be present as an
         // Authorization header:
         const authHeader = req.headers.get('authorization')

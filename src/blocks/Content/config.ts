@@ -7,32 +7,89 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { link } from '@/fields/link'
+const className: Field = {
+  label: 'HTML класс',
+  name: 'className',
+  type: 'text',
+}
 
 const columnFields: Field[] = [
   {
-    label: 'Размер',
-    name: 'size',
-    type: 'select',
-    defaultValue: 'oneThird',
-    options: [
+    type: 'row',
+    fields: [
       {
-        label: 'Треть',
-        value: 'oneThird',
+        label: 'Размер',
+        name: 'size',
+        type: 'select',
+        defaultValue: 'center',
+        options: [
+          {
+            label: 'В центре',
+            value: 'center',
+          },
+          {
+            label: 'Треть',
+            value: 'oneThird',
+          },
+          {
+            label: 'Половина',
+            value: 'half',
+          },
+          {
+            label: 'Две трети',
+            value: 'twoThirds',
+          },
+          {
+            label: 'Вся ширина',
+            value: 'full',
+          },
+        ],
       },
       {
-        label: 'Половина',
-        value: 'half',
-      },
-      {
-        label: 'Две трети',
-        value: 'twoThirds',
-      },
-      {
-        label: 'Вся ширина',
-        value: 'full',
+        type: 'row',
+        fields: [
+          {
+            label: 'HTML аттрибуты',
+            name: 'enableHtmlAttributes',
+            type: 'checkbox',
+            admin: {
+              style: {
+                transform: 'translateY(50%)',
+              },
+            },
+          },
+        ],
+        admin: {
+          style: {
+            padding: '0 12px',
+            marginTop: '25px',
+            justifyContent: 'end',
+            borderRadius: 'var(--style-radius-s)',
+            backgroundColor: 'var(--theme-input-bg)',
+          },
+        },
       },
     ],
+  },
+  {
+    label: 'HTML аттрибуты',
+    type: 'collapsible',
+    fields: [
+      {
+        label: 'HTML класс',
+        name: 'className',
+        type: 'text',
+      },
+      {
+        label: 'HTML стиль',
+        name: 'htmlStyle',
+        type: 'text',
+      },
+    ],
+    admin: {
+      initCollapsed: true,
+      condition: (_, data) => Boolean(data?.enableHtmlAttributes),
+    },
   },
   {
     name: 'richText',
@@ -49,20 +106,20 @@ const columnFields: Field[] = [
     }),
     label: false,
   },
-  {
-    label: 'Включить ссылки',
-    name: 'enableLink',
-    type: 'checkbox',
-  },
-  link({
-    overrides: {
-      admin: {
-        condition: (_data, siblingData) => {
-          return Boolean(siblingData?.enableLink)
+  /*   {
+      label: 'Включить ссылки',
+      name: 'enableLink',
+      type: 'checkbox',
+    },
+    link({
+      overrides: {
+        admin: {
+          condition: (_data, siblingData) => {
+            return Boolean(siblingData?.enableLink)
+          },
         },
       },
-    },
-  }),
+    }), */
 ]
 
 export const Content: Block = {

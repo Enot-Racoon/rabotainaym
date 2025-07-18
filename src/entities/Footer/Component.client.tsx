@@ -20,7 +20,7 @@ export const FooterClient = ({ data }: FooterClientProps) => {
 
   return (
     <footer className="mt-auto bg-[#eee] text-[#444] dark:invert">
-      <div className="container py-4 gap-4 flex flex-col md:flex-row md:justify-between">
+      <div className="container py-3 gap-4 flex flex-col md:flex-row md:justify-between">
         <Link className="flex items-center" href="/">
           <Logo />
         </Link>

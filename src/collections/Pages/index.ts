@@ -1,16 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Archive } from '../../blocks/ArchiveBlock/config'
-import { CallToAction } from '../../blocks/CallToAction/config'
-import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { hero } from '@/heros/config'
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { Content } from '@/blocks/Content/config'
+import { FormBlock } from '@/blocks/Form/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { slugField } from '@/fields/slug'
-import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { populatePublishedAt } from '@/hooks/populatePublishedAt'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
 import {
@@ -71,11 +68,8 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       type: 'tabs',
       tabs: [
-        // {
-        //   fields: [hero],
-        //   label: 'Hero',
-        // },
         {
+          label: 'Контент',
           fields: [
             {
               labels: {
@@ -85,18 +79,17 @@ export const Pages: CollectionConfig<'pages'> = {
               label: 'Блоки',
               name: 'layout',
               type: 'blocks',
-              blocks: [Content, MediaBlock, FormBlock, CallToAction, Archive],
+              blocks: [Content, MediaBlock, FormBlock],
               required: true,
               admin: {
                 initCollapsed: true,
               },
             },
           ],
-          label: 'Контент',
         },
         {
-          name: 'meta',
           label: 'SEO',
+          name: 'meta',
           fields: [
             OverviewField({
               titlePath: 'meta.title',
@@ -119,6 +112,17 @@ export const Pages: CollectionConfig<'pages'> = {
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
+          ],
+        },
+        {
+          label: 'Верхний баннер',
+          fields: [
+            {
+              label: '',
+              name: 'banner',
+              type: 'upload',
+              relationTo: 'media',
+            },
           ],
         },
       ],

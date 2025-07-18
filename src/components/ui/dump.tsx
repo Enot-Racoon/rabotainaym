@@ -6,7 +6,7 @@ const Dump = <T extends object>({ className, ...props }: T & { className?: strin
       'div',
       {
         style: { whiteSpace: 'pre-wrap', textAlign: 'left' },
-        className: ['dump', className].join(' '),
+        className: ['dump', className].filter(Boolean).join(' '),
       },
       JSON.stringify(props, null, 2),
     )

@@ -14,28 +14,22 @@ export const Footer: GlobalConfig = {
       labels: {
         plural: 'Ссылки',
         singular: ({ i18n, t }) => {
-          console.log('Ссылки', JSON.stringify(i18n.translations))
+          // console.log('Ссылки', JSON.stringify(i18n.translations))
           return 'Ссылка'
         },
       },
       label: 'Ссылки',
       name: 'navItems',
       type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
-      ],
+      fields: [link({ appearances: false })],
       maxRows: 6,
       admin: {
         initCollapsed: true,
         components: {
-          RowLabel: '@/Footer/RowLabel#RowLabel',
+          RowLabel: '@/entities/Footer/RowLabel#RowLabel',
         },
       },
     },
   ],
-  hooks: {
-    afterChange: [revalidateFooter],
-  },
+  hooks: { afterChange: [revalidateFooter] },
 }

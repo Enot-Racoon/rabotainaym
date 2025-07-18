@@ -14,8 +14,10 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
+const title = 'Работа и Найм'
+
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? [doc.title, title].join(' | ') : title
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
