@@ -7,12 +7,6 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-const className: Field = {
-  label: 'HTML класс',
-  name: 'className',
-  type: 'text',
-}
-
 const columnFields: Field[] = [
   {
     type: 'row',

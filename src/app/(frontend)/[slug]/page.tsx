@@ -45,9 +45,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const isHome = slug === 'home'
 
-  let page: RequiredDataFromCollectionSlug<'pages'> | null
-
-  page = await queryPageBySlug({ slug })
+  const page: RequiredDataFromCollectionSlug<'pages'> | null = await queryPageBySlug({ slug })
 
   if (!page) {
     return <PayloadRedirects url={url} />
@@ -58,10 +56,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <div className="grid gap-6 mb-48">
       {banner && (
-        <div
-          children={<Media resource={banner} />}
-          className="w-full grid justify-center bg-[#e8e8e8] py-8"
-        />
+        <div className="w-full grid justify-center bg-[#e8e8e8] py-8">
+          <Media resource={banner} />
+        </div>
       )}
       <PayloadRedirects disableNotFound url={url} />
       <article>

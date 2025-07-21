@@ -178,14 +178,15 @@ export const Specializations = () => {
     <div className="container grid grid-cols-4 gap-x-14 gap-y-10">
       {specializations.map(({ name, specializations }, keyGroup) => (
         <section className="grid gap-2" key={keyGroup}>
-          <h3 className="text-[#444] text-2xl pl-4" children={name} />
+          <h3 className="text-[#444] text-2xl pl-4">{name}</h3>
           <ul className="text-[#777] text-lg leading-8">
             {specializations.concat({ name: 'Все...' }).map(({ name }, key) => (
               <li
                 key={key}
-                children={name}
                 className="pl-4 rounded-[8px] hover:bg-[#e8e8e88e] hover:text-[#ef5e54] cursor-pointer"
-              />
+              >
+                {name}
+              </li>
             ))}
           </ul>
         </section>

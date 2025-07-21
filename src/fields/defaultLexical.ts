@@ -46,6 +46,7 @@ const linkFeatureConfig: Parameters<typeof LinkFeature>[0] = {
   },
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const blocksFeatureConfig: Parameters<typeof BlocksFeature>[0] = {
   blocks: [
     {

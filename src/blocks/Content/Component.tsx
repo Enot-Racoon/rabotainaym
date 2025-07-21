@@ -25,13 +25,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
           <StyledContent
             key={index}
             style={enableHtmlAttributes ? htmlStyle : null}
-            children={richText && <RichText data={richText} enableGutter={false} />}
             className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
               'md:col-span-2': size !== 'full',
               'grid justify-center': size === 'center',
               [`${className}`]: enableHtmlAttributes && className,
             })}
-          />
+          >
+            {richText && <RichText data={richText} enableGutter={false} />}
+          </StyledContent>
         ))}
       </div>
     </div>

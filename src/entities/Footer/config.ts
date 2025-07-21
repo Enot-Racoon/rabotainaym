@@ -13,6 +13,7 @@ export const Footer: GlobalConfig = {
     {
       labels: {
         plural: 'Ссылки',
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         singular: ({ i18n, t }) => {
           // console.log('Ссылки', JSON.stringify(i18n.translations))
           return 'Ссылка'

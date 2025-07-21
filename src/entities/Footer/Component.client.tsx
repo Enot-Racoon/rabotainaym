@@ -7,15 +7,12 @@ import type { Footer } from '@/payload-types'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
-import { useTheme } from '@/providers/Theme'
 
 export interface FooterClientProps {
   data: Footer
 }
 
 export const FooterClient = ({ data }: FooterClientProps) => {
-  const { theme } = useTheme()
-
   const navItems = data?.navItems || []
 
   return (
