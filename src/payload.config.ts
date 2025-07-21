@@ -12,8 +12,8 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
-import { Footer } from '@/entities/Footer/config'
-import { Header } from '@/entities/Header/config'
+import { Footer } from '@/entities/footer/config'
+import { Header } from '@/entities/header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -29,12 +29,12 @@ export default buildConfig({
   admin: {
     dateFormat: 'do MMMM yyyy, H:mm',
     components: {
-      views: {
-        login: {
-          Component: '@/views/Login/index#LoginView',
-          path: '/signin',
-        },
-      },
+      // views: {
+      //   login: {
+      //     Component: '@/views/Login/index#LoginView',
+      //     path: '/signin',
+      //   },
+      // },
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
       beforeLogin: ['@/components/BeforeLogin'],
