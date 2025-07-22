@@ -7,6 +7,7 @@ const ru = {
       },
     },
   },
+  general: { globals: 'Управление' },
 } as const
 
 export default ru

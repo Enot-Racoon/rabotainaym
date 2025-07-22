@@ -1,33 +1,27 @@
-// storage-adapter-import-placeholder
+import path from 'path'
+import sharp from 'sharp'
+import { fileURLToPath } from 'url'
+
+import { buildConfig, PayloadRequest } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 
-import sharp from 'sharp' // sharp-import
-import path from 'path'
-import { buildConfig, PayloadRequest } from 'payload'
-import { fileURLToPath } from 'url'
-import { ru } from '@payloadcms/translations/languages/ru'
-
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
+import i18n from '@/i18n'
+import { plugins } from '@/plugins'
+import { Media } from '@/collections/Media'
+import { Pages } from '@/collections/Pages'
+import { Posts } from '@/collections/Posts'
+import { Users } from '@/collections/Users'
+import { Categories } from '@/collections/Categories'
 import { Footer } from '@/entities/footer/config'
 import { Header } from '@/entities/header/config'
-import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
-import translations from '@/i18n'
+import { getServerSideURL } from '@/utilities/getURL'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  i18n: {
-    fallbackLanguage: 'ru',
-    supportedLanguages: { ru },
-    translations,
-  },
+  i18n,
   admin: {
     dateFormat: 'do MMMM yyyy, H:mm',
     components: {
@@ -39,8 +33,7 @@ export default buildConfig({
       // },
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
-      beforeLogin: ['@/components/BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
+      beforeLogin: ['@/components/BeforeLogin'], // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
@@ -70,8 +63,7 @@ export default buildConfig({
         },
       ],
     },
-  },
-  // This config helps us configure global or default features that the other editors can inherit
+  }, // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
@@ -82,8 +74,7 @@ export default buildConfig({
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
-    ...plugins,
-    // storage-adapter-placeholder
+    ...plugins, // storage-adapter-placeholder
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

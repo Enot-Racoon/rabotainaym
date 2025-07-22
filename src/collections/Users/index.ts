@@ -23,6 +23,7 @@ export const Users: CollectionConfig = {
   auth: true,
   fields: [
     {
+      label: translate('general:name'),
       name: 'name',
       type: 'text',
     },
