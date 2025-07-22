@@ -1,12 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '@/access/authenticated'
+import { translate } from '@/i18n'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   labels: {
-    plural: 'Пользователи',
-    singular: 'Пользователь',
+    plural: translate('collections:users:labels:plural'),
+    singular: translate('collections:users:labels:singular'),
   },
   access: {
     admin: authenticated,
