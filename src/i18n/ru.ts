@@ -1,4 +1,7 @@
 const ru = {
+  pages: {
+    login: 'Вход',
+  },
   collections: {
     users: {
       labels: {

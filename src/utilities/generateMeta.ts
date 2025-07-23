@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import type { Media, Page, Post, Config } from '../payload-types'
+import type { Config, Media, Page, Post } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
@@ -28,7 +28,7 @@ export const generateMeta = async (args: {
 
   const title = doc?.meta?.title
     ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+    : (doc?.title ?? 'Payload Website Template')
 
   return {
     description: doc?.meta?.description,
