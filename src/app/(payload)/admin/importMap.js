@@ -93,8 +93,8 @@ export const importMap = {
     BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   '@payloadcms/plugin-search/client#LinkToDoc': LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   '@payloadcms/plugin-search/client#ReindexButton': ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
-  '@/entities/Header/RowLabel#RowLabel': RowLabel_70cd828b89c9e7b90f91b3790e063c0e,
-  '@/entities/Footer/RowLabel#RowLabel': RowLabel_ef845859b401f94369c134c5ecb6ec03,
+  '@/entities/header/RowLabel#RowLabel': RowLabel_70cd828b89c9e7b90f91b3790e063c0e,
+  '@/entities/footer/RowLabel#RowLabel': RowLabel_ef845859b401f94369c134c5ecb6ec03,
   '@/components/BeforeDashboard#default': default_1a7510af427896d367a49dbf838d2de6,
   '@/components/BeforeLogin#default': default_8a7ab0eb7ab5c511aba12e68480bfe5e,
 }

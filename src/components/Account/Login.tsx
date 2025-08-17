@@ -1,9 +1,9 @@
 'use client'
 
-import { useTranslation } from '@/i18n'
+import useI18n from '@/i18n/useI18n'
 
 export default function Login() {
-  const { t } = useTranslation()
+  const { t } = useI18n()
   return (
     <div className="bordered">
       <title>Login</title>

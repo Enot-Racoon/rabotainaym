@@ -22,6 +22,7 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  admin: { hidden: true },
   fields: [
     {
       name: 'alt',

@@ -13,6 +13,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { translateLabel } from '@/i18n'
 
 const title = 'Работа и Найм'
 
@@ -30,6 +31,10 @@ export const plugins: Plugin[] = [
   redirectsPlugin({
     collections: ['pages', 'posts'],
     overrides: {
+      labels: {
+        plural: translateLabel('plugins:redirects:label'),
+        singular: translateLabel('plugins:redirects:label'),
+      },
       // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
@@ -61,7 +66,14 @@ export const plugins: Plugin[] = [
     fields: {
       payment: false,
     },
+
+    formSubmissionOverrides: {
+      admin: { hidden: true },
+    },
     formOverrides: {
+      admin: {
+        hidden: true,
+      },
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
           if ('name' in field && field.name === 'confirmationMessage') {
@@ -87,6 +99,10 @@ export const plugins: Plugin[] = [
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
+      labels: {
+        plural: translateLabel('plugins:search:label'),
+        singular: translateLabel('plugins:search:label'),
+      },
       fields: ({ defaultFields }) => {
         return [...defaultFields, ...searchFields]
       },

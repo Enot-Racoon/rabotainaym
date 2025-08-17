@@ -11,10 +11,11 @@ import {
 
 import { authenticated } from '@/collections/access/authenticated'
 import { authenticatedOrPublished } from '@/collections/access/authenticatedOrPublished'
-import { Banner } from '../../blocks/Banner/config'
-import { Code } from '../../blocks/Code/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { Banner } from '@/blocks/Banner/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
@@ -48,6 +49,7 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
+    hidden: true,
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {

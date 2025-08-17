@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 
-import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 
+import { Media } from '@/components/Media'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
+import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { Media } from '@/components/Media'
 import { Specializations } from '@/collections/Specializations'
 
 export async function generateStaticParams() {
@@ -57,7 +57,21 @@ export default async function Page({ params: paramsPromise }: Args) {
     <div className="grid gap-6 mb-48">
       {banner && (
         <div className="w-full grid justify-center bg-[#e8e8e8] py-8">
-          <Media resource={banner} />
+          <div className="container relative w-[1280px] flex justify-end">
+            <Media resource={banner} className="mt-10 w-[920px]" />
+            <div className="absolute left-0 top-0">
+              <div className="text-[#444] text-[40px] leading-[1.4] w-[680px]">
+                Тысячи объявлений поиска работы и сотрудников
+                <br /> в России
+              </div>
+              <button className="mt-[14px] rounded border-2 border-[#EF5E54] text-[#EF5E54] px-[26px] py-[18px] font-semibold text-2xl leading-none">
+                Подать объявление
+              </button>
+            </div>
+          </div>
+          <div className="">
+            <img src="/search.svg" />
+          </div>
         </div>
       )}
       <PayloadRedirects disableNotFound url={url} />
