@@ -12,6 +12,7 @@ import { Pages } from '@/collections/Pages'
 import { Posts } from '@/collections/Posts'
 import { Users } from '@/collections/Users'
 import { Categories } from '@/collections/Categories'
+import { Regions } from '@/collections/Regions'
 import { Footer } from '@/entities/footer/config'
 import { Header } from '@/entities/header/config'
 import { defaultLexical } from '@/fields/defaultLexical'
@@ -70,7 +71,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Users, Regions],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
