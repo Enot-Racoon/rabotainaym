@@ -39,6 +39,13 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
+      label: translateLabel('collections:regions:labels:singular'),
+      name: 'region',
+      required: true,
+      type: 'relationship',
+      relationTo: 'regions',
+    },
+    {
       label: translateLabel('collections:users:roles:singular'),
       name: 'roles',
       type: 'select',
