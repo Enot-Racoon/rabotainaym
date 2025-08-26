@@ -15,7 +15,7 @@ export const Users: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'email'],
+    defaultColumns: ['email', 'phone', 'name', 'surname'],
   },
   access: {
     read: adminsAndUser,
@@ -34,8 +34,27 @@ export const Users: CollectionConfig = {
   },
   fields: [
     {
+      label: translateLabel('general:surname'),
+      required: true,
+      name: 'surname',
+      type: 'text',
+    },
+    {
       label: translateLabel('general:name'),
+      required: true,
       name: 'name',
+      type: 'text',
+    },
+    {
+      label: translateLabel('general:patronymic'),
+      required: true,
+      name: 'patronymic',
+      type: 'text',
+    },
+    {
+      label: translateLabel('general:phone'),
+      required: true,
+      name: 'phone',
       type: 'text',
     },
     {
@@ -44,6 +63,11 @@ export const Users: CollectionConfig = {
       required: true,
       type: 'relationship',
       relationTo: 'regions',
+    },
+    {
+      label: translateLabel('general:referrer'),
+      name: 'referrer',
+      type: 'text',
     },
     {
       label: translateLabel('collections:users:roles:singular'),

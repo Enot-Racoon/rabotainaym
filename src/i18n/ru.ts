@@ -38,11 +38,16 @@ const ru = {
     },
   },
   general: {
+    appName: 'Работа и найм',
     globals: 'Управление',
     country: 'Страна',
     latitude: 'Широта',
     longitude: 'Долгота',
     where: 'Где',
+    surname: 'Фамилия',
+    patronymic: 'Отчество',
+    phone: 'Телефон',
+    referrer: 'Реферал',
   },
 } as const
 
