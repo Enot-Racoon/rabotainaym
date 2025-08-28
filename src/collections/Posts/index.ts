@@ -27,9 +27,14 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { translateLabel } from '@/i18n'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
+  labels: {
+    plural: translateLabel('collections:posts:labels:plural'),
+    singular: translateLabel('collections:posts:labels:singular'),
+  },
   access: {
     create: authenticated,
     delete: authenticated,
@@ -49,7 +54,7 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
-    hidden: true,
+    // hidden: true,
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
@@ -62,12 +67,13 @@ export const Posts: CollectionConfig<'posts'> = {
         return path
       },
     },
-    preview: (data, { req }) =>
-      generatePreviewPath({
+    preview: (data, { req }) => {
+      return generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'posts',
         req,
-      }),
+      })
+    },
     useAsTitle: 'title',
   },
   fields: [
@@ -220,6 +226,15 @@ export const Posts: CollectionConfig<'posts'> = {
       ],
     },
     ...slugField(),
+    {
+      name: 'alertBox',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/AlertBox#default',
+        },
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidatePost],

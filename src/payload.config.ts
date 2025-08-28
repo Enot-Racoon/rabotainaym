@@ -2,6 +2,7 @@ import path from 'path'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
+import type { Config } from 'payload'
 import { buildConfig, PayloadRequest } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 
@@ -21,10 +22,16 @@ import { getServerSideURL } from '@/utilities/getURL'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+type SupportedLanguages = NonNullable<Config['i18n']>['supportedLanguages']
+
 export default buildConfig({
-  i18n,
+  i18n: {
+    fallbackLanguage: i18n.fallbackLanguage,
+    translations: i18n.translations,
+    supportedLanguages: i18n.supportedLanguages as SupportedLanguages,
+  },
   admin: {
-    dateFormat: 'do MMMM yyyy, H:mm',
+    dateFormat: 'do MMMM yyyy, HH:mm',
     components: {
       // views: {
       //   login: {

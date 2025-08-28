@@ -1,6 +1,7 @@
 const ru = {
   pages: {
     login: 'Вход',
+    registration: 'Регистрация',
   },
   plugins: {
     search: {
@@ -11,6 +12,18 @@ const ru = {
     },
   },
   collections: {
+    pages: {
+      labels: {
+        plural: 'Страницы',
+        singular: 'Страница',
+      },
+    },
+    posts: {
+      labels: {
+        plural: 'Посты',
+        singular: 'Пост',
+      },
+    },
     users: {
       labels: {
         plural: 'Пользователи',
@@ -50,5 +63,7 @@ const ru = {
     referrer: 'Реферал',
   },
 } as const
+
+export type RuTranslation = typeof ru
 
 export default ru

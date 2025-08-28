@@ -17,13 +17,14 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { translateLabel } from '@/i18n'
 
 export const Pages: CollectionConfig<'pages'> = {
-  labels: {
-    plural: 'Страницы',
-    singular: 'Страница',
-  },
   slug: 'pages',
+  labels: {
+    plural: translateLabel('collections:pages:labels:plural'),
+    singular: translateLabel('collections:pages:labels:singular'),
+  },
   access: {
     create: authenticated,
     delete: authenticated,

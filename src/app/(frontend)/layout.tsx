@@ -14,7 +14,7 @@ import { Header } from '@/entities/header/Component'
 import { getServerSideURL } from '@/utilities/getURL'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 
-import './globals.css'
+import './globals.scss'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()

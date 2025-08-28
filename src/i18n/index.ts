@@ -1,5 +1,5 @@
 import { enTranslations } from '@payloadcms/translations/languages/en'
-import { ru as ruBaseTranslations, ruTranslations } from '@payloadcms/translations/languages/ru'
+import { ru as ruLanguage, ruTranslations } from '@payloadcms/translations/languages/ru'
 import {
   DefaultTranslationsObject,
   I18nOptions,
@@ -23,10 +23,10 @@ export const translateLabel =
     return (t as TFunction<TranslationsKeys>)(...args)
   }
 
-const i18n: I18nOptions<object | DefaultTranslationsObject> = {
+const i18n = {
   fallbackLanguage: 'ru',
   translations: { en, ru },
-  supportedLanguages: { ru: ruBaseTranslations },
-} as const
+  supportedLanguages: { ru: ruLanguage },
+} satisfies I18nOptions<object | DefaultTranslationsObject>
 
 export default i18n
