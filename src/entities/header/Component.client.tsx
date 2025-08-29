@@ -1,20 +1,22 @@
 'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 
 import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo'
+import { useHeaderTheme } from '@/providers/HeaderTheme'
+
 import { HeaderNav } from './Nav'
-import { SelectCity } from '@/components/SelectCity'
 
 interface HeaderClientProps {
   data: Header
+  selectRegion?: ReactNode
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+export const HeaderClient = ({ data, selectRegion }: HeaderClientProps) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
@@ -37,7 +39,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           <Link href="/">
             <Logo loading="eager" priority="high" />
           </Link>
-          <SelectCity />
+          {selectRegion}
         </div>
         <HeaderNav data={data} />
       </div>

@@ -1,11 +1,13 @@
 import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
+import { translateLabel } from '@/i18n'
+
 import { revalidateHeader } from './hooks/revalidateHeader'
 
 export const Header: GlobalConfig = {
-  label: 'Хедер',
   slug: 'header',
+  label: translateLabel('entities:header:label'),
   access: { read: () => true },
   fields: [
     {

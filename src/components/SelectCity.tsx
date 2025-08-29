@@ -13,7 +13,7 @@ export const SelectCity = () => {
   return (
     <Select onValueChange={setCity} value={city}>
       <SelectTrigger
-        aria-label="Выбор темы"
+        aria-label="Город"
         className="w-auto bg-transparent gap-2 pl-0 md:pl-3 focus:ring-transparent border-[#777]"
       >
         <SelectValue placeholder="Город" />

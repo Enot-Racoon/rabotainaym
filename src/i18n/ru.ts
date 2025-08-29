@@ -11,6 +11,14 @@ const ru = {
       label: 'Редиректы',
     },
   },
+  entities: {
+    header: {
+      label: 'Хедер',
+    },
+    footer: {
+      label: 'Футер',
+    },
+  },
   collections: {
     pages: {
       labels: {

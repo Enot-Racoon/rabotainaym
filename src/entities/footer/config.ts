@@ -1,10 +1,12 @@
 import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
+import { translateLabel } from '@/i18n'
+
 import { revalidateFooter } from './hooks/revalidateFooter'
 
 export const Footer: GlobalConfig = {
-  label: 'Футер',
+  label: translateLabel('entities:footer:label'),
   slug: 'footer',
   access: {
     read: () => true,
