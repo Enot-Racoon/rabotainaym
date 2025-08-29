@@ -32,7 +32,18 @@ export default buildConfig({
   },
   admin: {
     dateFormat: 'do MMMM yyyy, HH:mm',
+    avatar: {
+      Component: {
+        clientProps: { size: 36 },
+        path: '@/components/Avatar#default',
+      },
+    },
     components: {
+      graphics: {
+        Icon: {
+          path: '@payloadcms/ui#PayloadIcon',
+        },
+      },
       // views: {
       //   login: {
       //     Component: '@/views/Login/index#LoginView',

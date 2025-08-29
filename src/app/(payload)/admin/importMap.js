@@ -29,6 +29,8 @@ import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloa
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { RowLabel as RowLabel_62cfdcc4ebc97bd0aa366620e6d5da94 } from '@/entities/header/RowLabel'
 import { RowLabel as RowLabel_0433c71f9a84348d6f8a1ca657532236 } from '@/entities/footer/RowLabel'
+import { default as default_3f2d35de62e7465174b08474d8303528 } from '@/components/Avatar'
+import { PayloadIcon as PayloadIcon_3817bf644402e67bfe6577f60ef982de } from '@payloadcms/ui'
 import { default as default_1a7510af427896d367a49dbf838d2de6 } from '@/components/BeforeDashboard'
 import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/components/BeforeLogin'
 
@@ -64,6 +66,8 @@ export const importMap = {
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/entities/header/RowLabel#RowLabel": RowLabel_62cfdcc4ebc97bd0aa366620e6d5da94,
   "@/entities/footer/RowLabel#RowLabel": RowLabel_0433c71f9a84348d6f8a1ca657532236,
+  "@/components/Avatar#default": default_3f2d35de62e7465174b08474d8303528,
+  "@payloadcms/ui#PayloadIcon": PayloadIcon_3817bf644402e67bfe6577f60ef982de,
   "@/components/BeforeDashboard#default": default_1a7510af427896d367a49dbf838d2de6,
   "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e
 }

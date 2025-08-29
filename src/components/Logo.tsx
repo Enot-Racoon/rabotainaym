@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
+import useI18n from '@/i18n/useI18n'
 
 interface Props {
   className?: string
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export const Logo = (props: Props) => {
+  const { t } = useI18n()
   const { loading: loadingFromProps, priority: priorityFromProps, className } = props
 
   const loading = loadingFromProps || 'lazy'
@@ -16,7 +18,7 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Payload Logo"
+      alt={t('general:appName')}
       width={144}
       height={48}
       loading={loading}

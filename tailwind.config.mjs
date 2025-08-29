@@ -30,19 +30,19 @@ const config = {
     container: {
       center: true,
       padding: {
-        '2xl': '2rem',
-        DEFAULT: '1rem',
-        lg: '2rem',
-        md: '2rem',
+        DEFAULT: '1.25rem',
+        '2xl': '1.5rem',
+        xl: '1.5rem',
+        lg: '1.25rem',
+        md: '1.25rem',
         sm: '1rem',
-        xl: '2rem',
       },
       screens: {
-        '2xl': '86rem',
-        lg: '64rem',
-        md: '48rem',
-        sm: '40rem',
-        xl: '80rem',
+        '2xl': '86rem', // 1376
+        xl: '80rem', // 1280
+        lg: '64rem', // 1024
+        md: '48rem', // 768
+        sm: '40rem', // 640
       },
     },
     extend: {
@@ -94,8 +94,8 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-mono)'],
+        sans: ['var(--font-sans)'],
       },
       keyframes: {
         'accordion-down': {

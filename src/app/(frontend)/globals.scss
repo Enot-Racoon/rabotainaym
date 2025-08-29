@@ -14,6 +14,12 @@
   }
 
   :root {
+    --font-sans:
+      'SP Pro Text', -apple-system, BlinkMacSystemFont, 'Inter', 'Roboto', 'Segoe UI',
+      'Helvetica Neue', Arial, sans-serif;
+    --font-mono:
+      SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
