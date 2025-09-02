@@ -60,6 +60,8 @@ const ru = {
   },
   general: {
     appName: 'Работа и найм',
+    goHome: 'На главную',
+    controlPanel: 'Личный кабинет',
     globals: 'Управление',
     country: 'Страна',
     latitude: 'Широта',

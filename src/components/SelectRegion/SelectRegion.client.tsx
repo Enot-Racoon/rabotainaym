@@ -19,11 +19,13 @@ export interface SelectRegionClient {
 export default function SelectRegionClient({ label, options }: SelectRegionClient) {
   const [regionId, setRegionId] = useState('77')
 
+  console.log({ options })
+
   return (
     <Select onValueChange={setRegionId} value={regionId}>
       <SelectTrigger
         aria-label={label}
-        className="w-auto bg-transparent gap-2 pl-0 md:pl-3 focus:ring-transparent border-[#777]"
+        className="w-auto xl:min-w-48 bg-transparent gap-2 pl-0 md:pl-3 focus:ring-transparent border-[#777]"
       >
         <SelectValue placeholder={label} />
       </SelectTrigger>

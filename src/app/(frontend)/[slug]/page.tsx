@@ -57,7 +57,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     <div className="grid gap-6 mb-48">
       {banner && (
         <div className="w-full grid justify-center bg-[#e8e8e8] py-8">
-          <div className="container relative w-[1280px] flex justify-end">
+          <div className="container relative flex justify-end">
             <Media resource={banner} className="mt-10 w-[920px]" />
             <div className="absolute left-0 top-0">
               <div className="text-[#444] text-[40px] leading-[1.4] w-[680px]">
