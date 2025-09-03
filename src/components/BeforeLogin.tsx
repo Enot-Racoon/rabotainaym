@@ -6,6 +6,7 @@ const BeforeLogin: React.FC = async () => {
 
   return (
     <div className="login__Logo">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/logotype.svg" alt={t('general:appName')} />
     </div>
   )

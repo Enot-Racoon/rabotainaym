@@ -3,7 +3,8 @@ export default async function RegistrationPage() {
     <div className="container">
       <h2 className="text-center">Registration Page</h2>
       <br />
-      <img className="block mx-auto cursor-pointer" src="/registration.svg" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="block mx-auto cursor-pointer" src="/registration.svg" alt="" />
     </div>
   )
 }

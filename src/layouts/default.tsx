@@ -10,7 +10,7 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 
-import '@/app/(frontend)/globals.scss'
+import '@/app/(frontend)/globals.css'
 
 export default async function DefaultLayout({
   lang,
@@ -22,6 +22,7 @@ export default async function DefaultLayout({
   // noinspection HtmlRequiredTitleElement
   return (
     <html {...props} lang={lang ?? 'ru'} suppressHydrationWarning>
+      {/* eslint-disable-next-line @next/next/no-head-element */}
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

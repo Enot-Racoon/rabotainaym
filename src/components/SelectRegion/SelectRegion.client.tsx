@@ -19,8 +19,6 @@ export interface SelectRegionClient {
 export default function SelectRegionClient({ label, options }: SelectRegionClient) {
   const [regionId, setRegionId] = useState('77')
 
-  console.log({ options })
-
   return (
     <Select onValueChange={setRegionId} value={regionId}>
       <SelectTrigger

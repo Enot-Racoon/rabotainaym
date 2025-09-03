@@ -70,7 +70,8 @@ export default async function Page({ params: paramsPromise }: Args) {
             </div>
           </div>
           <div className="">
-            <img src="/search.svg" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/search.svg" alt="" />
           </div>
         </div>
       )}
