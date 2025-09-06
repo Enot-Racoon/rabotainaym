@@ -1,5 +1,58 @@
 import type { Story } from '@ladle/react'
 
+export const Colors: Story = () => {
+  return (
+    <ul className="grid grid-cols-6 justify-center flex-wrap gap-y-4 gap-x-2 p-4">
+      {[
+        'background',
+        'foreground',
+
+        'card',
+        'card-foreground',
+
+        'popover',
+        'popover-foreground',
+
+        'primary',
+        'primary-foreground',
+
+        'secondary',
+        'secondary-foreground',
+
+        'muted',
+        'muted-foreground',
+
+        'accent',
+        'accent-foreground',
+
+        'destructive',
+        'destructive-foreground',
+
+        'border',
+        'ring',
+        'input',
+
+        'success',
+        'warning',
+        'error',
+        'error-bg',
+      ].map((name) => (
+        <li key={name} className="grid justify-center gap-1 text-center">
+          <div className="flex justify-center gap-2">
+            <div style={{ backgroundColor: `hsl(var(--${name}))` }} className="size-16 rounded" />
+            <div
+              style={{ borderColor: `hsl(var(--${name}))` }}
+              className="border size-16 rounded"
+            />
+          </div>
+          {name}
+        </li>
+      ))}
+      <li className="w-[136px]" />
+    </ul>
+  )
+}
+
 export const Controls: Story<{
   label: string
   disabled: boolean

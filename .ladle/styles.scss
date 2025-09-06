@@ -14,8 +14,8 @@
 
 html[data-theme='light'] {
   .ladle-background {
-    --color: white;
-    @apply bg-noise;
+    --color: black;
+    @apply bg-noise-light;
   }
 }
 

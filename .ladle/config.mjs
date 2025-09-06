@@ -7,6 +7,7 @@ const config = {
       enabled: true,
       defaultState: 'dark',
     },
+    ladle: { enabled: false },
     mode: { enabled: false },
     rtl: { enabled: false },
     width: { enabled: false },
