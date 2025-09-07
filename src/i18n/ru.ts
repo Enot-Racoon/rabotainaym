@@ -58,6 +58,11 @@ const ru = {
       },
     },
   },
+  theme: {
+    auto: 'Авто',
+    light: 'Светлая',
+    dark: 'Тёмная',
+  },
   general: {
     appName: 'Работа и найм',
     goHome: 'На главную',
@@ -71,6 +76,7 @@ const ru = {
     patronymic: 'Отчество',
     phone: 'Телефон',
     referrer: 'Реферал',
+    theme: 'Тема',
   },
 } as const
 

@@ -1,87 +1,93 @@
-import { ButtonHTMLAttributes } from 'react'
-import type { VariantProps } from 'class-variance-authority'
-import { cva } from 'class-variance-authority'
+import * as React from 'react'
+import { Slot } from '@radix-ui/react-slot'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/utilities/ui'
 
 export const config = {
   variants: {
     variant: {
+      primary: 'bg-primary text-primary border-primary',
+      secondary: 'bg-secondary text-secondary border-secondary',
+      success: 'bg-success text-success border-success',
+      warning: 'bg-warning text-warning border-warning',
+      danger: 'bg-destructive text-destructive border-destructive',
+    },
+    appearance: {
       solid: '!text-white',
       outlined: 'border !bg-transparent',
       dashed: 'border border-dashed !bg-transparent',
       text: 'shadow-none !bg-transparent !text-foreground',
       link: 'underline-offset-4 hover:underline !bg-transparent !text-primary',
     },
-    color: {
-      primary: 'bg-primary text-primary border-primary',
-      secondary: 'bg-secondary text-secondary border-secondary',
-      success: 'bg-success text-success border-success',
-      warning: 'bg-warning text-warning border-warning',
-      danger: 'bg-destructive text-destructive border-destructive',
-      default: 'bg-secondary text-secondary border-secondary',
-    },
     size: {
-      large: 'h-12 px-6 text-base',
-      middle: 'h-10 px-4 text-sm',
-      small: 'h-8 px-3 text-xs',
+      lg: 'h-11 px-8',
+      default: 'h-10 px-4 py-2',
+      sm: 'h-9 px-3',
+      icon: 'h-10 w-10',
     },
     shape: {
-      default: 'rounded-md',
-      circle: 'rounded-full p-0 aspect-square',
+      default: '',
       round: 'rounded-full',
+      circle: 'rounded-full p-0 aspect-square',
     },
     loading: {
       true: 'cursor-wait opacity-80',
     },
   },
   defaultVariants: {
-    variant: 'solid',
-    color: 'primary',
-    size: 'middle',
+    variant: 'secondary',
+    size: 'default',
     shape: 'default',
+    appearance: 'solid',
   },
 } as const
 
 const buttonVariants = cva(
-  'hoverable inline-flex items-center justify-center font-medium transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none',
+  'hoverable inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   config,
 )
 
 export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  loading?: boolean
+  asChild?: boolean
 }
 
-export const Button = ({
-  className,
-  variant,
-  color,
-  size,
-  shape,
-  loading = false,
-  disabled,
-  children,
-  ...props
-}: ButtonProps) => (
-  <button
-    className={cn(
-      buttonVariants({
-        variant,
-        color: color as never,
-        size,
-        shape,
-        loading,
-        className,
-      }),
-    )}
-    disabled={disabled || loading}
-    {...props}
-  >
-    {loading && (
-      <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-    )}
-    {children}
-  </button>
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      appearance,
+      size,
+      shape,
+      loading,
+      disabled,
+      children,
+      asChild = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const Comp = asChild ? Slot : 'button'
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, appearance, size, shape, loading, className }))}
+        ref={ref}
+        disabled={(disabled || loading) ?? false}
+        {...props}
+      >
+        <>
+          {loading && (
+            <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          )}
+          {children}
+        </>
+      </Comp>
+    )
+  },
 )
+Button.displayName = 'Button'
+
+export { Button, buttonVariants }
