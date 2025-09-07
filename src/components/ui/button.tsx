@@ -21,9 +21,9 @@ export const config = {
       link: 'underline-offset-4 hover:underline !bg-transparent !text-primary',
     },
     size: {
-      lg: 'h-11 px-8',
-      default: 'h-10 px-4 py-2',
-      sm: 'h-9 px-3',
+      lg: 'h-11 px-8 py-2',
+      base: 'h-10 px-4 py-2',
+      sm: 'h-9 px-2 py-1',
       icon: 'h-10 w-10',
     },
     shape: {
@@ -36,8 +36,8 @@ export const config = {
     },
   },
   defaultVariants: {
-    variant: 'secondary',
-    size: 'default',
+    variant: 'primary',
+    size: 'base',
     shape: 'default',
     appearance: 'solid',
   },

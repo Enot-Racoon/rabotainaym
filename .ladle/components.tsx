@@ -18,7 +18,7 @@ export const Provider: GlobalProvider = ({ children, globalState, storyMeta }) =
       }}
     >
       <div className="grid justify-center items-center min-h-10 w-full h-full">
-        <div className="flex gap-4">{children}</div>
+        <div>{children}</div>
       </div>
     </AppRouterContext>
   )
