@@ -58,7 +58,7 @@
 
   [data-theme='dark'] {
     --background: 0 0% 27%;
-    --foreground: 0 0% 95%;
+    --foreground: 0 0% 87%;
 
     --card: 0 0% 47%;
     --card-foreground: 0 0% 95%;
@@ -73,7 +73,7 @@
     --secondary-foreground: 0 0% 94%;
 
     --muted: 0 0% 47%;
-    --muted-foreground: 0 0% 95%;
+    --muted-foreground: 0 0% 85%;
 
     --accent: 35 97% 57%;
     --accent-foreground: 0 0% 95%;

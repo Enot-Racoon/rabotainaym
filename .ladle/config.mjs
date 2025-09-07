@@ -2,6 +2,7 @@ const isDark = () => !!window?.matchMedia('(prefers-color-scheme: dark)').matche
 
 /** @type {import('@ladle/react').UserConfig} */
 const config = {
+  stories: ['src/**/*.stories.{js,jsx,ts,tsx,mdx}', '.ladle/**/*.stories.{js,jsx,ts,tsx,mdx}'],
   addons: {
     theme: {
       enabled: true,

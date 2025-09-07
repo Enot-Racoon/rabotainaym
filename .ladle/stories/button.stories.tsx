@@ -2,7 +2,7 @@ import type { Story } from '@ladle/react'
 import { MessageSquare } from 'lucide-react'
 import useI18nStory from '@/i18n/useI18nStory'
 
-import { Button, config } from './button'
+import { Button, config } from '@/components/ui/button'
 
 export const Primary: Story = () => {
   return <Button variant="primary">Click me</Button>
