@@ -36,43 +36,45 @@ export const I18n: Story = () => {
   return loading ? (
     'Loading...'
   ) : (
-    <>
+    <div className="flex gap-4">
       <Button loading>{t?.('general:loading')}</Button>
       <Button disabled>{t?.('authentication:login')}</Button>
-    </>
+    </div>
   )
 }
 
 export const Other = () => {
   return (
-    <div className="flex flex-wrap gap-4">
-      <Button variant="danger" appearance="outlined">
-        Личный кабинет
-      </Button>
-      <Button variant="warning">Search</Button>
-      <Button variant="success" appearance="outlined" shape="round">
-        Entire Rubricer
-      </Button>
-      <Button variant="success">Account</Button>
-      <Button variant="success" appearance="outlined">
-        Refill
-      </Button>
-      <Button appearance="outlined">Logout</Button>
-      <Button variant="success" appearance="solid" shape="round">
-        Plumbers
-      </Button>
-      <Button variant="success" appearance="outlined" shape="round">
-        Electricians
-      </Button>
-      <Button variant="warning" appearance="solid" shape="circle" className="relative *:absolute">
-        <MessageSquare fill="white" />
-        <span
-          className="-scale-x-100 translate-x-1 translate-y-1 text-white zoo"
-          style={{ color: 'hsl(var(--warning))' }}
-        >
+    <div>
+      <div className="flex flex-wrap gap-4">
+        <Button variant="danger" appearance="outlined">
+          Личный кабинет
+        </Button>
+        <Button variant="warning">Search</Button>
+        <Button variant="success" appearance="outlined" shape="round">
+          Entire Rubricer
+        </Button>
+        <Button variant="success">Account</Button>
+        <Button variant="success" appearance="outlined">
+          Refill
+        </Button>
+        <Button appearance="outlined">Logout</Button>
+        <Button variant="success" appearance="solid" shape="round">
+          Plumbers
+        </Button>
+        <Button variant="success" appearance="outlined" shape="round">
+          Electricians
+        </Button>
+        <Button variant="warning" appearance="solid" shape="circle" className="relative *:absolute">
           <MessageSquare fill="white" />
-        </span>
-      </Button>
+          <span
+            className="-scale-x-100 translate-x-1 translate-y-1 text-white zoo"
+            style={{ color: 'hsl(var(--warning))' }}
+          >
+            <MessageSquare fill="white" />
+          </span>
+        </Button>
+      </div>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import { cn } from '@/utilities/ui'
 export const config = {
   variants: {
     variant: {
+      default: 'bg-primary text-primary border-primary',
       primary: 'bg-primary text-primary border-primary',
       secondary: 'bg-secondary text-secondary border-secondary',
       success: 'bg-success text-success border-success',
@@ -14,6 +15,7 @@ export const config = {
       danger: 'bg-destructive text-destructive border-destructive',
     },
     appearance: {
+      default: '!text-white',
       solid: '!text-white',
       outlined: 'border !bg-transparent',
       dashed: 'border border-dashed !bg-transparent',
@@ -23,8 +25,10 @@ export const config = {
     size: {
       lg: 'h-11 px-8 py-2',
       base: 'h-10 px-4 py-2',
+      default: 'h-10 px-4 py-2',
       sm: 'h-9 px-2 py-1',
       icon: 'h-10 w-10',
+      clear: '',
     },
     shape: {
       default: '',
