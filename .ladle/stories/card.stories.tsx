@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import React from 'react'
 
-export function Form() {
+export const Form: Story = () => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 space-y-0">
@@ -63,5 +63,5 @@ export function Form() {
 }
 
 export const Default: Story = () => {
-  return <Card>Content</Card>
+  return <Card className="p-6">Content</Card>
 }

@@ -2,6 +2,7 @@ const isDark = () => !!window?.matchMedia('(prefers-color-scheme: dark)').matche
 
 /** @type {import('@ladle/react').UserConfig} */
 const config = {
+  viteConfig: process.cwd() + '/.ladle/ladle-vite.config.ts',
   stories: ['src/**/*.stories.{js,jsx,ts,tsx,mdx}', '.ladle/**/*.stories.{js,jsx,ts,tsx,mdx}'],
   addons: {
     theme: {
@@ -14,7 +15,7 @@ const config = {
     width: { enabled: false },
     control: {
       defaultState: {
-        open: true,
+        open: false,
       },
     },
   },
