@@ -1,88 +1,77 @@
 'use client'
 
-import useI18n from '@/i18n/useI18n'
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+import { z } from 'zod'
 import React from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-export default function Login() {
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import useI18n from '@/i18n/useI18n'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
+const createFormSchema = (t: ReturnType<typeof useI18n>['t']) => {
+  return z.object({
+    email: z.email(t('form:errors:email:invalid')),
+  })
+}
+
+export default function LoginForm() {
   const { t } = useI18n()
+  const formSchema = React.useMemo(() => createFormSchema(t), [t])
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      email: '',
+    },
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+  }
+
   return (
     <>
-      <Card className="w-full max-w-sm">
-        <CardHeader className="grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 space-y-0">
-          <CardTitle className="leading-none font-semibold text-base tracking-normal">
-            Login to your account
-          </CardTitle>
-          <CardDescription>Enter your email below to login to your account</CardDescription>
-          <CardAction>
-            <Button appearance="link" size="base">
-              Sign Up
-            </Button>
-          </CardAction>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="m@example.com" required />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
-                <Input id="password" type="password" required />
-              </div>
+      <Card className="mx-auto p-12 pt-8 md:w-[50vw]">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required>{t('form:labels:email')}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t('form:placeholders:email')} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="text-center">
+              <Button
+                type="submit"
+                size="xl"
+                variant="success"
+                className="px-32 mx-auto"
+                disabled={!form.formState.isValid}
+              >
+                {t('pages:login')}
+              </Button>
             </div>
           </form>
-        </CardContent>
-        <CardFooter className="flex-col gap-2">
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-          <Button appearance="outlined" className="w-full">
-            Login with Google
-          </Button>
-        </CardFooter>
+        </Form>
       </Card>
-
-      <hr />
-
-      <div className="bordered">
-        <title>Login</title>
-        <h2 className="text-center">Login Form</h2>
-        <div className="p-4 bordered">{t('pages:login')}</div>
-        <div>
-          <label>
-            Email: <input />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password: <input />
-          </label>
-        </div>
-        <div>
-          <button>Login</button>
-        </div>
-      </div>
     </>
   )
 }

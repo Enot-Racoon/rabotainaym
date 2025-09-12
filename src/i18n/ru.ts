@@ -1,6 +1,7 @@
 const ru = {
   pages: {
     login: 'Вход',
+    loginToAccount: 'Вход в личный кабинет',
     registration: 'Регистрация',
   },
   plugins: {
@@ -77,6 +78,19 @@ const ru = {
     phone: 'Телефон',
     referrer: 'Реферал',
     theme: 'Тема',
+  },
+  form: {
+    labels: {
+      email: 'E-mail',
+    },
+    placeholders: {
+      email: 'E-mail указанный при регистрации',
+    },
+    errors: {
+      email: {
+        invalid: 'Неправильный e-mail',
+      },
+    },
   },
 } as const
 

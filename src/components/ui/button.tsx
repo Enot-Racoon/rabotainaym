@@ -23,8 +23,9 @@ export const config = {
       link: 'underline-offset-4 hover:underline !bg-transparent !text-primary',
     },
     size: {
-      lg: 'h-11 px-8 py-2',
-      base: 'h-10 px-4 py-2',
+      xl: 'h-14 px-10 py-2 text-xl',
+      lg: 'h-11 px-8 py-2 text-lg',
+      base: 'h-10 px-4 py-2 text-lg',
       default: 'h-10 px-4 py-2',
       sm: 'h-9 px-2 py-1',
       icon: 'h-10 w-10',

@@ -1,15 +1,19 @@
-// import getI18n from '@/i18n/getI18n'
+import getI18n from '@/i18n/getI18n'
+import LoginForm from '@/components/Account/Login'
+import LoginIcon from '@/components/Account/login.svg'
 
 export default async function LoginPage() {
-  // const { t } = await getI18n()
+  const { t } = await getI18n()
 
   return (
-    <div className="container">
-      {/* <h2 className="text-center">{t('pages:login')}</h2> */}
+    <div className="container gap-10 justify-center grid mt-8 mb-48">
+      <LoginIcon className="mx-auto" />
 
-      <br />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="block mx-auto cursor-pointer" src="/login.svg" alt="" />
+      <h1 className="font-medium text-3xl tracking-wider text-center">
+        {t('pages:loginToAccount')}
+      </h1>
+
+      <LoginForm />
     </div>
   )
 }

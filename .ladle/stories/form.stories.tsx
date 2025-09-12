@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import type { Story } from '@ladle/react'
 
 import {
@@ -29,7 +29,7 @@ export const Default: Story = () => {
   })
 
   return (
-    <FormProvider {...form}>
+    <Form {...form}>
       <FormField
         control={form.control}
         name="username"
@@ -44,7 +44,7 @@ export const Default: Story = () => {
           </FormItem>
         )}
       />
-    </FormProvider>
+    </Form>
   )
 }
 
