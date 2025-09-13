@@ -89,6 +89,9 @@ const ru = {
   form: {
     labels: {
       email: 'E-mail',
+      location: 'Населенный пункт',
+      phone: 'Мобильный телефон',
+      agreePPD: 'Я даю согласие на обработку моих личных данных',
     },
     placeholders: {
       email: {
@@ -96,11 +99,16 @@ const ru = {
         registration: 'Ваша электронная почта',
       },
       region: 'Выберите Ваш регион',
+      location: 'Выберите Ваш населённый пункт',
+      surname: 'Ваша фамилия',
+      name: 'Ваше имя',
+      phone: '+7 (ххх) ххх-хх-хх',
     },
     errors: {
       email: {
         invalid: 'Неправильный e-mail',
       },
+      agreePPD: 'Необходимо подтвердить согласие',
     },
   },
 } as const

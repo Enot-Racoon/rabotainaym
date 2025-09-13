@@ -31,7 +31,13 @@ import {
 const createFormSchema = (t: ReturnType<typeof useI18n>['t']) => {
   return z.object({
     email: z.email(t('form:errors:email:invalid')),
-    region: z.string(),
+    agree: z.boolean(t('form:errors:agreePPD')),
+    surname: z.string().min(2, t('form:placeholders:surname')),
+    name: z.string().min(2, t('form:placeholders:name')),
+    // todo: define better schema phone
+    region: z.string().min(1, t('form:placeholders:region')),
+    location: z.string().min(1, t('form:placeholders:location')),
+    phone: z.string().min(7, t('form:placeholders:phone')),
   })
 }
 
@@ -63,7 +69,13 @@ const SelfEmployed = () => {
     resolver: zodResolver(formSchema),
     mode: 'onBlur',
     defaultValues: {
+      region: '',
+      location: '',
+      surname: '',
+      name: '',
+      phone: '',
       email: '',
+      agree: undefined,
     },
   })
 
@@ -73,44 +85,125 @@ const SelfEmployed = () => {
 
   return (
     <Form {...form}>
-      <CustomCard
-        footer={
-          <Button type="submit" variant="success" size="xl">
-            {t('pages:registration:action')}
-          </Button>
-        }
-      >
-        <FormField
-          name="region"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="region" required>
-                {t('collections:regions:labels:singular')}
-              </FormLabel>
-              <FormControl>
-                <Input placeholder={t('form:placeholders:region')} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="email"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel required htmlFor="email">
-                {t('form:labels:email')}
-              </FormLabel>
-              <FormControl>
-                <Input placeholder={t('form:placeholders:email:registration')} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </CustomCard>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <CustomCard
+          footer={
+            <Button type="submit" variant="success" size="xl">
+              {t('pages:registration:action')}
+            </Button>
+          }
+        >
+          <FormField
+            name="region"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="region" required>
+                  {t('collections:regions:labels:singular')}
+                </FormLabel>
+                <FormControl>
+                  <Input id="region" placeholder={t('form:placeholders:region')} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="location"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="location" required>
+                  {t('form:labels:location')}
+                </FormLabel>
+                <FormControl>
+                  <Input id="location" placeholder={t('form:placeholders:location')} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="surname"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="surname" required>
+                  {t('general:surname')}
+                </FormLabel>
+                <FormControl>
+                  <Input id="surname" placeholder={t('form:placeholders:surname')} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="name"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="name" required>
+                  {t('general:name')}
+                </FormLabel>
+                <FormControl>
+                  <Input id="name" placeholder={t('form:placeholders:name')} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="phone"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="phone" required>
+                  {t('form:labels:phone')}
+                </FormLabel>
+                <FormControl>
+                  <Input id="phone" placeholder={t('form:placeholders:phone')} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="email"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel required htmlFor="email">
+                  {t('form:labels:email')}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    id="email"
+                    placeholder={t('form:placeholders:email:registration')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="agree"
+            control={form.control}
+            render={({ field: { value, ...field } }) => (
+              <FormItem>
+                <FormControl>
+                  <label htmlFor="agree" className="flex items-center gap-2 cursor-pointer">
+                    <input id="agree" type="checkbox" {...field} checked={value ?? false} />
+                    {t('form:labels:agreePPD')}
+                  </label>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </CustomCard>
+      </form>
     </Form>
   )
 }
@@ -143,13 +236,13 @@ const LegalEntity = () => {
           <Label size="lg" htmlFor="tabs-demo-current">
             Current password
           </Label>
-          <Input id="tabs-demo-current" type="password" />
+          <Input type="password" />
         </div>
         <div className="grid gap-3">
           <Label size="lg" htmlFor="tabs-demo-new">
             New password
           </Label>
-          <Input id="tabs-demo-new" type="password" />
+          <Input type="password" />
         </div>
       </CustomCard>
     </Form>
