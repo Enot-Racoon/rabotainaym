@@ -9,9 +9,7 @@ export default async function LoginPage() {
     <div className="container gap-10 justify-center grid mt-8 mb-48">
       <LoginIcon className="mx-auto" />
 
-      <h1 className="font-medium text-3xl tracking-wider text-center">
-        {t('pages:loginToAccount')}
-      </h1>
+      <h1 className="font-medium text-3xl tracking-wider text-center">{t('pages:login:header')}</h1>
 
       <LoginForm />
     </div>

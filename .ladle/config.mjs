@@ -19,6 +19,6 @@ const config = {
       },
     },
   },
-  expandStoryTree: true,
+  expandStoryTree: false,
 }
 export default config

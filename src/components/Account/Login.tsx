@@ -41,18 +41,20 @@ export default function LoginForm() {
   }
 
   return (
-    <>
-      <Card className="mx-auto p-12 pt-8 md:w-[50vw]">
+    <div className="mx-auto md:w-[50vw]">
+      <Card className="p-12 pt-8">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
-              control={form.control}
               name="email"
+              control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel required>{t('form:labels:email')}</FormLabel>
+                  <FormLabel required htmlFor="email">
+                    {t('form:labels:email')}
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder={t('form:placeholders:email')} {...field} />
+                    <Input placeholder={t('form:placeholders:email:login')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -60,18 +62,18 @@ export default function LoginForm() {
             />
             <div className="text-center">
               <Button
-                type="submit"
                 size="xl"
+                type="submit"
                 variant="success"
                 className="px-32 mx-auto"
                 disabled={!form.formState.isValid}
               >
-                {t('pages:login')}
+                {t('pages:login:action')}
               </Button>
             </div>
           </form>
         </Form>
       </Card>
-    </>
+    </div>
   )
 }

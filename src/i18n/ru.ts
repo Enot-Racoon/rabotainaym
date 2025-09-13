@@ -1,8 +1,15 @@
 const ru = {
   pages: {
-    login: 'Вход',
-    loginToAccount: 'Вход в личный кабинет',
-    registration: 'Регистрация',
+    login: {
+      header: 'Вход в личный кабинет',
+      action: 'Войти',
+    },
+    registration: {
+      header: 'Регистрация соискателя',
+      action: 'Зарегистрироваться',
+      'as-self-employed': 'Я ищу работу',
+      'as-legal-entity': 'Я предлагаю работу',
+    },
   },
   plugins: {
     search: {
@@ -84,7 +91,11 @@ const ru = {
       email: 'E-mail',
     },
     placeholders: {
-      email: 'E-mail указанный при регистрации',
+      email: {
+        login: 'E-mail указанный при регистрации',
+        registration: 'Ваша электронная почта',
+      },
+      region: 'Выберите Ваш регион',
     },
     errors: {
       email: {
