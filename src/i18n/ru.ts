@@ -74,7 +74,7 @@ const ru = {
   general: {
     appName: 'Работа и найм',
     goHome: 'На главную',
-    controlPanel: 'Личный кабинет',
+    accountDashboard: 'Личный кабинет',
     globals: 'Управление',
     country: 'Страна',
     latitude: 'Широта',
@@ -86,12 +86,22 @@ const ru = {
     referrer: 'Реферал',
     theme: 'Тема',
   },
+  message: {
+    account: {
+      createdSuccess: 'Учетная запись создана успешно',
+      loginToAccessAccount:
+        'Вы должны войти в систему, чтобы получить доступ к вашей учетной записи',
+      logoutToRegistration:
+        'Невозможно создать новую учетную запись, пожалуйста выйдите из системы и попробуйте еще раз',
+    },
+  },
   form: {
     labels: {
       email: 'E-mail',
       location: 'Населенный пункт',
       phone: 'Мобильный телефон',
       agreePPD: 'Я даю согласие на обработку моих личных данных',
+      company: 'Название организации',
     },
     placeholders: {
       email: {
@@ -103,8 +113,14 @@ const ru = {
       surname: 'Ваша фамилия',
       name: 'Ваше имя',
       phone: '+7 (ххх) ххх-хх-хх',
+      company: 'ИП, ООО',
     },
     errors: {
+      company: 'Укажите название компании',
+      numbersOnly: 'Используйте только цифры',
+      cyrillicOnly: 'Используйте только буквы кириллицы',
+      region: 'Выберите регион',
+      location: 'Выберите населенный пункт',
       email: {
         invalid: 'Неправильный e-mail',
       },

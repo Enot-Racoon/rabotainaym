@@ -15,7 +15,7 @@ export const Default = () => {
   return (
     <div className="flex w-full max-w-md flex-col">
       <Tabs defaultValue="account">
-        <TabsList>
+        <TabsList className="inline-grid grid-cols-2 gap-x-[1px]">
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Password</TabsTrigger>
         </TabsList>

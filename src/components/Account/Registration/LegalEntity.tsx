@@ -1,0 +1,289 @@
+import { z } from 'zod'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useRouter, useSearchParams } from 'next/navigation'
+
+import useI18n from '@/i18n/useI18n'
+import { useAuth } from '@/providers/Auth'
+import Paths from '@/providers/Auth/paths'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import Form from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Message } from '@/components/Message'
+import Select from '@/components/ui/select'
+import { getCitiesByRegionCode, regions } from '@/collections/Locations'
+import type { User } from '@/payload-types'
+
+import CustomCard from './card'
+import { createFormSchema } from './form'
+
+const LegalEntity = () => {
+  const { t } = useI18n()
+
+  const { login } = useAuth()
+  const router = useRouter()
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<null | string>(null)
+  const searchParams = useSearchParams()
+
+  const formSchema = React.useMemo(() => createFormSchema(t, true), [t])
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    mode: 'all',
+    defaultValues: {
+      region: '',
+      location: '',
+      surname: '',
+      name: '',
+      phone: '',
+      email: '',
+      agree: undefined,
+    },
+  })
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const response = await fetch(Paths.api.user.create, {
+      body: JSON.stringify({
+        surname: data.surname,
+        name: data.name,
+        phone: data.phone,
+        region: Number(data.region),
+        roles: ['legal-entity'],
+        email: data.email,
+        patronymic: ' ',
+        company: data.company,
+        password: String(Math.random()),
+      } satisfies Omit<User, 'id' | 'createdAt' | 'updatedAt'>),
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+    })
+
+    if (!response.ok) {
+      const { errors } = (await response.json()) ?? {}
+      const message =
+        (errors ?? []).map((err: Error) => err?.message).join(', ') ||
+        response.statusText ||
+        'There was an error creating the account.'
+      setError(message)
+      return
+    }
+
+    const redirect = searchParams.get('redirect')
+
+    const timer = setTimeout(() => {
+      setLoading(true)
+    }, 1000)
+
+    try {
+      // 0 && (await login(data))
+      clearTimeout(timer)
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        router.push(
+          `${Paths.page.account}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
+        )
+      }
+    } catch (_) {
+      clearTimeout(timer)
+      setError('There was an error with the credentials provided. Please try again.')
+    }
+  }
+
+  const regionsList = React.useMemo(
+    () =>
+      regions.sort((a, b) => {
+        const bigRegionCode = [77, 78].findIndex((code) => code == a.code)
+        if (bigRegionCode > -1) return -1
+        return String(a.name).localeCompare(b.name)
+      }),
+    [],
+  )
+
+  return (
+    <Form {...form}>
+      <div className="grid gap-4">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <CustomCard
+            footer={
+              <Button loading={loading} type="submit" variant="success" size="xl">
+                {t('pages:registration:action')}
+              </Button>
+            }
+          >
+            <Form.Field
+              name="region"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label htmlFor="region" required>
+                    {t('collections:regions:labels:singular')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Select
+                      onValueChange={(...ev) => {
+                        field.onChange(...ev)
+                        form.setValue('location', '')
+                      }}
+                      defaultValue={field.value}
+                    >
+                      <Select.Trigger
+                        id="region"
+                        className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
+                      >
+                        <Select.Value placeholder={t('form:placeholders:region')} />
+                      </Select.Trigger>
+                      <Select.Content>
+                        {regionsList.map(({ code: id, name }) => (
+                          <Select.Item key={id} value={String(id)}>
+                            {name}
+                          </Select.Item>
+                        ))}
+                      </Select.Content>
+                    </Select>
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="location"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label htmlFor="location" required>
+                    {t('form:labels:location')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Select
+                      disabled={!form.getValues().region}
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <Select.Trigger
+                        id="location"
+                        className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
+                      >
+                        <Select.Value placeholder={t('form:placeholders:location')} />
+                      </Select.Trigger>
+                      <Select.Content>
+                        {getCitiesByRegionCode(form.getValues().region).map(({ id, name }) => (
+                          <Select.Item key={id} value={String(id)}>
+                            {name}
+                          </Select.Item>
+                        ))}
+                      </Select.Content>
+                    </Select>
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="surname"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label htmlFor="surname" required>
+                    {t('general:surname')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Input id="surname" placeholder={t('form:placeholders:surname')} {...field} />
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label htmlFor="name" required>
+                    {t('general:name')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Input id="name" placeholder={t('form:placeholders:name')} {...field} />
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="company"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label htmlFor="company" required>
+                    {t('form:labels:company')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Input id="company" placeholder={t('form:placeholders:company')} {...field} />
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="phone"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label htmlFor="phone" required>
+                    {t('form:labels:phone')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Input id="phone" placeholder={t('form:placeholders:phone')} {...field} />
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label required htmlFor="email">
+                    {t('form:labels:email')}
+                  </Form.Label>
+                  <Form.Control>
+                    <Input
+                      {...field}
+                      id="email"
+                      placeholder={t('form:placeholders:email:registration')}
+                    />
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              name="agree"
+              control={form.control}
+              render={({ field: { value, ...field } }) => (
+                <Form.Item>
+                  <Form.Control>
+                    <label
+                      htmlFor="agree"
+                      className="flex items-center gap-2 cursor-pointer select-none"
+                    >
+                      <input {...field} id="agree" type="checkbox" checked={value ?? false} />
+                      {t('form:labels:agreePPD')}
+                    </label>
+                  </Form.Control>
+                  <Form.Message />
+                </Form.Item>
+              )}
+            />
+          </CustomCard>
+        </form>
+        <Message error={error} />
+      </div>
+    </Form>
+  )
+}
+
+export default LegalEntity

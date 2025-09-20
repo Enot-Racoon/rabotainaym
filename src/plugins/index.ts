@@ -1,21 +1,22 @@
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
-import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { Plugin } from 'payload'
+import { pluginOTP } from '@payloadcms/plugin-otp'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
-import { Plugin } from 'payload'
+import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { revalidateRedirects } from '@/collections/hooks/revalidateRedirects'
-import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+
+import type { Page, Post } from '@/payload-types'
+import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+
+import { translateLabel } from '@/i18n'
+import { getServerSideURL } from '@/utilities/getURL'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
-import { Page, Post } from '@/payload-types'
-import { getServerSideURL } from '@/utilities/getURL'
-import { translateLabel } from '@/i18n'
-
-const title = 'Работа и Найм'
+const title = 'Работа и Найм' // todo: extract to i18n
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? [doc.title, title].join(' | ') : title
@@ -108,5 +109,8 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  payloadCloudPlugin(),
+  pluginOTP({
+    admin: false,
+    collections: { users: { exp: 60 * 10 /* min */ } },
+  }),
 ]

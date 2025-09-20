@@ -79,7 +79,7 @@ export const Users: CollectionConfig = {
       access: {
         read: admins,
         update: admins,
-        create: admins,
+        // create: admins, // todo: check security
       },
       hooks: {
         beforeChange: [protectRoles],

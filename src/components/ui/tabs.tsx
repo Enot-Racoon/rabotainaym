@@ -14,7 +14,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      'inline-grid grid-cols-2 items-center justify-center rounded-t-md bg-secondary text-white/50',
+      'inline-flex items-center justify-center rounded-t-md bg-white text-white/50',
       className,
     )}
     {...props}
@@ -29,7 +29,8 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'h-14 inline-grid items-center justify-center whitespace-nowrap first:rounded-tl-md last:rounded-tr-md px-10 py-1.5 text-xl font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-success data-[state=active]:text-white hover:text-white data-[state=active]:shadow-sm',
+      'h-14 inline-grid items-center justify-center whitespace-nowrap first:rounded-tl-md last:rounded-tr-md px-10 py-1.5 text-xl font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ' +
+        'bg-secondary data-[state=active]:bg-success data-[state=active]:text-white hover:text-white data-[state=active]:shadow-sm',
       className,
     )}
     {...props}
@@ -53,3 +54,9 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }
+
+export default Object.assign(Tabs, {
+  List: TabsList,
+  Trigger: TabsTrigger,
+  Content: TabsContent,
+})

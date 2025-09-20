@@ -48,7 +48,7 @@ export const HeaderClient = ({ data, selectRegion }: HeaderClientProps) => {
         <HeaderNav data={data} />
 
         <Button className="xl:px-16" size="lg" variant="success">
-          <Link href="/account">{t('general:controlPanel')}</Link>
+          <Link href="/account">{t('general:accountDashboard')}</Link>
         </Button>
       </div>
     </header>

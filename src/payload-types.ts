@@ -583,6 +583,8 @@ export interface User {
   region: number | Region;
   referrer?: string | null;
   roles: ('admin' | 'self-employed' | 'legal-entity')[];
+  _otp?: string | null;
+  _otpExpiration?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1096,6 +1098,8 @@ export interface UsersSelect<T extends boolean = true> {
   region?: T;
   referrer?: T;
   roles?: T;
+  _otp?: T;
+  _otpExpiration?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

@@ -151,3 +151,15 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 }
+
+export default Object.assign(Select, {
+  Group: SelectGroup,
+  Value: SelectValue,
+  Trigger: SelectTrigger,
+  Content: SelectContent,
+  Label: SelectLabel,
+  Item: SelectItem,
+  Separator: SelectSeparator,
+  ScrollUpButton: SelectScrollUpButton,
+  ScrollDownButton: SelectScrollDownButton,
+})

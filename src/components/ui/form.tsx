@@ -156,7 +156,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn('text-sm font-medium text-destructive', className)}
+      className={cn('text-sm font-medium text-destructive/90', className)}
       {...props}
     >
       {body}
@@ -175,3 +175,13 @@ export {
   FormMessage,
   FormField,
 }
+
+export default Object.assign(Form, {
+  useField: useFormField,
+  Item: FormItem,
+  Label: FormLabel,
+  Control: FormControl,
+  Description: FormDescription,
+  Message: FormMessage,
+  Field: FormField,
+})

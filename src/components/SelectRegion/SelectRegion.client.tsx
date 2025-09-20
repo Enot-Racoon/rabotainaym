@@ -3,13 +3,7 @@
 import React, { useState } from 'react'
 import { Region } from '@/payload-types'
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import Select from '@/components/ui/select'
 
 export interface SelectRegionClient {
   label: string
@@ -21,19 +15,19 @@ export default function SelectRegionClient({ label, options }: SelectRegionClien
 
   return (
     <Select onValueChange={setRegionId} value={regionId}>
-      <SelectTrigger
+      <Select.Trigger
         aria-label={label}
         className="w-auto xl:min-w-48 bg-transparent gap-2 pl-0 md:pl-3 focus:ring-transparent border-[#777]"
       >
-        <SelectValue placeholder={label} />
-      </SelectTrigger>
-      <SelectContent>
+        <Select.Value placeholder={label} />
+      </Select.Trigger>
+      <Select.Content>
         {options.map(({ id, name }) => (
-          <SelectItem key={id} value={String(id)}>
+          <Select.Item key={id} value={String(id)}>
             {name}
-          </SelectItem>
+          </Select.Item>
         ))}
-      </SelectContent>
+      </Select.Content>
     </Select>
   )
 }

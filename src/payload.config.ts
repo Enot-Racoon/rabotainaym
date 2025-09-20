@@ -18,6 +18,7 @@ import { Header } from '@/entities/header/config'
 import { Categories } from '@/collections/Categories'
 import { getServerSideURL } from '@/utilities/getURL'
 import { defaultLexical } from '@/fields/defaultLexical'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,6 +26,18 @@ const dirname = path.dirname(filename)
 type SupportedLanguages = NonNullable<Config['i18n']>['supportedLanguages']
 
 export default buildConfig({
+  email: nodemailerAdapter({
+    defaultFromAddress: 'info@rabotainaym.ru',
+    defaultFromName: 'Rabotainaym.ru',
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: 587,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    },
+  }),
   i18n: {
     fallbackLanguage: i18n.fallbackLanguage,
     translations: i18n.translations,
@@ -92,9 +105,7 @@ export default buildConfig({
   collections: [Pages, Posts, Media, Categories, Users, Regions],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
-  plugins: [
-    ...plugins, // storage-adapter-placeholder
-  ],
+  plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

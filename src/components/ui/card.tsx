@@ -65,3 +65,12 @@ const CardAction = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 CardAction.displayName = 'CardAction'
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, CardAction }
+
+export default Object.assign(Card, {
+  Header: CardHeader,
+  Footer: CardFooter,
+  Title: CardTitle,
+  Description: CardDescription,
+  Content: CardContent,
+  Action: CardAction,
+})
