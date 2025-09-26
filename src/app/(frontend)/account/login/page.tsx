@@ -1,17 +1,23 @@
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import { redirect } from 'next/navigation'
+import { headers as getHeaders } from 'next/headers'
+
 import getI18n from '@/i18n/getI18n'
+import Paths from '@/providers/Auth/paths'
 import LoginForm from '@/components/Account/Login'
-import LoginIcon from '@/components/Account/login.svg'
 
 export default async function LoginPage() {
   const { t } = await getI18n()
+  const headers = await getHeaders()
+  const payload = await getPayload({ config })
+  const { user } = await payload.auth({ headers })
 
-  return (
-    <div className="container gap-10 justify-center grid mt-8 mb-48">
-      <LoginIcon className="mx-auto" />
+  if (user) {
+    redirect(
+      `${Paths.page.account}?message=${encodeURIComponent(t('message:account:already-logged-in'))}&redirect=/account`,
+    )
+  }
 
-      <h1 className="font-medium text-3xl tracking-wider text-center">{t('pages:login:header')}</h1>
-
-      <LoginForm />
-    </div>
-  )
+  return <LoginForm />
 }

@@ -18,7 +18,7 @@ const RenderParams: React.FC<{
 
   if (Object.keys(paramObject).length) {
     return (
-      <div className={cn('container', className)}>
+      <div className={cn('container my-4', className)}>
         {Object.entries(paramObject).map(([key, value]) => (
           <Message key={key} {...{ [key]: value }} />
         ))}

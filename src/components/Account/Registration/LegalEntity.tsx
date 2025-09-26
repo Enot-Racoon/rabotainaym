@@ -1,20 +1,18 @@
 import { z } from 'zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
+import type { User } from '@/payload-types'
 
 import useI18n from '@/i18n/useI18n'
-import { useAuth } from '@/providers/Auth'
 import Paths from '@/providers/Auth/paths'
-import { zodResolver } from '@hookform/resolvers/zod'
-
 import Form from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Message } from '@/components/Message'
 import Select from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { Message } from '@/components/Message'
+import { Button } from '@/components/ui/button'
 import { getCitiesByRegionCode, regions } from '@/collections/Locations'
-import type { User } from '@/payload-types'
 
 import CustomCard from './card'
 import { createFormSchema } from './form'
@@ -22,7 +20,6 @@ import { createFormSchema } from './form'
 const LegalEntity = () => {
   const { t } = useI18n()
 
-  const { login } = useAuth()
   const router = useRouter()
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<null | string>(null)
@@ -37,6 +34,7 @@ const LegalEntity = () => {
       location: '',
       surname: '',
       name: '',
+      company: '',
       phone: '',
       email: '',
       agree: undefined,
@@ -53,7 +51,7 @@ const LegalEntity = () => {
         roles: ['legal-entity'],
         email: data.email,
         patronymic: ' ',
-        company: data.company,
+        company: String(data.company),
         password: String(Math.random()),
       } satisfies Omit<User, 'id' | 'createdAt' | 'updatedAt'>),
       headers: { 'Content-Type': 'application/json' },
@@ -77,6 +75,11 @@ const LegalEntity = () => {
     }, 1000)
 
     try {
+      // await payload.sendEmail({
+      //   to: 'test@example.com',
+      //   subject: 'This is a test email',
+      //   text: 'This is my message body',
+      // })
       // 0 && (await login(data))
       clearTimeout(timer)
       if (redirect) {

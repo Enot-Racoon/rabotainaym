@@ -59,10 +59,7 @@ export const plugins: Plugin[] = [
     collections: ['categories'],
     generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
   }),
-  seoPlugin({
-    generateTitle,
-    generateURL,
-  }),
+  seoPlugin({ generateTitle, generateURL }),
   formBuilderPlugin({
     fields: {
       payment: false,

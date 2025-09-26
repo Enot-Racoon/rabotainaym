@@ -87,6 +87,7 @@ const config = {
         },
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
+        'error-bg': 'hsl(var(--error-bg))',
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {

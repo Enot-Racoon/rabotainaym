@@ -52,6 +52,13 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
+      label: translateLabel('general:company'),
+      required: true,
+      name: 'company',
+      type: 'text',
+      defaultValue: '',
+    },
+    {
       label: translateLabel('general:phone'),
       required: true,
       name: 'phone',
@@ -77,7 +84,7 @@ export const Users: CollectionConfig = {
       required: true,
       saveToJWT: true,
       access: {
-        read: admins,
+        read: adminsAndUser,
         update: admins,
         // create: admins, // todo: check security
       },

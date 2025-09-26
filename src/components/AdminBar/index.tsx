@@ -1,15 +1,15 @@
 'use client'
 
+import React from 'react'
 import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
 
 import { cn } from '@/utilities/ui'
+import { getClientSideURL } from '@/utilities/getURL'
+import { checkRole } from '@/collections/access/checkRole'
 import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
-import React, { useState } from 'react'
 
 import './index.scss'
-
-import { getClientSideURL } from '@/utilities/getURL'
 
 const baseClass = 'admin-bar'
 
@@ -28,19 +28,20 @@ const collectionLabels = {
   },
 }
 
+// todo: i18n
 export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps
 }> = (props) => {
   const { adminBarProps } = props || {}
   const segments = useSelectedLayoutSegments()
-  const [show, setShow] = useState(false)
+  const [show, setShow] = React.useState(false)
   const collection = (
     collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'pages'
   ) as keyof typeof collectionLabels
   const router = useRouter()
 
   const onAuthChange = React.useCallback((user: PayloadMeUser) => {
-    setShow(Boolean(user?.id))
+    setShow(checkRole(user, 'admin'))
   }, [])
 
   return (

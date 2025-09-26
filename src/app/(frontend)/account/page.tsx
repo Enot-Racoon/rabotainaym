@@ -24,7 +24,9 @@ export default async function AccountPage() {
     <>
       <HydrateClientUser permissions={permissions} user={user} />
       <div className="container">
-        <h2 className="text-center">{t('general:accountDashboard')}</h2>
+        <h1 className="font-medium text-3xl tracking-wider text-center whitespace-pre-wrap">
+          {t('general:accountDashboard')}
+        </h1>
 
         <Account />
       </div>

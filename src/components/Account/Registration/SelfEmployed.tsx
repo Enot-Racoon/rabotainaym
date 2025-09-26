@@ -4,8 +4,6 @@ import useI18n from '@/i18n/useI18n'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-
-import { useAuth } from '@/providers/Auth'
 import Paths from '@/providers/Auth/paths'
 import Form from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -22,7 +20,6 @@ import { createFormSchema } from './form'
 const SelfEmployed = () => {
   const { t } = useI18n()
 
-  const { login } = useAuth()
   const router = useRouter()
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<null | string>(null)
@@ -53,6 +50,7 @@ const SelfEmployed = () => {
         roles: ['self-employed'],
         email: data.email,
         patronymic: ' ',
+        company: ' ',
         password: String(Math.random()),
       } satisfies Omit<User, 'id' | 'createdAt' | 'updatedAt'>),
       headers: { 'Content-Type': 'application/json' },

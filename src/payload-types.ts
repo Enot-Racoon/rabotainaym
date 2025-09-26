@@ -579,6 +579,7 @@ export interface User {
   surname: string;
   name: string;
   patronymic: string;
+  company: string;
   phone: string;
   region: number | Region;
   referrer?: string | null;
@@ -1094,6 +1095,7 @@ export interface UsersSelect<T extends boolean = true> {
   surname?: T;
   name?: T;
   patronymic?: T;
+  company?: T;
   phone?: T;
   region?: T;
   referrer?: T;

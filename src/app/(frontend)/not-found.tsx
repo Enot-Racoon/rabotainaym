@@ -12,9 +12,9 @@ export default async function NotFound() {
         <h1 style={{ marginBottom: 0 }}>404</h1>
         <p className="mb-4">Страница не найдена.</p>
       </div>
-      <Button asChild variant="success">
-        <Link href="/">{t('general:goHome')}</Link>
-      </Button>
+      <Link href="/">
+        <Button variant="success">{t('general:goHome')}</Button>
+      </Link>
     </div>
   )
 }

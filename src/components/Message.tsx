@@ -6,7 +6,7 @@ import { cn } from '@/utilities/ui'
 const messageVariants = cva('w-full p-4 leading-tight rounded-md', {
   variants: {
     variant: {
-      default: 'text-foreground',
+      default: 'bg-muted text-foreground',
       warning: 'bg-warning text-background',
       error: 'bg-destructive/90 text-background',
       success: 'bg-success text-background',
