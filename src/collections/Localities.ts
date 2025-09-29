@@ -17,6 +17,7 @@ const Localities: CollectionConfig = {
     unlock: admins,
     admin: admins,
   },
+  defaultSort: 'name',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name'],
@@ -92,8 +93,6 @@ const Localities: CollectionConfig = {
         },
       ],
     },
-
-    // namecase,
     coords,
     timezone,
   ],
