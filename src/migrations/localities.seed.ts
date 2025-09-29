@@ -1,5 +1,6 @@
 import type { MigrateUpArgs } from '@payloadcms/db-postgres'
-import { cities } from '@/collections/Locations'
+
+import cities from './data/locations/cities'
 
 export async function up({ payload }: MigrateUpArgs): Promise<void> {
   for (const city of cities) {
