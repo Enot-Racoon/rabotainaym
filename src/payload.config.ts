@@ -19,6 +19,8 @@ import { Categories } from '@/collections/Categories'
 import { getServerSideURL } from '@/utilities/getURL'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import Localities from '@/collections/Localities'
+import Announcements from '@/collections/Announcements'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -102,7 +104,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Regions],
+  collections: [Announcements, Localities, Pages, Posts, Media, Categories, Users, Regions],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [...plugins],

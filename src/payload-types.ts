@@ -67,6 +67,8 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    announcements: Announcement;
+    localities: Locality;
     pages: Page;
     posts: Post;
     media: Media;
@@ -84,6 +86,8 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
+    localities: LocalitiesSelect<false> | LocalitiesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -142,6 +146,68 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcements".
+ */
+export interface Announcement {
+  id: number;
+  title: string;
+  skills: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "localities".
+ */
+export interface Locality {
+  id: number;
+  region?: (number | null) | Region;
+  isCapital?: boolean | null;
+  name: string;
+  name_alt: string;
+  label: string;
+  zip?: number | null;
+  type: string;
+  typeShort: string;
+  isDualName?: boolean | null;
+  namecase: {
+    nominative: string;
+    genitive: string;
+    dative: string;
+    accusative: string;
+    ablative: string;
+    prepositional: string;
+    locative: string;
+  };
+  coords?: {
+    lat?: number | null;
+    lon?: number | null;
+  };
+  timezone?: {
+    tzid?: string | null;
+    utcOffset?: string | null;
+    abbreviation?: string | null;
+    mskOffset?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: number;
+  name: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+  where: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -606,20 +672,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "regions".
- */
-export interface Region {
-  id: number;
-  name: string;
-  country: string;
-  latitude: number;
-  longitude: number;
-  where: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -792,6 +844,14 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'announcements';
+        value: number | Announcement;
+      } | null)
+    | ({
+        relationTo: 'localities';
+        value: number | Locality;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -876,6 +936,58 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcements_select".
+ */
+export interface AnnouncementsSelect<T extends boolean = true> {
+  title?: T;
+  skills?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "localities_select".
+ */
+export interface LocalitiesSelect<T extends boolean = true> {
+  region?: T;
+  isCapital?: T;
+  name?: T;
+  name_alt?: T;
+  label?: T;
+  zip?: T;
+  type?: T;
+  typeShort?: T;
+  isDualName?: T;
+  namecase?:
+    | T
+    | {
+        nominative?: T;
+        genitive?: T;
+        dative?: T;
+        accusative?: T;
+        ablative?: T;
+        prepositional?: T;
+        locative?: T;
+      };
+  coords?:
+    | T
+    | {
+        lat?: T;
+        lon?: T;
+      };
+  timezone?:
+    | T
+    | {
+        tzid?: T;
+        utcOffset?: T;
+        abbreviation?: T;
+        mskOffset?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
