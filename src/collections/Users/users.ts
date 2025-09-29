@@ -72,6 +72,13 @@ export const Users: CollectionConfig = {
       relationTo: 'regions',
     },
     {
+      label: translateLabel('collections:localities:labels:singular'),
+      name: 'locality',
+      required: true,
+      type: 'relationship',
+      relationTo: 'localities',
+    },
+    {
       label: translateLabel('general:referrer'),
       name: 'referrer',
       type: 'text',

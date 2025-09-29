@@ -26,7 +26,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE "regions" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"capital_id" integer,
+  	"capital_id" integer NOT NULL,
   	"district" varchar NOT NULL,
   	"type" varchar NOT NULL,
   	"type_short" varchar NOT NULL,
@@ -48,7 +48,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE "localities" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"region_id" integer,
+  	"region_id" integer NOT NULL,
   	"is_capital" boolean,
   	"zip" numeric,
   	"type" varchar NOT NULL,
@@ -364,7 +364,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"patronymic" varchar NOT NULL,
   	"company" varchar DEFAULT '' NOT NULL,
   	"phone" varchar NOT NULL,
-  	"region" varchar,
+  	"region_id" integer NOT NULL,
+  	"locality_id" integer NOT NULL,
   	"referrer" varchar,
   	"_otp" varchar,
   	"_otpexpiration" timestamp(3) with time zone,
@@ -753,6 +754,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "categories" ADD CONSTRAINT "categories_parent_id_categories_id_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."categories"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "users_roles" ADD CONSTRAINT "users_roles_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "users_sessions" ADD CONSTRAINT "users_sessions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "users" ADD CONSTRAINT "users_region_id_regions_id_fk" FOREIGN KEY ("region_id") REFERENCES "public"."regions"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "users" ADD CONSTRAINT "users_locality_id_localities_id_fk" FOREIGN KEY ("locality_id") REFERENCES "public"."localities"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "redirects_rels" ADD CONSTRAINT "redirects_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."redirects"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "redirects_rels" ADD CONSTRAINT "redirects_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "redirects_rels" ADD CONSTRAINT "redirects_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
@@ -801,11 +804,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "announcements_updated_at_idx" ON "announcements" USING btree ("updated_at");
   CREATE INDEX "announcements_created_at_idx" ON "announcements" USING btree ("created_at");
   CREATE INDEX "regions_capital_idx" ON "regions" USING btree ("capital_id");
+  CREATE UNIQUE INDEX "regions_label_idx" ON "regions" USING btree ("label");
   CREATE INDEX "regions_updated_at_idx" ON "regions" USING btree ("updated_at");
   CREATE INDEX "regions_created_at_idx" ON "regions" USING btree ("created_at");
   CREATE INDEX "localities_region_idx" ON "localities" USING btree ("region_id");
   CREATE UNIQUE INDEX "localities_label_idx" ON "localities" USING btree ("label");
-  CREATE UNIQUE INDEX "localities_name_en_idx" ON "localities" USING btree ("name_en");
   CREATE INDEX "localities_updated_at_idx" ON "localities" USING btree ("updated_at");
   CREATE INDEX "localities_created_at_idx" ON "localities" USING btree ("created_at");
   CREATE INDEX "pages_blocks_content_columns_order_idx" ON "pages_blocks_content_columns" USING btree ("_order");
@@ -905,6 +908,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "users_roles_parent_idx" ON "users_roles" USING btree ("parent_id");
   CREATE INDEX "users_sessions_order_idx" ON "users_sessions" USING btree ("_order");
   CREATE INDEX "users_sessions_parent_id_idx" ON "users_sessions" USING btree ("_parent_id");
+  CREATE INDEX "users_region_idx" ON "users" USING btree ("region_id");
+  CREATE INDEX "users_locality_idx" ON "users" USING btree ("locality_id");
   CREATE INDEX "users__otp_idx" ON "users" USING btree ("_otp");
   CREATE INDEX "users__otpexpiration_idx" ON "users" USING btree ("_otpexpiration");
   CREATE INDEX "users_updated_at_idx" ON "users" USING btree ("updated_at");

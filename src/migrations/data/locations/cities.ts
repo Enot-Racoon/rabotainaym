@@ -53303,7 +53303,7 @@ const cities: City[] = [
   {
     name: 'Орёл',
     name_alt: 'Орел',
-    label: 'oryol',
+    label: 'orel',
     type: 'Город',
     typeShort: 'г',
     contentType: 'city',

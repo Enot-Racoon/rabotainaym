@@ -1,5 +1,5 @@
 {
-  "id": "54f096ea-f7c5-45e1-b72a-d412fe82c260",
+  "id": "cc8a4aeb-6a0c-423f-80e1-eb6305e22424",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -94,7 +94,7 @@
           "name": "capital_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "district": {
           "name": "district",
@@ -217,6 +217,21 @@
           "method": "btree",
           "with": {}
         },
+        "regions_label_idx": {
+          "name": "regions_label_idx",
+          "columns": [
+            {
+              "expression": "label",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "regions_updated_at_idx": {
           "name": "regions_updated_at_idx",
           "columns": [
@@ -283,7 +298,7 @@
           "name": "region_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "is_capital": {
           "name": "is_capital",
@@ -453,21 +468,6 @@
           "columns": [
             {
               "expression": "label",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "localities_name_en_idx": {
-          "name": "localities_name_en_idx",
-          "columns": [
-            {
-              "expression": "name_en",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -4165,11 +4165,17 @@
           "primaryKey": false,
           "notNull": true
         },
-        "region": {
-          "name": "region",
-          "type": "varchar",
+        "region_id": {
+          "name": "region_id",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
+        },
+        "locality_id": {
+          "name": "locality_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
         },
         "referrer": {
           "name": "referrer",
@@ -4248,6 +4254,36 @@
         }
       },
       "indexes": {
+        "users_region_idx": {
+          "name": "users_region_idx",
+          "columns": [
+            {
+              "expression": "region_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_locality_idx": {
+          "name": "users_locality_idx",
+          "columns": [
+            {
+              "expression": "locality_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "users__otp_idx": {
           "name": "users__otp_idx",
           "columns": [
@@ -4324,7 +4360,34 @@
           "with": {}
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "users_region_id_regions_id_fk": {
+          "name": "users_region_id_regions_id_fk",
+          "tableFrom": "users",
+          "tableTo": "regions",
+          "columnsFrom": [
+            "region_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "users_locality_id_localities_id_fk": {
+          "name": "users_locality_id_localities_id_fk",
+          "tableFrom": "users",
+          "tableTo": "localities",
+          "columnsFrom": [
+            "locality_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

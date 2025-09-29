@@ -1,15 +1,39 @@
-import * as migration_20250929_125227_init from './20250929_125227_init';
-import * as migration_20250929_125453_seed_users from './20250929_125453_seed_users';
+import * as migration_20250929_212024_init from './20250929_212024_init';
+import * as migration_20250929_212209_pre_seed_regions from './20250929_212209_pre_seed_regions';
+import * as migration_20250929_212302_seed_regions from './20250929_212302_seed_regions';
+import * as migration_20250929_212349_seed_localities from './20250929_212349_seed_localities';
+import * as migration_20250929_212426_post_seed_localities from './20250929_212426_post_seed_localities';
+import * as migration_20250929_212830_seed_users from './20250929_212830_seed_users';
 
 export const migrations = [
   {
-    up: migration_20250929_125227_init.up,
-    down: migration_20250929_125227_init.down,
-    name: '20250929_125227_init',
+    up: migration_20250929_212024_init.up,
+    down: migration_20250929_212024_init.down,
+    name: '20250929_212024_init',
   },
   {
-    up: migration_20250929_125453_seed_users.up,
-    down: migration_20250929_125453_seed_users.down,
-    name: '20250929_125453_seed_users'
+    up: migration_20250929_212209_pre_seed_regions.up,
+    down: migration_20250929_212209_pre_seed_regions.down,
+    name: '20250929_212209_pre_seed_regions',
+  },
+  {
+    up: migration_20250929_212302_seed_regions.up,
+    down: migration_20250929_212302_seed_regions.down,
+    name: '20250929_212302_seed_regions',
+  },
+  {
+    up: migration_20250929_212349_seed_localities.up,
+    down: migration_20250929_212349_seed_localities.down,
+    name: '20250929_212349_seed_localities',
+  },
+  {
+    up: migration_20250929_212426_post_seed_localities.up,
+    down: migration_20250929_212426_post_seed_localities.down,
+    name: '20250929_212426_post_seed_localities',
+  },
+  {
+    up: migration_20250929_212830_seed_users.up,
+    down: migration_20250929_212830_seed_users.down,
+    name: '20250929_212830_seed_users'
   },
 ];

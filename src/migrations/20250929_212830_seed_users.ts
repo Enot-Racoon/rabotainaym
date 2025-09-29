@@ -7,6 +7,8 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'users',
     data: {
+      region: 77,
+      locality: 590,
       email: 'rabota-i-naim@ya.ru',
       password: adminPass,
       surname: ' ',
@@ -21,6 +23,8 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'users',
     data: {
+      region: 77,
+      locality: 590,
       email: 'enotracoon2020@gmail.com',
       password: 'demo',
       surname: 'Фамилия самозанятого',
@@ -35,6 +39,8 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'users',
     data: {
+      region: 77,
+      locality: 590,
       email: 'a8333093@yandex.com',
       password: 'demo',
       surname: 'Фамилия юр.лица',

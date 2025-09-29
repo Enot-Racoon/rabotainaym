@@ -12,7 +12,7 @@ import { Media } from '@/collections/Media'
 import { Pages } from '@/collections/Pages'
 import { Posts } from '@/collections/Posts'
 import { Users } from '@/collections/Users'
-import { Regions } from '@/collections/Regions'
+import Regions from '@/collections/Regions/index'
 import { Footer } from '@/entities/footer/config'
 import { Header } from '@/entities/header/config'
 import { Categories } from '@/collections/Categories'
@@ -104,7 +104,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Announcements, Localities, Pages, Posts, Media, Categories, Users, Regions],
+  collections: [Announcements, Regions, Localities, Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [...plugins],

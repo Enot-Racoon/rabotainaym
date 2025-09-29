@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     announcements: Announcement;
+    regions: Region;
     localities: Locality;
     pages: Page;
     posts: Post;
@@ -86,6 +87,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
+    regions: RegionsSelect<false> | RegionsSelect<true>;
     localities: LocalitiesSelect<false> | LocalitiesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -158,10 +160,38 @@ export interface Announcement {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: number;
+  capital: number | Locality;
+  district: string;
+  type: string;
+  typeShort: string;
+  code: string;
+  name: string;
+  fullname: string;
+  label: string;
+  name_en: string;
+  namecase: {
+    nominative: string;
+    genitive: string;
+    dative: string;
+    accusative: string;
+    ablative: string;
+    prepositional: string;
+    locative: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "localities".
  */
 export interface Locality {
   id: number;
+  region: number | Region;
   isCapital?: boolean | null;
   zip?: number | null;
   type: string;
@@ -169,6 +199,7 @@ export interface Locality {
   name: string;
   name_alt: string;
   label: string;
+  name_en: string;
   isDualName?: boolean | null;
   namecase: {
     nominative: string;
@@ -630,7 +661,8 @@ export interface User {
   patronymic: string;
   company: string;
   phone: string;
-  region?: string | null;
+  region: number | Region;
+  locality: number | Locality;
   referrer?: string | null;
   roles: ('admin' | 'self-employed' | 'legal-entity')[];
   _otp?: string | null;
@@ -831,6 +863,10 @@ export interface PayloadLockedDocument {
         value: number | Announcement;
       } | null)
     | ({
+        relationTo: 'regions';
+        value: number | Region;
+      } | null)
+    | ({
         relationTo: 'localities';
         value: number | Locality;
       } | null)
@@ -928,9 +964,38 @@ export interface AnnouncementsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions_select".
+ */
+export interface RegionsSelect<T extends boolean = true> {
+  capital?: T;
+  district?: T;
+  type?: T;
+  typeShort?: T;
+  code?: T;
+  name?: T;
+  fullname?: T;
+  label?: T;
+  name_en?: T;
+  namecase?:
+    | T
+    | {
+        nominative?: T;
+        genitive?: T;
+        dative?: T;
+        accusative?: T;
+        ablative?: T;
+        prepositional?: T;
+        locative?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "localities_select".
  */
 export interface LocalitiesSelect<T extends boolean = true> {
+  region?: T;
   isCapital?: T;
   zip?: T;
   type?: T;
@@ -938,6 +1003,7 @@ export interface LocalitiesSelect<T extends boolean = true> {
   name?: T;
   name_alt?: T;
   label?: T;
+  name_en?: T;
   isDualName?: T;
   namecase?:
     | T
@@ -1188,6 +1254,7 @@ export interface UsersSelect<T extends boolean = true> {
   company?: T;
   phone?: T;
   region?: T;
+  locality?: T;
   referrer?: T;
   roles?: T;
   _otp?: T;

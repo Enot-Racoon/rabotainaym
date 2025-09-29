@@ -2773,6 +2773,14 @@ const regions: Region[] = [
       prepositional: 'Москве',
       locative: 'Москве',
     },
+    capital: {
+      name: 'Москва',
+      label: 'moscow',
+      id: '7700000000000',
+      okato: '45000000000',
+      oktmo: '45000000',
+      contentType: 'city',
+    },
   },
   {
     name: 'Санкт-Петербург',
@@ -2800,6 +2808,14 @@ const regions: Region[] = [
       ablative: 'Санкт-Петербургом',
       prepositional: 'Санкт-Петербурге',
       locative: 'Санкт-Петербурге',
+    },
+    capital: {
+      name: 'Санкт-Петербург',
+      label: 'saint_petersburg',
+      id: '7800000000000',
+      okato: '40000000000',
+      oktmo: '40000000',
+      contentType: 'city',
     },
   },
   {

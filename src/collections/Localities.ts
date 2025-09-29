@@ -14,8 +14,6 @@ const Localities: CollectionConfig = {
     create: admins,
     update: admins,
     delete: admins,
-    unlock: admins,
-    admin: admins,
   },
   defaultSort: 'name',
   admin: {
@@ -32,12 +30,29 @@ const Localities: CollectionConfig = {
       label: translateLabel('collections:localities:region'),
       type: 'relationship',
       relationTo: 'regions',
-      // required: true,
+      required: true,
     },
     {
       name: 'isCapital',
       type: 'checkbox',
       label: translateLabel('collections:localities:isCapital'),
+    },
+    {
+      name: 'zip',
+      type: 'number',
+      label: translateLabel('collections:localities:zip'),
+    },
+    {
+      name: 'type',
+      type: 'text',
+      required: true,
+      label: translateLabel('collections:localities:type'),
+    },
+    {
+      name: 'typeShort',
+      type: 'text',
+      required: true,
+      label: translateLabel('collections:localities:typeShort'),
     },
     {
       type: 'tabs',
@@ -61,24 +76,14 @@ const Localities: CollectionConfig = {
               name: 'label',
               type: 'text',
               required: true,
+              unique: true,
               label: translateLabel('collections:localities:label'),
             },
             {
-              name: 'zip',
-              type: 'number',
-              label: translateLabel('collections:localities:zip'),
-            },
-            {
-              name: 'type',
+              name: 'name_en',
               type: 'text',
               required: true,
-              label: translateLabel('collections:localities:type'),
-            },
-            {
-              name: 'typeShort',
-              type: 'text',
-              required: true,
-              label: translateLabel('collections:localities:typeShort'),
+              label: translateLabel('collections:localities:name_en'),
             },
             {
               name: 'isDualName',
