@@ -29,6 +29,7 @@ const Regions: CollectionConfig = {
       type: 'relationship',
       relationTo: 'localities',
       required: true,
+      filterOptions: () => ({ isCapital: { equals: true } }),
     },
     {
       name: 'district',

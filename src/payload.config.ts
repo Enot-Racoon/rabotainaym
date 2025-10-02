@@ -12,15 +12,16 @@ import { Media } from '@/collections/Media'
 import { Pages } from '@/collections/Pages'
 import { Posts } from '@/collections/Posts'
 import { Users } from '@/collections/Users'
-import Regions from '@/collections/Regions/index'
 import { Footer } from '@/entities/footer/config'
 import { Header } from '@/entities/header/config'
+import Regions from '@/collections/Regions/index'
+import Localities from '@/collections/Localities'
+import Specialties from '@/collections/Specialties'
+import Announcements from '@/collections/Announcements'
 import { Categories } from '@/collections/Categories'
 import { getServerSideURL } from '@/utilities/getURL'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
-import Localities from '@/collections/Localities'
-import Announcements from '@/collections/Announcements'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -104,7 +105,17 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Announcements, Regions, Localities, Pages, Posts, Media, Categories, Users],
+  collections: [
+    Announcements,
+    Specialties,
+    Regions,
+    Localities,
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [...plugins],

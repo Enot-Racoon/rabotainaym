@@ -31,6 +31,20 @@ const Announcements: CollectionConfig = {
       label: translateLabel('collections:announcements:title'),
     },
     {
+      label: translateLabel('collections:regions:labels:singular'),
+      name: 'region',
+      required: true,
+      type: 'relationship',
+      relationTo: 'regions',
+    },
+    {
+      label: translateLabel('collections:localities:labels:singular'),
+      name: 'locality',
+      required: true,
+      type: 'relationship',
+      relationTo: 'localities',
+    },
+    {
       name: 'skills',
       type: 'textarea',
       required: true,

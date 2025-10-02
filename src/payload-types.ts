@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     announcements: Announcement;
+    specialties: Specialty;
     regions: Region;
     localities: Locality;
     pages: Page;
@@ -87,6 +88,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
+    specialties: SpecialtiesSelect<false> | SpecialtiesSelect<true>;
     regions: RegionsSelect<false> | RegionsSelect<true>;
     localities: LocalitiesSelect<false> | LocalitiesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
@@ -154,6 +156,8 @@ export interface UserAuthOperations {
 export interface Announcement {
   id: number;
   title: string;
+  region: number | Region;
+  locality: number | Locality;
   skills: string;
   updatedAt: string;
   createdAt: string;
@@ -220,6 +224,18 @@ export interface Locality {
     abbreviation?: string | null;
     mskOffset?: string | null;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialties".
+ */
+export interface Specialty {
+  id: number;
+  name: string;
+  category?: (number | Specialty)[] | null;
+  isCategory?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -863,6 +879,10 @@ export interface PayloadLockedDocument {
         value: number | Announcement;
       } | null)
     | ({
+        relationTo: 'specialties';
+        value: number | Specialty;
+      } | null)
+    | ({
         relationTo: 'regions';
         value: number | Region;
       } | null)
@@ -958,7 +978,20 @@ export interface PayloadMigration {
  */
 export interface AnnouncementsSelect<T extends boolean = true> {
   title?: T;
+  region?: T;
+  locality?: T;
   skills?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialties_select".
+ */
+export interface SpecialtiesSelect<T extends boolean = true> {
+  name?: T;
+  category?: T;
+  isCategory?: T;
   updatedAt?: T;
   createdAt?: T;
 }

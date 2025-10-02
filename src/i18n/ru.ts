@@ -100,6 +100,15 @@ const ru = {
       zip: 'Почтовый индекс',
       region: 'Регион',
     },
+    specialties: {
+      labels: {
+        plural: 'Специальности',
+        singular: 'Специальность',
+      },
+      name: 'Название',
+      category: 'Категория',
+      isCategory: 'Это категория',
+    },
     announcements: {
       labels: {
         plural: 'Объявления',
