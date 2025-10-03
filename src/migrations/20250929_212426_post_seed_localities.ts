@@ -17,15 +17,10 @@ export async function up({ db, payload }: MigrateUpArgs): Promise<void> {
       throw new Error(`City with label "${region.capital?.label}" not found`)
     }
 
-    await payload.update({
-      collection: 'regions',
-      data: {
-        capital: capital.id,
-      },
-      where: {
-        label: { equals: region.label },
-      },
-    })
+    await db.execute(sql`
+      UPDATE "regions"
+      SET capital_id = ${capital.id}
+      WHERE label = ${region.label}`)
   }
 
   await db.execute(sql`

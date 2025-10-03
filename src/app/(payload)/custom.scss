@@ -10,3 +10,14 @@
   text-align: center;
   padding: 2.5rem 5rem;
 }
+
+.collection-list,
+.document-fields {
+  .table {
+    display: block;
+
+    .cell-_select {
+      width: 1%;
+    }
+  }
+}

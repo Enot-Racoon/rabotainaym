@@ -1,14 +1,22 @@
 import type { CollectionConfig } from 'payload'
+
 import { translateLabel } from '@/i18n'
+import { anyone } from '@/collections/access/anyone'
+import { admins } from '@/collections/access/admins'
 
 const Specialties: CollectionConfig = {
   slug: 'specialties',
-  // todo: complete define collection
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'category'],
   },
-  access: {},
+  defaultSort: 'name',
+  access: {
+    read: anyone,
+    create: admins,
+    update: admins,
+    delete: admins,
+  },
   labels: {
     plural: translateLabel('collections:specialties:labels:plural'),
     singular: translateLabel('collections:specialties:labels:singular'),
@@ -25,14 +33,7 @@ const Specialties: CollectionConfig = {
       label: translateLabel('collections:specialties:category'),
       type: 'relationship',
       hasMany: true,
-      relationTo: 'specialties',
-      admin: { condition: ({ isCategory }) => !isCategory },
-      filterOptions: () => ({ isCategory: { equals: true } }),
-    },
-    {
-      name: 'isCategory',
-      label: translateLabel('collections:specialties:isCategory'),
-      type: 'checkbox',
+      relationTo: 'specialty-categories',
     },
   ],
 }

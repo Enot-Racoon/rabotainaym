@@ -109,6 +109,14 @@ const ru = {
       category: 'Категория',
       isCategory: 'Это категория',
     },
+    'specialty-groups': {
+      labels: {
+        plural: 'Категория специальностей',
+        singular: 'Категории специальностей',
+      },
+      name: 'Название',
+      specialties: 'Специальности',
+    },
     announcements: {
       labels: {
         plural: 'Объявления',

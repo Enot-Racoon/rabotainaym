@@ -17,6 +17,7 @@ import { Header } from '@/entities/header/config'
 import Regions from '@/collections/Regions/index'
 import Localities from '@/collections/Localities'
 import Specialties from '@/collections/Specialties'
+import SpecialtyCategories from '@/collections/SpecialtyCategories'
 import Announcements from '@/collections/Announcements'
 import { Categories } from '@/collections/Categories'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -108,6 +109,7 @@ export default buildConfig({
   collections: [
     Announcements,
     Specialties,
+    SpecialtyCategories,
     Regions,
     Localities,
     Pages,

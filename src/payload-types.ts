@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     announcements: Announcement;
     specialties: Specialty;
+    'specialty-categories': SpecialtyCategory;
     regions: Region;
     localities: Locality;
     pages: Page;
@@ -85,10 +86,15 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'specialty-categories': {
+      specialties: 'specialties';
+    };
+  };
   collectionsSelect: {
     announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
     specialties: SpecialtiesSelect<false> | SpecialtiesSelect<true>;
+    'specialty-categories': SpecialtyCategoriesSelect<false> | SpecialtyCategoriesSelect<true>;
     regions: RegionsSelect<false> | RegionsSelect<true>;
     localities: LocalitiesSelect<false> | LocalitiesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
@@ -234,8 +240,22 @@ export interface Locality {
 export interface Specialty {
   id: number;
   name: string;
-  category?: (number | Specialty)[] | null;
-  isCategory?: boolean | null;
+  category?: (number | SpecialtyCategory)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialty-categories".
+ */
+export interface SpecialtyCategory {
+  id: number;
+  name?: string | null;
+  specialties?: {
+    docs?: (number | Specialty)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -883,6 +903,10 @@ export interface PayloadLockedDocument {
         value: number | Specialty;
       } | null)
     | ({
+        relationTo: 'specialty-categories';
+        value: number | SpecialtyCategory;
+      } | null)
+    | ({
         relationTo: 'regions';
         value: number | Region;
       } | null)
@@ -991,7 +1015,16 @@ export interface AnnouncementsSelect<T extends boolean = true> {
 export interface SpecialtiesSelect<T extends boolean = true> {
   name?: T;
   category?: T;
-  isCategory?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialty-categories_select".
+ */
+export interface SpecialtyCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  specialties?: T;
   updatedAt?: T;
   createdAt?: T;
 }
