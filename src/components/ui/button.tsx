@@ -28,6 +28,7 @@ export const config = {
       base: 'h-10 px-4 py-2 text-lg',
       default: 'h-10 px-4 py-2',
       sm: 'h-9 px-2 py-1',
+      xs: 'h-6 px-2 py-1',
       icon: 'h-10 w-10',
       clear: '',
     },

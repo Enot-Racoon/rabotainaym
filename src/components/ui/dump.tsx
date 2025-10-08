@@ -1,6 +1,7 @@
 import { createElement } from 'react'
 
 const Dump = <T extends object>({ className, ...props }: T & { className?: string }) => {
+  // console.log('Dump', props)
   try {
     return createElement(
       'div',

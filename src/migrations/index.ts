@@ -7,6 +7,7 @@ import * as migration_20250929_212830_seed_users from './20250929_212830_seed_us
 import * as migration_20251003_003128_add_specialties from './20251003_003128_add_specialties';
 import * as migration_20251004_085632_add_specialty_categories from './20251004_085632_add_specialty_categories';
 import * as migration_20251004_085829_seed_specialties from './20251004_085829_seed_specialties';
+import * as migration_20251007_035037_add_work_time from './20251007_035037_add_work_time';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20251004_085829_seed_specialties.up,
     down: migration_20251004_085829_seed_specialties.down,
-    name: '20251004_085829_seed_specialties'
+    name: '20251004_085829_seed_specialties',
+  },
+  {
+    up: migration_20251007_035037_add_work_time.up,
+    down: migration_20251007_035037_add_work_time.down,
+    name: '20251007_035037_add_work_time'
   },
 ];

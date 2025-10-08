@@ -123,6 +123,9 @@ const ru = {
         singular: 'Объявление',
       },
       title: 'Название',
+      region: 'Регион',
+      locality: 'Населенный пункт',
+      specialty: 'Cпециальность',
       skills: 'Профессиональные навыки',
     },
   },
@@ -135,6 +138,14 @@ const ru = {
     ablative: 'Предложный падеж',
     prepositional: 'Предложный падеж',
     locative: 'Местный падеж',
+  },
+  'week-days': {
+    mon: 'пн',
+    tue: 'вт',
+    wed: 'ср',
+    thu: 'чт',
+    fri: 'пт',
+    sat: 'сб',
   },
   coords: {
     label: 'Координаты',
@@ -215,6 +226,11 @@ const ru = {
       },
       agreePPD: 'Необходимо подтвердить согласие',
     },
+  },
+  actions: {
+    edit: 'Редактировать',
+    publish: 'Опубликовать',
+    delete: 'Удалить',
   },
 } as const
 

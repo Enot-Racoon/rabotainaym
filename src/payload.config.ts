@@ -57,9 +57,7 @@ export default buildConfig({
     },
     components: {
       graphics: {
-        Icon: {
-          path: '@payloadcms/ui#PayloadIcon',
-        },
+        Icon: { path: '@/components/AdminIcon' },
       },
       // views: {
       //   login: {

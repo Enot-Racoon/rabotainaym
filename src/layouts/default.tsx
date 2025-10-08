@@ -33,7 +33,7 @@ export default async function DefaultLayout({
           <AdminBar adminBarProps={{ preview: isEnabled }} />
 
           <Header />
-          {children}
+          <div className="mb-24">{children}</div>
           <Footer />
         </Providers>
       </body>

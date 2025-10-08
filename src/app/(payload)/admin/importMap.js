@@ -1,3 +1,4 @@
+import { Label as Label_375cd58aa4e11f580e416f4835b6b09a } from '@/components/ui/label'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -30,11 +31,12 @@ import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from 
 import { RowLabel as RowLabel_62cfdcc4ebc97bd0aa366620e6d5da94 } from '@/entities/header/RowLabel'
 import { RowLabel as RowLabel_0433c71f9a84348d6f8a1ca657532236 } from '@/entities/footer/RowLabel'
 import { default as default_3f2d35de62e7465174b08474d8303528 } from '@/components/Avatar'
-import { PayloadIcon as PayloadIcon_3817bf644402e67bfe6577f60ef982de } from '@payloadcms/ui'
+import { default as default_c1363893506d7ed29a71d1a4da01ddb5 } from '@/components/AdminIcon'
 import { default as default_1a7510af427896d367a49dbf838d2de6 } from '@/components/BeforeDashboard'
 import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/components/BeforeLogin'
 
 export const importMap = {
+  "@/components/ui/label#Label": Label_375cd58aa4e11f580e416f4835b6b09a,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -67,7 +69,7 @@ export const importMap = {
   "@/entities/header/RowLabel#RowLabel": RowLabel_62cfdcc4ebc97bd0aa366620e6d5da94,
   "@/entities/footer/RowLabel#RowLabel": RowLabel_0433c71f9a84348d6f8a1ca657532236,
   "@/components/Avatar#default": default_3f2d35de62e7465174b08474d8303528,
-  "@payloadcms/ui#PayloadIcon": PayloadIcon_3817bf644402e67bfe6577f60ef982de,
+  "@/components/AdminIcon#default": default_c1363893506d7ed29a71d1a4da01ddb5,
   "@/components/BeforeDashboard#default": default_1a7510af427896d367a49dbf838d2de6,
   "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e
 }

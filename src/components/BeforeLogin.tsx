@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
+
 import getI18n from '@/i18n/getI18n'
 
 const BeforeLogin: React.FC = async () => {
@@ -6,8 +8,10 @@ const BeforeLogin: React.FC = async () => {
 
   return (
     <div className="login__Logo">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logotype.svg" alt={t('general:appName')} />
+      <Link href="/">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logotype.svg" alt={t('general:appName')} />
+      </Link>
     </div>
   )
 }

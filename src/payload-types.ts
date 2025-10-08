@@ -164,7 +164,123 @@ export interface Announcement {
   title: string;
   region: number | Region;
   locality: number | Locality;
+  specialty: number | Specialty;
   skills: string;
+  images?: (number | Media)[] | null;
+  workTime?: {
+    start?:
+      | (
+          | '0000'
+          | '0030'
+          | '0100'
+          | '0130'
+          | '0200'
+          | '0230'
+          | '0300'
+          | '0330'
+          | '0400'
+          | '0430'
+          | '0500'
+          | '0530'
+          | '0600'
+          | '0630'
+          | '0700'
+          | '0730'
+          | '0800'
+          | '0830'
+          | '0900'
+          | '0930'
+          | '1000'
+          | '1030'
+          | '1100'
+          | '1130'
+          | '1200'
+          | '1230'
+          | '1300'
+          | '1330'
+          | '1400'
+          | '1430'
+          | '1500'
+          | '1530'
+          | '1600'
+          | '1630'
+          | '1700'
+          | '1730'
+          | '1800'
+          | '1830'
+          | '1900'
+          | '1930'
+          | '2000'
+          | '2030'
+          | '2100'
+          | '2130'
+          | '2200'
+          | '2230'
+          | '2300'
+          | '2330'
+        )
+      | null;
+    end?:
+      | (
+          | '0000'
+          | '0030'
+          | '0100'
+          | '0130'
+          | '0200'
+          | '0230'
+          | '0300'
+          | '0330'
+          | '0400'
+          | '0430'
+          | '0500'
+          | '0530'
+          | '0600'
+          | '0630'
+          | '0700'
+          | '0730'
+          | '0800'
+          | '0830'
+          | '0900'
+          | '0930'
+          | '1000'
+          | '1030'
+          | '1100'
+          | '1130'
+          | '1200'
+          | '1230'
+          | '1300'
+          | '1330'
+          | '1400'
+          | '1430'
+          | '1500'
+          | '1530'
+          | '1600'
+          | '1630'
+          | '1700'
+          | '1730'
+          | '1800'
+          | '1830'
+          | '1900'
+          | '1930'
+          | '2000'
+          | '2030'
+          | '2100'
+          | '2130'
+          | '2200'
+          | '2230'
+          | '2300'
+          | '2330'
+        )
+      | null;
+    days?: {
+      mon?: boolean | null;
+      tue?: boolean | null;
+      wed?: boolean | null;
+      thu?: boolean | null;
+      fri?: boolean | null;
+      sat?: boolean | null;
+    };
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -261,73 +377,6 @@ export interface SpecialtyCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: number;
-  title: string;
-  layout: (ContentBlock | MediaBlock | FormBlock)[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  banner?: (number | null) | Media;
-  publishedAt?: string | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlock".
- */
-export interface ContentBlock {
-  columns?:
-    | {
-        size?: ('center' | 'oneThird' | 'half' | 'twoThirds' | 'full') | null;
-        enableHtmlAttributes?: boolean | null;
-        className?: string | null;
-        htmlStyle?: string | null;
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'content';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
- */
-export interface MediaBlock {
-  media: number | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mediaBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -417,6 +466,73 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  layout: (ContentBlock | MediaBlock | FormBlock)[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  banner?: (number | null) | Media;
+  publishedAt?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  columns?:
+    | {
+        size?: ('center' | 'oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        enableHtmlAttributes?: boolean | null;
+        className?: string | null;
+        htmlStyle?: string | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: number | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1004,7 +1120,25 @@ export interface AnnouncementsSelect<T extends boolean = true> {
   title?: T;
   region?: T;
   locality?: T;
+  specialty?: T;
   skills?: T;
+  images?: T;
+  workTime?:
+    | T
+    | {
+        start?: T;
+        end?: T;
+        days?:
+          | T
+          | {
+              mon?: T;
+              tue?: T;
+              wed?: T;
+              thu?: T;
+              fri?: T;
+              sat?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
