@@ -6,6 +6,7 @@ import useI18n from '@/i18n/useI18n'
 // import { useAuth } from '@/providers/Auth'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import paths from '@/providers/Auth/paths'
 
 const Account = () => {
   const { t } = useI18n()
@@ -13,7 +14,7 @@ const Account = () => {
   return (
     <div className="space-y-8 mt-8">
       <div className="text-center">
-        <Link href="/account/logout">
+        <Link href={paths.page.logout}>
           <Button className="px-8" size="lg">
             {t('authentication:logout')}
           </Button>

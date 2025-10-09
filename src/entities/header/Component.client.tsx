@@ -8,11 +8,11 @@ import type { Header } from '@/payload-types'
 
 import useI18n from '@/i18n/useI18n'
 import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 
 import { HeaderNav } from './Nav'
 import { useAuth } from '@/providers/Auth'
+import UserBar from '@/components/UserBar'
 
 interface HeaderClientProps {
   data: Header
@@ -49,26 +49,7 @@ export const HeaderClient = ({ data, selectRegion }: HeaderClientProps) => {
 
         <HeaderNav data={data} />
 
-        {!user ? (
-          <div className="flex gap-6 items-center">
-            <Link href="/account/login">
-              <Button size="lg" variant="success">
-                {t('pages:login:action')}
-              </Button>
-            </Link>
-            <Link href="/account/registration">
-              <Button size="lg" variant="default">
-                {t('pages:registration:action')}
-              </Button>
-            </Link>
-          </div>
-        ) : (
-          <Link href="/account">
-            <Button className="xl:px-16" size="lg" variant="success">
-              {t('general:accountDashboard')}
-            </Button>
-          </Link>
-        )}
+        <UserBar />
       </div>
     </header>
   )

@@ -26,6 +26,7 @@ const SpecialtyCategories: CollectionConfig = {
       label: translateLabel('collections:specialty-groups:specialties'),
       collection: 'specialties',
       on: 'category',
+      defaultSort: 'name',
     },
   ],
 }

@@ -16,7 +16,7 @@ const Regions: CollectionConfig = {
   defaultSort: 'name',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name'],
+    defaultColumns: ['name', 'region', 'capital', 'code', 'localities'],
   },
   labels: {
     plural: translateLabel('collections:regions:labels:plural'),
@@ -93,6 +93,15 @@ const Regions: CollectionConfig = {
           fields: [namecase],
         },
       ],
+    },
+    {
+      name: 'localities',
+      type: 'join',
+      label: translateLabel('collections:localities:labels:plural'),
+      collection: 'localities',
+      defaultLimit: 0,
+      on: 'region',
+      defaultSort: 'name',
     },
   ],
 }

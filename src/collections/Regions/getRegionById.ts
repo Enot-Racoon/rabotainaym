@@ -6,18 +6,16 @@ import type { Region } from '@/payload-types'
 
 import publicFields from './publicFields'
 
-export const getRegions = cache(
-  async (): Promise<Pick<Region, (typeof publicFields)[number]>[]> => {
+export const getRegionById = cache(
+  async (id: string | number): Promise<Pick<Region, (typeof publicFields)[number]>> => {
     const payload = await getPayload({ config: configPromise })
-    const result = await payload.find({
+
+    return await payload.findByID({
       collection: 'regions',
-      limit: 0,
-      sort: 'name',
+      id,
       select: Object.fromEntries(publicFields.map((field) => [field, true])),
     })
-
-    return result.docs ?? []
   },
 )
 
-export default getRegions
+export default getRegionById

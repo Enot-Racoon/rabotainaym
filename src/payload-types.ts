@@ -90,6 +90,9 @@ export interface Config {
     'specialty-categories': {
       specialties: 'specialties';
     };
+    regions: {
+      localities: 'localities';
+    };
   };
   collectionsSelect: {
     announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
@@ -307,6 +310,11 @@ export interface Region {
     ablative: string;
     prepositional: string;
     locative: string;
+  };
+  localities?: {
+    docs?: (number | Locality)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
   };
   updatedAt: string;
   createdAt: string;
@@ -1187,6 +1195,7 @@ export interface RegionsSelect<T extends boolean = true> {
         prepositional?: T;
         locative?: T;
       };
+  localities?: T;
   updatedAt?: T;
   createdAt?: T;
 }

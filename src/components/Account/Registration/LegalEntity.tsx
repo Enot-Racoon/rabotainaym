@@ -12,7 +12,7 @@ import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Message } from '@/components/Message'
 import { Button } from '@/components/ui/button'
-import { getCitiesByRegionCode, regions } from '@/collections/Locations'
+// import { getCitiesByRegionCode, regions } from '@/collections/Locations'
 
 import CustomCard from './card'
 import { createFormSchema } from './form'

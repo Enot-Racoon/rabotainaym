@@ -7,7 +7,7 @@ import Select from '@/components/ui/select'
 
 export interface SelectRegionClient {
   label: string
-  options: Region[]
+  options: Pick<Region, 'id' | 'name'>[]
 }
 
 export default function SelectRegionClient({ label, options }: SelectRegionClient) {

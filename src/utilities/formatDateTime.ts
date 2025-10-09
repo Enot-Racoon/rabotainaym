@@ -1,6 +1,5 @@
 export const formatDateTime = (timestamp: string): string => {
-  const now = new Date()
-  let date = now
+  let date = new Date()
   if (timestamp) date = new Date(timestamp)
   const months = date.getMonth()
   const days = date.getDate()
@@ -16,5 +15,5 @@ export const formatDateTime = (timestamp: string): string => {
   // const MinMin = (minutes < 10) ? `0${minutes}` : minutes;
   // const SS = (seconds < 10) ? `0${seconds}` : seconds;
 
-  return `${MM}/${DD}/${YYYY}`
+  return `${MM}.${DD}.${YYYY}`
 }

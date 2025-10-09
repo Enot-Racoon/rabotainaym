@@ -15,5 +15,8 @@ export default {
   page: {
     account: '/account',
     login: '/account/login',
+    logout: '/account/logout',
+    registration: '/account/registration',
+    announcements: '/account/announcements',
   },
 } as const
