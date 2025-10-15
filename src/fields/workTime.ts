@@ -12,7 +12,7 @@ const workTimeOptions: Option[] = [...Array(24).keys()].flatMap((key) => [
   },
 ])
 
-const weekDays: CheckboxField[] = (['mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const).map(
+const weekDays: CheckboxField[] = (['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const).map(
   (name) => ({
     name,
     type: 'checkbox',

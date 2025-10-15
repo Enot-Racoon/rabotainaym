@@ -13,10 +13,12 @@ export default {
   },
 
   page: {
-    account: '/account',
+    account: {
+      toString: () => '/account',
+      announcements: '/account/announcements',
+    },
     login: '/account/login',
     logout: '/account/logout',
     registration: '/account/registration',
-    announcements: '/account/announcements',
   },
 } as const

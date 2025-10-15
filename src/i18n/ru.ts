@@ -1,11 +1,13 @@
 const ru = {
   pages: {
     login: {
+      title: 'Вход в личный кабинет',
       header: 'Вход в личный кабинет',
       action: 'Войти',
     },
     'login-by-otp': {
       header: {
+        title: 'Вход в личный кабинет',
         request: 'Вход в личный кабинет',
         login: 'Введите код, отправленный\nна почту',
       },
@@ -14,11 +16,23 @@ const ru = {
       },
     },
     registration: {
+      title: 'Регистрация соискателя',
       header: 'Регистрация соискателя',
       action: 'Зарегистрироваться',
       'as-self-employed': 'Я ищу работу',
       'as-legal-entity': 'Я предлагаю работу',
     },
+    announcement: {
+      title: 'Мои объявления',
+      header: 'Мои объявления',
+    },
+  },
+  'user-bar': {
+    account: 'Мой профиль',
+    announcements: 'Мои объявления',
+    refill: 'Пополнить',
+    balance: 'Баланс',
+    rub: 'руб.',
   },
   plugins: {
     search: {
@@ -61,6 +75,10 @@ const ru = {
         'self-employed': 'Cамозанятый',
         'legal-entity': 'Юр. лицо',
       },
+      phone: 'Телефон',
+      email: 'E-mail',
+      avatar: 'Аватар',
+      balance: 'Баланс',
     },
     categories: {
       labels: {
@@ -122,11 +140,22 @@ const ru = {
         plural: 'Объявления',
         singular: 'Объявление',
       },
+      author: 'Автор',
       title: 'Название',
       region: 'Регион',
       locality: 'Населенный пункт',
       specialty: 'Cпециальность',
       skills: 'Профессиональные навыки',
+      images: 'Фото работ',
+      'work-time': 'Время работы',
+      'main-info': 'Основная информация',
+      status: {
+        label: 'Статус',
+        blocked: 'Заблокировано',
+        stopped: 'Показ остановлен',
+        published: 'Идет показ',
+        unpublished: 'Неопубликованно',
+      },
     },
   },
   namecase: {
@@ -146,6 +175,7 @@ const ru = {
     thu: 'чт',
     fri: 'пт',
     sat: 'сб',
+    sun: 'вс',
   },
   coords: {
     label: 'Координаты',
@@ -230,6 +260,8 @@ const ru = {
   actions: {
     edit: 'Редактировать',
     publish: 'Опубликовать',
+    view: 'Посмотреть',
+
     delete: 'Удалить',
   },
 } as const

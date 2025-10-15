@@ -8,7 +8,5 @@ export default async function SelectRegion() {
   const { t } = await getI18n()
   const options = await getRegions()
 
-  console.log('SelectRegion.options', options)
-
   return <SelectRegionClient label={t('collections:regions:labels:singular')} options={options} />
 }

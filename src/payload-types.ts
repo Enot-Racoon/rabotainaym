@@ -93,6 +93,9 @@ export interface Config {
     regions: {
       localities: 'localities';
     };
+    users: {
+      announcements: 'announcements';
+    };
   };
   collectionsSelect: {
     announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
@@ -164,11 +167,13 @@ export interface UserAuthOperations {
  */
 export interface Announcement {
   id: number;
+  author?: (number | null) | User;
   title: string;
   region: number | Region;
   locality: number | Locality;
   specialty: number | Specialty;
   skills: string;
+  status: 'blocked' | 'stopped' | 'published' | 'unpublished';
   images?: (number | Media)[] | null;
   workTime?: {
     start?:
@@ -282,10 +287,53 @@ export interface Announcement {
       thu?: boolean | null;
       fri?: boolean | null;
       sat?: boolean | null;
+      sun?: boolean | null;
     };
   };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  surname: string;
+  name: string;
+  patronymic: string;
+  company: string;
+  phone: string;
+  region: number | Region;
+  locality: number | Locality;
+  referrer?: string | null;
+  roles: ('admin' | 'self-employed' | 'legal-entity')[];
+  avatar?: (number | null) | Media;
+  balance: number;
+  announcements?: {
+    docs?: (number | Announcement)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  _otp?: string | null;
+  _otpExpiration?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -353,32 +401,6 @@ export interface Locality {
     utcOffset?: string | null;
     abbreviation?: string | null;
     mskOffset?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "specialties".
- */
-export interface Specialty {
-  id: number;
-  name: string;
-  category?: (number | SpecialtyCategory)[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "specialty-categories".
- */
-export interface SpecialtyCategory {
-  id: number;
-  name?: string | null;
-  specialties?: {
-    docs?: (number | Specialty)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
   };
   updatedAt: string;
   createdAt: string;
@@ -474,6 +496,32 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialties".
+ */
+export interface Specialty {
+  id: number;
+  name: string;
+  category?: (number | SpecialtyCategory)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specialty-categories".
+ */
+export interface SpecialtyCategory {
+  id: number;
+  name?: string | null;
+  specialties?: {
+    docs?: (number | Specialty)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -812,41 +860,6 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  surname: string;
-  name: string;
-  patronymic: string;
-  company: string;
-  phone: string;
-  region: number | Region;
-  locality: number | Locality;
-  referrer?: string | null;
-  roles: ('admin' | 'self-employed' | 'legal-entity')[];
-  _otp?: string | null;
-  _otpExpiration?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1125,11 +1138,13 @@ export interface PayloadMigration {
  * via the `definition` "announcements_select".
  */
 export interface AnnouncementsSelect<T extends boolean = true> {
+  author?: T;
   title?: T;
   region?: T;
   locality?: T;
   specialty?: T;
   skills?: T;
+  status?: T;
   images?: T;
   workTime?:
     | T
@@ -1145,6 +1160,7 @@ export interface AnnouncementsSelect<T extends boolean = true> {
               thu?: T;
               fri?: T;
               sat?: T;
+              sun?: T;
             };
       };
   updatedAt?: T;
@@ -1466,6 +1482,9 @@ export interface UsersSelect<T extends boolean = true> {
   locality?: T;
   referrer?: T;
   roles?: T;
+  avatar?: T;
+  balance?: T;
+  announcements?: T;
   _otp?: T;
   _otpExpiration?: T;
   updatedAt?: T;

@@ -30,20 +30,24 @@ const UserBar = () => {
         </>
       ) : (
         <>
-          {path.startsWith(paths.page.account) ? (
+          {path.startsWith(`${paths.page.account}`) ? (
             <div className="flex items-center gap-4">
-              <Link href={paths.page.announcements}>Мои объявления</Link>
-              <Link href={paths.page.account}>Мой профиль</Link>
+              <Link href={`${paths.page.account.announcements}`}>
+                {t('user-bar:announcements')}
+              </Link>
+              <Link href={`${paths.page.account}`}>{t('user-bar:account')}</Link>
               <div className="bg-card rounded-md p-2 pl-3 flex gap-8">
                 <div>
-                  <div className="text-sm -mt-3 relative top-1 text-secondary">Баланс:</div>
+                  <div className="text-sm -mt-3 relative top-1 text-secondary">
+                    {t('user-bar:balance')}:
+                  </div>
                   <span className="text-destructive text-3xl font-medium mt-1 leading-6 inline-block d mr-2">
-                    0
+                    {user.balance}
                   </span>
-                  <span>руб.</span>
+                  <span>{t('user-bar:rub')}</span>
                 </div>
                 <Button variant="success" appearance="outlined">
-                  Пополнить
+                  {t('user-bar:refill')}
                 </Button>
               </div>
 
@@ -54,7 +58,7 @@ const UserBar = () => {
               </Link>
             </div>
           ) : (
-            <Link href={paths.page.account}>
+            <Link href={String(paths.page.account)}>
               <Button className="xl:px-16" size="lg" variant="success">
                 {t('general:accountDashboard')}
               </Button>

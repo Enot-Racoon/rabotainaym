@@ -30,8 +30,14 @@ const Announcements: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: translateLabel('general:createNew'), // todo: fix label
+          label: translateLabel('collections:announcements:main-info'),
           fields: [
+            {
+              name: 'author',
+              type: 'relationship',
+              label: translateLabel('collections:announcements:author'),
+              relationTo: 'users',
+            },
             {
               name: 'title',
               type: 'text',
@@ -69,10 +75,35 @@ const Announcements: CollectionConfig = {
               required: true,
               label: translateLabel('collections:announcements:skills'),
             },
+            {
+              name: 'status',
+              label: translateLabel('collections:announcements:status:label'),
+              required: true,
+              type: 'select',
+              defaultValue: 'unpublished',
+              options: [
+                {
+                  value: 'blocked',
+                  label: translateLabel('collections:announcements:status:blocked'),
+                },
+                {
+                  value: 'stopped',
+                  label: translateLabel('collections:announcements:status:stopped'),
+                },
+                {
+                  value: 'published',
+                  label: translateLabel('collections:announcements:status:published'),
+                },
+                {
+                  value: 'unpublished',
+                  label: translateLabel('collections:announcements:status:unpublished'),
+                },
+              ],
+            },
           ],
         },
         {
-          label: 'Images',
+          label: translateLabel('collections:announcements:images'),
           fields: [
             {
               label: '',
@@ -84,7 +115,7 @@ const Announcements: CollectionConfig = {
           ],
         },
         {
-          label: 'Work time',
+          label: translateLabel('collections:announcements:work-time'),
           name: 'workTime',
           fields: [workTime],
         },

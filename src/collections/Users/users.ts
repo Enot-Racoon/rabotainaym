@@ -104,6 +104,26 @@ export const Users: CollectionConfig = {
         { label: translateLabel('collections:users:roles:legal-entity'), value: 'legal-entity' },
       ],
     },
+    {
+      name: 'avatar',
+      label: translateLabel('collections:users:avatar'),
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
+      name: 'balance',
+      type: 'number',
+      label: translateLabel('collections:users:balance'),
+      required: true,
+      defaultValue: 0,
+    },
+    {
+      name: 'announcements',
+      type: 'join',
+      label: translateLabel('collections:announcements:labels:plural'),
+      collection: 'announcements',
+      on: 'author',
+    },
   ],
   timestamps: true,
 }
