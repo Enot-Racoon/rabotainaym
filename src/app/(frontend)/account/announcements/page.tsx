@@ -7,6 +7,7 @@ import getI18n from '@/i18n/getI18n'
 import Paths from '@/providers/Auth/paths'
 import HydrateClientUser from '@/components/HydrateClientUser'
 import AnnouncementCard from '@/components/Announcements/card'
+import EmptyAnnouncements from '@/components/Announcements/empty'
 
 export default async function AccountPage() {
   const { t } = await getI18n()
@@ -35,13 +36,17 @@ export default async function AccountPage() {
       <title>{t('pages:announcement:title')}</title>
       <HydrateClientUser permissions={permissions} user={user} />
       <div className="container">
-        <h1 className="font-medium text-3xl tracking-wider text-center whitespace-pre-wrap">
+        <h1 className="font-medium text-3xl tracking-wider text-center whitespace-pre-wrap mb-14">
           {t('pages:announcement:header')}
         </h1>
         <div className="grid gap-[60px]">
-          {announcements.map((announcement) => (
-            <AnnouncementCard key={announcement.id} data={announcement} />
-          ))}
+          {!announcements.length ? (
+            <EmptyAnnouncements />
+          ) : (
+            announcements.map((announcement) => (
+              <AnnouncementCard key={announcement.id} data={announcement} />
+            ))
+          )}
         </div>
       </div>
     </>

@@ -1,23 +1,25 @@
-import React from 'react'
+'use client'
+
 import { z } from 'zod'
-import useI18n from '@/i18n/useI18n'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
+
+import useI18n from '@/i18n/useI18n'
 import Paths from '@/providers/Auth/paths'
 import Form from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import Select from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
 import { Message } from '@/components/Message'
-import { getCitiesByRegionCode, regions } from '@/collections/Locations'
+import { Button } from '@/components/ui/button'
 
-import type { User } from '@/payload-types'
+import type { Locality, Region, User } from '@/payload-types'
 
 import CustomCard from './card'
 import { createFormSchema } from './form'
 
-const SelfEmployed = () => {
+const SelfEmployed = ({ regions }: { regions: Region[] }) => {
   const { t } = useI18n()
 
   const router = useRouter()
@@ -31,7 +33,7 @@ const SelfEmployed = () => {
     mode: 'all',
     defaultValues: {
       region: '',
-      location: '',
+      locality: '',
       surname: '',
       name: '',
       phone: '',
@@ -46,11 +48,13 @@ const SelfEmployed = () => {
         surname: data.surname,
         name: data.name,
         phone: data.phone,
-        region: Number(data.region),
+        region: regions[Number(data.region)].id,
+        locality: Number(data.locality),
         roles: ['self-employed'],
         email: data.email,
         patronymic: ' ',
         company: ' ',
+        balance: 0,
         password: String(Math.random()),
       } satisfies Omit<User, 'id' | 'createdAt' | 'updatedAt'>),
       headers: { 'Content-Type': 'application/json' },
@@ -97,12 +101,17 @@ const SelfEmployed = () => {
   const regionsList = React.useMemo(
     () =>
       regions.sort((a, b) => {
-        const bigRegionCode = [77, 78].findIndex((code) => code == a.code)
-        if (bigRegionCode > -1) return -1
+        // const bigRegionCode = [77, 78].findIndex((code) => code == a.code)
+        // if (bigRegionCode > -1) return -1
         return String(a.name).localeCompare(b.name)
       }),
     [],
   )
+
+  const localityList = (regions[Number(form.getValues().region)]?.localities?.docs ??
+    []) as Locality[]
+
+  console.log('errors', form.formState.errors)
 
   return (
     <Form {...form}>
@@ -125,9 +134,9 @@ const SelfEmployed = () => {
                   </Form.Label>
                   <Form.Control>
                     <Select
-                      onValueChange={(...ev) => {
-                        field.onChange(...ev)
-                        form.setValue('location', '')
+                      onValueChange={(region) => {
+                        field.onChange(region)
+                        form.setValue('locality', '')
                       }}
                       defaultValue={field.value}
                     >
@@ -138,9 +147,9 @@ const SelfEmployed = () => {
                         <Select.Value placeholder={t('form:placeholders:region')} />
                       </Select.Trigger>
                       <Select.Content>
-                        {regionsList.map(({ code: id, name }) => (
-                          <Select.Item key={id} value={String(id)}>
-                            {name}
+                        {regionsList.map(({ fullname }, idx) => (
+                          <Select.Item key={idx} value={String(idx)}>
+                            {fullname}
                           </Select.Item>
                         ))}
                       </Select.Content>
@@ -151,12 +160,12 @@ const SelfEmployed = () => {
               )}
             />
             <Form.Field
-              name="location"
+              name="locality"
               control={form.control}
               render={({ field }) => (
                 <Form.Item>
-                  <Form.Label htmlFor="location" required>
-                    {t('form:labels:location')}
+                  <Form.Label htmlFor="locality" required>
+                    {t('form:labels:locality')}
                   </Form.Label>
                   <Form.Control>
                     <Select
@@ -165,13 +174,13 @@ const SelfEmployed = () => {
                       defaultValue={field.value}
                     >
                       <Select.Trigger
-                        id="location"
+                        id="locality"
                         className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                       >
-                        <Select.Value placeholder={t('form:placeholders:location')} />
+                        <Select.Value placeholder={t('form:placeholders:locality')} />
                       </Select.Trigger>
                       <Select.Content>
-                        {getCitiesByRegionCode(form.getValues().region).map(({ id, name }) => (
+                        {localityList.map(({ id, name }: Locality) => (
                           <Select.Item key={id} value={String(id)}>
                             {name}
                           </Select.Item>

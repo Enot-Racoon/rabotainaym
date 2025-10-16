@@ -7,7 +7,7 @@ import Select from '@/components/ui/select'
 
 export interface SelectRegionClient {
   label: string
-  options: Pick<Region, 'id' | 'name'>[]
+  options: Region[]
 }
 
 export default function SelectRegionClient({ label, options }: SelectRegionClient) {
@@ -22,9 +22,9 @@ export default function SelectRegionClient({ label, options }: SelectRegionClien
         <Select.Value placeholder={label} />
       </Select.Trigger>
       <Select.Content>
-        {options.map(({ id, name }) => (
+        {options.map(({ id, fullname }) => (
           <Select.Item key={id} value={String(id)}>
-            {name}
+            {fullname}
           </Select.Item>
         ))}
       </Select.Content>

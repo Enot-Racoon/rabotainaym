@@ -15,6 +15,7 @@ import { translateLabel } from '@/i18n'
 import { getServerSideURL } from '@/utilities/getURL'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
+import getI18n from '@/i18n/getI18n'
 
 const title = 'Работа и Найм' // todo: extract to i18n
 
@@ -94,7 +95,7 @@ export const plugins: Plugin[] = [
     },
   }),
   searchPlugin({
-    collections: ['posts'],
+    collections: ['posts', 'announcements'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       labels: {
@@ -108,6 +109,19 @@ export const plugins: Plugin[] = [
   }),
   pluginOTP({
     admin: false,
-    collections: { users: { exp: 60 * 10 /* min */ } },
+    collections: {
+      users: {
+        exp: 60 * 10 /* min */,
+        // todo: i18n like translateLabel('mail:otpEmailSubject')
+        generateOTPEmailSubject: async () => {
+          const { t } = await getI18n()
+          return t('mail:otpEmailSubject')
+        },
+        generateOTPEmailHTML: async (data) => {
+          const { t } = await getI18n()
+          return `<div style="font-size: 2rem">${t('mail:otpCode')} <strong style="color: darkblue; font-size: 4rem; font-weight: 500">${data.otp}</strong>.</div>`
+        },
+      },
+    },
   }),
 ]

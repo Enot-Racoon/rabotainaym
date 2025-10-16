@@ -911,10 +911,15 @@ export interface Search {
   id: number;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: number | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: number | Post;
+      }
+    | {
+        relationTo: 'announcements';
+        value: number | Announcement;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;

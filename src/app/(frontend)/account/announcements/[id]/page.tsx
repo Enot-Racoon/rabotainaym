@@ -5,7 +5,7 @@ import { headers as getHeaders } from 'next/dist/server/request/headers'
 
 import paths from '@/providers/Auth/paths'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
-import Dump from '@/components/ui/dump'
+import AnnouncementForm from '@/components/Announcements/form'
 
 type Args = {
   params: Promise<{
@@ -21,7 +21,7 @@ export default async function AnnouncementEditPage({ params: paramsPromise }: Ar
   const announcement = await queryAnnouncementById(id)
   if (!announcement) return <PayloadRedirects url={url} />
 
-  return <Dump announcement={announcement} />
+  return <AnnouncementForm initialValues={announcement} />
 }
 
 const queryAnnouncementById = cache(async (id: string | number) => {

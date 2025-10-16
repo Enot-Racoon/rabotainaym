@@ -1,2 +1,2 @@
 export { default } from './regions'
-export { getRegions } from './getRegions'
+export { default as fetchRegions } from './fetchRegions'

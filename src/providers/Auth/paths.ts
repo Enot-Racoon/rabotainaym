@@ -15,7 +15,10 @@ export default {
   page: {
     account: {
       toString: () => '/account',
-      announcements: '/account/announcements',
+      announcements: {
+        toString: () => '/account/announcements',
+        create: '/account/announcements/create',
+      },
     },
     login: '/account/login',
     logout: '/account/logout',
