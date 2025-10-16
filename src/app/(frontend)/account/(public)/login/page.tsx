@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { headers as getHeaders } from 'next/headers'
 
 import getI18n from '@/i18n/getI18n'
-import Paths from '@/providers/Auth/paths'
+import Paths from '@/paths'
 import LoginForm from '@/components/Account/Login'
 
 export default async function LoginPage() {
@@ -15,7 +15,7 @@ export default async function LoginPage() {
 
   if (user) {
     redirect(
-      `${Paths.page.account}?message=${encodeURIComponent(t('message:account:already-logged-in'))}&redirect=/account`,
+      `${Paths.page.account}?message=${encodeURIComponent(t('message:account:already-logged-in'))}&redirect=${Paths.page.account}`,
     )
   }
 

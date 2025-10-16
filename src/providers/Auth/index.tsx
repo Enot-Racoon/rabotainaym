@@ -5,7 +5,7 @@ import type { SanitizedPermissions } from 'payload'
 import type { User } from '@/payload-types'
 
 import api from './api'
-import Paths from './paths'
+import Paths from '../../paths'
 
 import type { AuthContext, Create, ForgotPassword, Login, Logout, ResetPassword } from './types'
 

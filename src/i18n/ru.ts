@@ -209,6 +209,9 @@ const ru = {
     referrer: 'Реферал',
     theme: 'Тема',
     company: 'Организация',
+    settings: 'Настройки',
+    profile: 'Профиль',
+    'my-profile': 'Мой профиль',
   },
   message: {
     account: {

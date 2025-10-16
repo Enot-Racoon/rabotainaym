@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import useI18n from '@/i18n/useI18n'
-import paths from '@/providers/Auth/paths'
+import paths from '@/paths'
 import { useAuth } from '@/providers/Auth'
 import { Button } from '@/components/ui/button'
 

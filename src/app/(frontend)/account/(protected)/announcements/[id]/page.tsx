@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { headers as getHeaders } from 'next/dist/server/request/headers'
 
-import paths from '@/providers/Auth/paths'
+import paths from '@/paths'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import AnnouncementForm from '@/components/Announcements/form'
 

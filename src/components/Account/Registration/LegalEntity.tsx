@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import useI18n from '@/i18n/useI18n'
-import Paths from '@/providers/Auth/paths'
+import Paths from '@/paths'
 import Form from '@/components/ui/form'
 import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'

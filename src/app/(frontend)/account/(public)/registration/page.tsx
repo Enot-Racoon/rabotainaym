@@ -4,7 +4,7 @@ import { headers as getHeaders } from 'next/dist/server/request/headers'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { redirect } from 'next/navigation'
-import Paths from '@/providers/Auth/paths'
+import Paths from '@/paths'
 
 export default async function RegistrationPage() {
   const { t } = await getI18n()
@@ -15,7 +15,7 @@ export default async function RegistrationPage() {
 
   if (user) {
     redirect(
-      `${Paths.page.account}?error=${encodeURIComponent(t('message:account:logoutToRegistration'))}&redirect=/account`,
+      `${Paths.page.account}?error=${encodeURIComponent(t('message:account:logoutToRegistration'))}&redirect=${Paths.page.account}`,
     )
   }
 

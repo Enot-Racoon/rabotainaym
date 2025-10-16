@@ -7,7 +7,7 @@ import useI18n from '@/i18n/useI18n'
 import Card from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { formatDateTime } from '@/utilities/formatDateTime'
-import paths from '@/providers/Auth/paths'
+import paths from '@/paths'
 
 export interface AnnouncementCardProps {
   data: Announcement

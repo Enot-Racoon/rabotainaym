@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 
 import Empty from './empty.svg'
-import paths from '@/providers/Auth/paths'
+import paths from '@/paths'
 import Link from 'next/link'
 
 const EmptyAnnouncements = () => {

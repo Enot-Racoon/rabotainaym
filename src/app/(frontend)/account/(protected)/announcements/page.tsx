@@ -4,12 +4,12 @@ import { redirect } from 'next/navigation'
 import { headers as getHeaders } from 'next/headers'
 
 import getI18n from '@/i18n/getI18n'
-import Paths from '@/providers/Auth/paths'
+import Paths from '@/paths'
 import HydrateClientUser from '@/components/HydrateClientUser'
 import AnnouncementCard from '@/components/Announcements/card'
 import EmptyAnnouncements from '@/components/Announcements/empty'
 
-export default async function AccountPage() {
+export default async function AnnouncementsPage() {
   const { t } = await getI18n()
   const headers = await getHeaders()
   const payload = await getPayload({ config })
@@ -17,7 +17,7 @@ export default async function AccountPage() {
 
   if (!user) {
     redirect(
-      `${Paths.page.login}?error=${encodeURIComponent(t('message:account:loginToAccessAccount'))}&redirect=/account`,
+      `${Paths.page.login}?error=${encodeURIComponent(t('message:account:loginToAccessAccount'))}&redirect=${Paths.page.account}`,
     )
   }
 

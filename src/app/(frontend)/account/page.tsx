@@ -3,8 +3,8 @@ import config from '@payload-config'
 import { redirect } from 'next/navigation'
 import { headers as getHeaders } from 'next/headers'
 
+import Paths from '@/paths'
 import getI18n from '@/i18n/getI18n'
-import Paths from '@/providers/Auth/paths'
 import Account from '@/components/Account/Account'
 import HydrateClientUser from '@/components/HydrateClientUser'
 
@@ -16,7 +16,7 @@ export default async function AccountPage() {
 
   if (!user) {
     redirect(
-      `${Paths.page.login}?error=${encodeURIComponent(t('message:account:loginToAccessAccount'))}&redirect=/account`,
+      `${Paths.page.login}?error=${encodeURIComponent(t('message:account:loginToAccessAccount'))}&redirect=${Paths.page.account}`,
     )
   }
 

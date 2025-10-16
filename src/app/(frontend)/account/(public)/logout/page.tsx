@@ -4,7 +4,7 @@ import { getPayload } from 'payload'
 import { headers as getHeaders } from 'next/headers'
 
 import getI18n from '@/i18n/getI18n'
-import paths from '@/providers/Auth/paths'
+import paths from '@/paths'
 import Logout from '@/components/Account/Logout'
 
 // todo: i18n
@@ -20,7 +20,7 @@ export default async function LogoutPage() {
         <h1>You are already logged out.</h1>
         <p>
           {'What would you like to do next? '}
-          <Link className="text-primary" href="/">
+          <Link className="text-primary" href="/public">
             Click here
           </Link>
           {` to go to the home page. To log back in, `}

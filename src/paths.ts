@@ -19,6 +19,7 @@ export default {
         toString: () => '/account/announcements',
         create: '/account/announcements/create',
       },
+      profile: '/account/profile',
     },
     login: '/account/login',
     logout: '/account/logout',
