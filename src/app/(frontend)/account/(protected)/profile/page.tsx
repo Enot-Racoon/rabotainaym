@@ -1,4 +1,5 @@
 import getI18n from '@/i18n/getI18n'
+import PageHeader from '@/components/PageHeader'
 import ProfileForm from '@/components/Account/Profile'
 
 export default async function AccountProfilePage() {
@@ -6,9 +7,8 @@ export default async function AccountProfilePage() {
 
   return (
     <div className="container">
-      <h1 className="font-medium text-3xl tracking-wider text-center whitespace-pre-wrap mb-14">
-        {t('general:my-profile')}
-      </h1>
+      <title>{t('general:my-profile')}</title>
+      <PageHeader>{t('general:my-profile')}</PageHeader>
 
       <div className="max-w-[880px] w-full mx-auto">
         <ProfileForm />

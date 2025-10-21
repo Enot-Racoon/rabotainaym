@@ -21,6 +21,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import InputOTP from '@/components/ui/input-otp'
+import PageHeader from '@/components/PageHeader'
 import LoginIcon from '@/components/Account/login.svg'
 
 const createRequestFormSchema = (t: ReturnType<typeof useI18n>['t']) => {
@@ -121,11 +122,17 @@ export default function LoginByOTP() {
   return (
     <div className="container gap-10 justify-center grid mt-8 mb-48">
       <LoginIcon className="mx-auto" />
-      <h1 className="font-medium text-3xl tracking-wider text-center whitespace-pre-wrap">
+      <title>
         {!waitingOTP
           ? t('pages:login-by-otp:header:request')
           : `${t('pages:login-by-otp:header:login')} ${requestForm.getValues().email}`}
-      </h1>
+      </title>
+      <PageHeader>
+        {!waitingOTP
+          ? t('pages:login-by-otp:header:request')
+          : `${t('pages:login-by-otp:header:login')} ${requestForm.getValues().email}`}
+      </PageHeader>
+
       <div className={cn('mx-auto', { 'md:w-[50vw]': !waitingOTP })}>
         <Card className="px-12 py-8">
           <Form {...requestForm}>

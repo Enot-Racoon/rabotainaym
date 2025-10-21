@@ -1,9 +1,10 @@
 import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { headers as getHeaders } from 'next/dist/server/request/headers'
+import { headers as getHeaders } from 'next/headers'
 
 import paths from '@/paths'
+import PageHeader from '@/components/PageHeader'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import AnnouncementForm from '@/components/Announcements/form'
 
@@ -21,7 +22,14 @@ export default async function AnnouncementEditPage({ params: paramsPromise }: Ar
   const announcement = await queryAnnouncementById(id)
   if (!announcement) return <PayloadRedirects url={url} />
 
-  return <AnnouncementForm initialValues={announcement} />
+  return (
+    <div className="container">
+      <title>Мои объявления / Редактировать объявление</title>
+      <PageHeader>Мои объявления / Редактировать объявление</PageHeader>
+
+      <AnnouncementForm initialValues={announcement} />
+    </div>
+  )
 }
 
 const queryAnnouncementById = cache(async (id: string | number) => {
