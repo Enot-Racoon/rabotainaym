@@ -7,7 +7,6 @@ import paths from '@/paths'
 import { useAuth } from '@/providers/Auth'
 import { Button } from '@/components/ui/button'
 
-// todo: i18m
 const UserBar = () => {
   const { t } = useI18n()
   const { user } = useAuth()
@@ -35,7 +34,7 @@ const UserBar = () => {
               <Link href={`${paths.page.account.announcements}`}>
                 {t('user-bar:announcements')}
               </Link>
-              <Link href={`${paths.page.account}`}>{t('user-bar:account')}</Link>
+              <Link href={`${paths.page.account.profile}`}>{t('user-bar:account')}</Link>
               <div className="bg-card rounded-md p-2 pl-3 flex gap-8">
                 <div>
                   <div className="text-sm -mt-3 relative top-1 text-secondary">

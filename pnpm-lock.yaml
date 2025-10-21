@@ -53,6 +53,9 @@ importers:
       '@payloadcms/richtext-lexical':
         specifier: 3.47.0
         version: 3.47.0(@faceless-ui/modal@3.0.0-beta.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@faceless-ui/scroll-info@2.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@payloadcms/next@3.47.0(@types/react@19.1.0)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.3.3(@babel/core@7.28.0)(@playwright/test@1.50.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.47.0(graphql@16.11.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3))(@types/react@19.1.0)(monaco-editor@0.52.2)(next@15.3.3(@babel/core@7.28.0)(@playwright/test@1.50.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.47.0(graphql@16.11.0)(typescript@5.7.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.7.3)(yjs@13.6.27)
+      '@payloadcms/sdk':
+        specifier: ^3.60.0
+        version: 3.60.0(graphql@16.11.0)(typescript@5.7.3)
       '@payloadcms/translations':
         specifier: ^3.47.0
         version: 3.48.0
@@ -2148,11 +2151,17 @@ packages:
       react: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
       react-dom: ^19.0.0 || ^19.0.0-rc-65a56d0e-20241020
 
+  '@payloadcms/sdk@3.60.0':
+    resolution: {integrity: sha512-B5uvWQQ0lMFErnC7n6xPOAKP+FMxGYDmI+f1RThuntIwvAHDbeBdJyWeLiNpqfrNcLIjr4pxqe1jeTOIVZEo5Q==}
+
   '@payloadcms/translations@3.47.0':
     resolution: {integrity: sha512-sGiBDH+LKaXvRbc2bR1rh0n8DfGNCSpFGJjxpT+dxw7jRnRLWdF9xqoOoo7AP5jjA9mgPlcGbqqCLfXHKGdKEg==}
 
   '@payloadcms/translations@3.48.0':
     resolution: {integrity: sha512-YFEEyrCWK96q8uZ0OK9SU80ywSqc0S3dh+vAfI4mPzs2OPG//CHgbtz1d5X1r3e7A7CY/MzzGMVgf++fmRz2gQ==}
+
+  '@payloadcms/translations@3.60.0':
+    resolution: {integrity: sha512-fuc/FwLOoPNWGcDuOWQ+blCDRDMCDb9/ZMoa447VVUhqmTIL0CXh0SIKdbMuhpyvq5nevQ6fxUOlV/pUj0A32A==}
 
   '@payloadcms/ui@3.47.0':
     resolution: {integrity: sha512-s710QSyHRADRJHbivtHFnPmmPwLilBsFuNkv5iEUgmxpESYedKwE3vcaP9vdeCEAm+Pc2H36bOxO2uswP+4atQ==}
@@ -3915,6 +3924,10 @@ packages:
 
   croner@9.0.0:
     resolution: {integrity: sha512-onMB0OkDjkXunhdW9htFjEhqrD54+M94i6ackoUkjHKbRnXdyEyKRelp4nJ1kAz32+s27jP1FsebpJCVl0BsvA==}
+    engines: {node: '>=18.0'}
+
+  croner@9.1.0:
+    resolution: {integrity: sha512-p9nwwR4qyT5W996vBZhdvBCnMhicY5ytZkR4D1Xj0wuTDEiMnjwR57Q3RXYY/s0EpX6Ay3vgIcfaR+ewGHsi+g==}
     engines: {node: '>=18.0'}
 
   cross-env@7.0.3:
@@ -5797,6 +5810,13 @@ packages:
 
   payload@3.47.0:
     resolution: {integrity: sha512-G1WTlYasVsRmZDAdJYjixMhwmMrRjvfCQCEmoIGeIgNUElWf/1f3meAzjZIxrvci0GC0wC5CLiSIyab0wsJ/qQ==}
+    engines: {node: ^18.20.2 || >=20.9.0}
+    hasBin: true
+    peerDependencies:
+      graphql: ^16.8.1
+
+  payload@3.60.0:
+    resolution: {integrity: sha512-45W3oMvzkZp0xyTq+CNBbnhXvaQ8V4Wf/qgQyMp62qNFmhzBjfat9oL3WlZpR8w9P/dMcnlz1PfDwWt9t60cdw==}
     engines: {node: ^18.20.2 || >=20.9.0}
     hasBin: true
     peerDependencies:
@@ -9898,11 +9918,26 @@ snapshots:
       - typescript
       - yjs
 
+  '@payloadcms/sdk@3.60.0(graphql@16.11.0)(typescript@5.7.3)':
+    dependencies:
+      payload: 3.60.0(graphql@16.11.0)(typescript@5.7.3)
+      qs-esm: 7.0.2
+      ts-essentials: 10.0.3(typescript@5.7.3)
+    transitivePeerDependencies:
+      - bufferutil
+      - graphql
+      - typescript
+      - utf-8-validate
+
   '@payloadcms/translations@3.47.0':
     dependencies:
       date-fns: 4.1.0
 
   '@payloadcms/translations@3.48.0':
+    dependencies:
+      date-fns: 4.1.0
+
+  '@payloadcms/translations@3.60.0':
     dependencies:
       date-fns: 4.1.0
 
@@ -11845,6 +11880,8 @@ snapshots:
       typescript: 5.7.3
 
   croner@9.0.0: {}
+
+  croner@9.1.0: {}
 
   cross-env@7.0.3:
     dependencies:
@@ -14235,6 +14272,45 @@ snapshots:
       ci-info: 4.3.0
       console-table-printer: 2.12.1
       croner: 9.0.0
+      dataloader: 2.2.3
+      deepmerge: 4.3.1
+      file-type: 19.3.0
+      get-tsconfig: 4.8.1
+      graphql: 16.11.0
+      http-status: 2.1.0
+      image-size: 2.0.2
+      ipaddr.js: 2.2.0
+      jose: 5.9.6
+      json-schema-to-typescript: 15.0.3
+      minimist: 1.2.8
+      path-to-regexp: 6.3.0
+      pino: 9.5.0
+      pino-pretty: 13.0.0
+      pluralize: 8.0.0
+      qs-esm: 7.0.2
+      sanitize-filename: 1.6.3
+      scmp: 2.1.0
+      ts-essentials: 10.0.3(typescript@5.7.3)
+      tsx: 4.20.3
+      undici: 7.10.0
+      uuid: 10.0.0
+      ws: 8.18.3
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
+
+  payload@3.60.0(graphql@16.11.0)(typescript@5.7.3):
+    dependencies:
+      '@next/env': 15.4.2
+      '@payloadcms/translations': 3.60.0
+      '@types/busboy': 1.5.4
+      ajv: 8.17.1
+      bson-objectid: 2.0.4
+      busboy: 1.6.0
+      ci-info: 4.3.0
+      console-table-printer: 2.12.1
+      croner: 9.1.0
       dataloader: 2.2.3
       deepmerge: 4.3.1
       file-type: 19.3.0

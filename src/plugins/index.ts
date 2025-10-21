@@ -119,7 +119,8 @@ export const plugins: Plugin[] = [
         },
         generateOTPEmailHTML: async (data) => {
           const { t } = await getI18n()
-          return `<div style="font-size: 2rem">${t('mail:otpCode')} <strong style="color: darkblue; font-size: 4rem; font-weight: 500">${data.otp}</strong>.</div>`
+          return `<div style="font-size: 2rem">${t('mail:otpCode')}<br/>
+<strong style="color: darkblue; font-size: 4rem; font-weight: 500">${data.otp}</strong></div>`
         },
       },
     },

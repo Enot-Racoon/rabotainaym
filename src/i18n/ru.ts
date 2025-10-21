@@ -214,6 +214,7 @@ const ru = {
     'my-profile': 'Мой профиль',
   },
   message: {
+    'saved-successful': 'Сохранено успешно',
     account: {
       'already-logged-in': 'Вы уже вошли в систему',
       createdSuccess: 'Учетная запись создана успешно',
@@ -264,7 +265,7 @@ const ru = {
     edit: 'Редактировать',
     publish: 'Опубликовать',
     view: 'Посмотреть',
-
+    save: 'Сохранить',
     delete: 'Удалить',
   },
   mail: {

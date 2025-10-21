@@ -78,12 +78,6 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
     }, 1000)
 
     try {
-      // await payload.sendEmail({
-      //   to: 'test@example.com',
-      //   subject: 'This is a test email',
-      //   text: 'This is my message body',
-      // })
-      // 0 && (await login(data))
       clearTimeout(timer)
       if (redirect) {
         router.push(redirect)
@@ -110,8 +104,6 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
 
   const localityList = (regions[Number(form.getValues().region)]?.localities?.docs ??
     []) as Locality[]
-
-  console.log('errors', form.formState.errors)
 
   return (
     <Form {...form}>

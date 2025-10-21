@@ -1,6 +1,7 @@
 import getI18n from '@/i18n/getI18n'
+import ProfileForm from '@/components/Account/Profile'
 
-export default async function AccountPage() {
+export default async function AccountProfilePage() {
   const { t } = await getI18n()
 
   return (
@@ -9,7 +10,9 @@ export default async function AccountPage() {
         {t('general:my-profile')}
       </h1>
 
-      {/* <Account /> */}
+      <div className="max-w-[880px] w-full mx-auto">
+        <ProfileForm />
+      </div>
     </div>
   )
 }

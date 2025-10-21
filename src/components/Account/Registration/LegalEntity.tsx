@@ -79,12 +79,6 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
     }, 1000)
 
     try {
-      // await payload.sendEmail({
-      //   to: 'test@example.com',
-      //   subject: 'This is a test email',
-      //   text: 'This is my message body',
-      // })
-      // 0 && (await login(data))
       clearTimeout(timer)
       if (redirect) {
         router.push(redirect)

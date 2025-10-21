@@ -1,10 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { redirect } from 'next/navigation'
 import { headers as getHeaders } from 'next/headers'
 
 import getI18n from '@/i18n/getI18n'
-import Paths from '@/paths'
 import HydrateClientUser from '@/components/HydrateClientUser'
 import AnnouncementCard from '@/components/Announcements/card'
 import EmptyAnnouncements from '@/components/Announcements/empty'
@@ -15,11 +13,7 @@ export default async function AnnouncementsPage() {
   const payload = await getPayload({ config })
   const { permissions, user } = await payload.auth({ headers })
 
-  if (!user) {
-    redirect(
-      `${Paths.page.login}?error=${encodeURIComponent(t('message:account:loginToAccessAccount'))}&redirect=${Paths.page.account}`,
-    )
-  }
+  if (!user) return null
 
   const announcements = (
     await payload.find({
