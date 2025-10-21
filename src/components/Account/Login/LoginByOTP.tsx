@@ -111,7 +111,6 @@ export default function LoginByOTP() {
         })
       } else {
         router.push('/account')
-        // setWaitingOTP(true)
       }
     } catch (error) {
       console.error(error)
@@ -189,7 +188,15 @@ export default function LoginByOTP() {
                     )}
                   >
                     <FormControl>
-                      <InputOTP pattern={REGEXP_ONLY_DIGITS} maxLength={6} {...field}>
+                      <InputOTP
+                        pattern={REGEXP_ONLY_DIGITS}
+                        maxLength={6}
+                        {...field}
+                        onChange={(code) => {
+                          field.onChange(code)
+                          if (code?.length === 6) void sendOTP({ code })
+                        }}
+                      >
                         <InputOTP.Group className="m-0 *:h-20">
                           <InputOTP.Slot className="text-3xl" index={0} />
                           <InputOTP.Slot className="text-3xl" index={1} />
