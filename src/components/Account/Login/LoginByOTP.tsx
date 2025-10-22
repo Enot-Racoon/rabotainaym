@@ -23,6 +23,7 @@ import { Input } from '@/components/ui/input'
 import InputOTP from '@/components/ui/input-otp'
 import PageHeader from '@/components/PageHeader'
 import LoginIcon from '@/components/Account/login.svg'
+import PageMetaTitle from '@/components/PageMetaTitle'
 
 const createRequestFormSchema = (t: ReturnType<typeof useI18n>['t']) => {
   return z.object({
@@ -122,11 +123,12 @@ export default function LoginByOTP() {
   return (
     <div className="container gap-10 justify-center grid mt-8 mb-48">
       <LoginIcon className="mx-auto" />
-      <title>
+      <PageMetaTitle>
         {!waitingOTP
           ? t('pages:login-by-otp:header:request')
-          : `${t('pages:login-by-otp:header:login')} ${requestForm.getValues().email}`}
-      </title>
+          : `${t('pages:login-by-otp:header:login')} ${requestForm.getValues().email}`}{' '}
+        - {t('general:appName')}
+      </PageMetaTitle>
       <PageHeader>
         {!waitingOTP
           ? t('pages:login-by-otp:header:request')

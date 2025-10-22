@@ -4,9 +4,11 @@ import configPromise from '@payload-config'
 import { headers as getHeaders } from 'next/headers'
 
 import paths from '@/paths'
+import getI18n from '@/i18n/getI18n'
 import PageHeader from '@/components/PageHeader'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import AnnouncementForm from '@/components/Announcements/form'
+import PageMetaTitle from '@/components/PageMetaTitle'
 
 type Args = {
   params: Promise<{
@@ -15,6 +17,7 @@ type Args = {
 }
 
 export default async function AnnouncementEditPage({ params: paramsPromise }: Args) {
+  const { t } = await getI18n()
   const { id = '' } = await paramsPromise
   const url = [paths.page.account.announcements, id].join('/')
 
@@ -24,7 +27,9 @@ export default async function AnnouncementEditPage({ params: paramsPromise }: Ar
 
   return (
     <div className="container">
-      <title>Мои объявления / Редактировать объявление</title>
+      <PageMetaTitle>
+        Мои объявления / Редактировать объявление - {t('general:appName')}
+      </PageMetaTitle>
       <PageHeader>Мои объявления / Редактировать объявление</PageHeader>
 
       <AnnouncementForm initialValues={announcement} />

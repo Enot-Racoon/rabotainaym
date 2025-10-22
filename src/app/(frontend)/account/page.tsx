@@ -7,6 +7,7 @@ import Account from '@/components/Account/Account'
 import HydrateClientUser from '@/components/HydrateClientUser'
 import checkLoginToAccess from '@/components/Account/checkLoginToAccess'
 import PageHeader from '@/components/PageHeader'
+import PageMetaTitle from '@/components/PageMetaTitle'
 
 export default async function AccountPage() {
   const { t } = await getI18n()
@@ -20,7 +21,9 @@ export default async function AccountPage() {
     <>
       <HydrateClientUser permissions={permissions} user={user} />
       <div className="container">
-        <title>{t('general:accountDashboard')}</title>
+        <PageMetaTitle>
+          {t('general:accountDashboard')} - {t('general:appName')}
+        </PageMetaTitle>
         <PageHeader>{t('general:accountDashboard')}</PageHeader>
 
         <Account />

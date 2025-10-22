@@ -1,6 +1,7 @@
 import getI18n from '@/i18n/getI18n'
 import PageHeader from '@/components/PageHeader'
 import AnnouncementForm from '@/components/Announcements/form'
+import PageMetaTitle from '@/components/PageMetaTitle'
 
 export default async function CreateAnnouncementPage() {
   const { t } = await getI18n()
@@ -8,7 +9,7 @@ export default async function CreateAnnouncementPage() {
   // todo: i18n
   return (
     <div className="container">
-      <title>Мои объявления / Новое объявление</title>
+      <PageMetaTitle>Мои объявления / Новое объявление - {t('general:appName')}</PageMetaTitle>
       <PageHeader>Мои объявления / Новое объявление</PageHeader>
 
       <AnnouncementForm />
