@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
+import Toaster from './Toasrer'
 import AuthProvider from './Auth'
 import { I18nProvider } from './i18n'
 import { ThemeProvider } from './Theme'
@@ -13,6 +14,7 @@ export const Providers = async ({ children }: PropsWithChildren) => {
           <AuthProvider>{children}</AuthProvider>
         </I18nProvider>
       </HeaderThemeProvider>
+      <Toaster />
     </ThemeProvider>
   )
 }

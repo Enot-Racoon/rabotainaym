@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import useI18n from '@/i18n/useI18n'
 import Paths from '@/paths'
-import Form from '@/components/ui/form'
+import Form, { useFormDisabled } from '@/components/ui/form'
 import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Message } from '@/components/Message'
@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button'
 import type { Locality, Region, User } from '@/payload-types'
 
 import CustomCard from './card'
-import { createFormSchema } from './form'
+import { createFormSchema } from './formSchema'
 
 const SelfEmployed = ({ regions }: { regions: Region[] }) => {
   const { t } = useI18n()
@@ -42,7 +42,12 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
     },
   })
 
+  const formRef = React.useRef<HTMLFormElement>(null)
+  useFormDisabled(formRef, loading)
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setLoading(true)
+
     const response = await fetch(Paths.api.user.create, {
       body: JSON.stringify({
         surname: data.surname,
@@ -67,29 +72,15 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
         (errors ?? []).map((err: Error) => err?.message).join(', ') ||
         response.statusText ||
         'There was an error creating the account.'
+      setLoading(false)
       setError(message)
       return
     }
 
-    const redirect = searchParams.get('redirect')
-
-    const timer = setTimeout(() => {
-      setLoading(true)
-    }, 1000)
-
-    try {
-      clearTimeout(timer)
-      if (redirect) {
-        router.push(redirect)
-      } else {
-        router.push(
-          `${Paths.page.account}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
-        )
-      }
-    } catch (_) {
-      clearTimeout(timer)
-      setError('There was an error with the credentials provided. Please try again.')
-    }
+    router.push(
+      searchParams.get('redirect') ??
+        `${Paths.page.account}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
+    )
   }
 
   const regionsList = React.useMemo(
@@ -99,7 +90,7 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
         // if (bigRegionCode > -1) return -1
         return String(a.name).localeCompare(b.name)
       }),
-    [],
+    [regions],
   )
 
   const localityList = (regions[Number(form.getValues().region)]?.localities?.docs ??
@@ -108,7 +99,7 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
   return (
     <Form {...form}>
       <div className="grid gap-4">
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
           <CustomCard
             footer={
               <Button loading={loading} type="submit" variant="success" size="xl">
@@ -126,14 +117,18 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
                   </Form.Label>
                   <Form.Control>
                     <Select
+                      name={field.name}
+                      value={field.value}
+                      defaultValue={field.value}
                       onValueChange={(region) => {
                         field.onChange(region)
                         form.setValue('locality', '')
                       }}
-                      defaultValue={field.value}
                     >
                       <Select.Trigger
                         id="region"
+                        ref={field.ref}
+                        onBlur={field.onBlur}
                         className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                       >
                         <Select.Value placeholder={t('form:placeholders:region')} />
@@ -161,12 +156,16 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
                   </Form.Label>
                   <Form.Control>
                     <Select
-                      disabled={!form.getValues().region}
-                      onValueChange={field.onChange}
+                      name={field.name}
+                      value={field.value}
                       defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      disabled={!form.getValues().region}
                     >
                       <Select.Trigger
                         id="locality"
+                        ref={field.ref}
+                        onBlur={field.onBlur}
                         className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                       >
                         <Select.Value placeholder={t('form:placeholders:locality')} />

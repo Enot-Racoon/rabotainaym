@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button'
 import type { Locality, Region, User } from '@/payload-types'
 
 import CustomCard from './card'
-import { createFormSchema } from './form'
+import { createFormSchema } from './formSchema'
 
 const LegalEntity = ({ regions }: { regions: Region[] }) => {
   const { t } = useI18n()
@@ -127,14 +127,18 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
                   </Form.Label>
                   <Form.Control>
                     <Select
+                      name={field.name}
+                      value={field.value}
+                      defaultValue={field.value}
                       onValueChange={(region) => {
                         field.onChange(region)
                         form.setValue('locality', '')
                       }}
-                      defaultValue={field.value}
                     >
                       <Select.Trigger
                         id="region"
+                        ref={field.ref}
+                        onBlur={field.onBlur}
                         className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                       >
                         <Select.Value placeholder={t('form:placeholders:region')} />
@@ -162,12 +166,16 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
                   </Form.Label>
                   <Form.Control>
                     <Select
-                      disabled={!form.getValues().region}
-                      onValueChange={field.onChange}
+                      name={field.name}
+                      value={field.value}
                       defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      disabled={!form.getValues().region}
                     >
                       <Select.Trigger
                         id="locality"
+                        ref={field.ref}
+                        onBlur={field.onBlur}
                         className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                       >
                         <Select.Value placeholder={t('form:placeholders:locality')} />

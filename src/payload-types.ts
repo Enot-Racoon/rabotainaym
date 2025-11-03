@@ -167,7 +167,7 @@ export interface UserAuthOperations {
  */
 export interface Announcement {
   id: number;
-  author?: (number | null) | User;
+  author: number | User;
   title: string;
   region: number | Region;
   locality: number | Locality;

@@ -24,5 +24,6 @@ export default {
     login: '/account/login',
     logout: '/account/logout',
     registration: '/account/registration',
+    search: '/search',
   },
 } as const

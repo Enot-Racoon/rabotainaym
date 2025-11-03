@@ -2,15 +2,40 @@
 import Link from 'next/link'
 import type { Announcement, Media, Region, User } from '@/payload-types'
 
+import paths from '@/paths'
 import { cn } from '@/utilities/ui'
 import useI18n from '@/i18n/useI18n'
 import Card from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { formatDateTime } from '@/utilities/formatDateTime'
-import paths from '@/paths'
 
 export interface AnnouncementCardProps {
   data: Announcement
+}
+
+const printTime = (time?: string | null) => {
+  if (!time) return null
+
+  const hours = time.substring(0, 2)
+  const minutes = time.substring(2, 4)
+
+  if (minutes[0] === '0') return hours
+  return `${hours}:${minutes}`
+}
+
+const printDays = (
+  t: ReturnType<typeof useI18n>['t'],
+  days?: NonNullable<Announcement['workTime']>['days'] | null,
+) => {
+  if (!days) return null
+  const entries = Object.entries(days)
+
+  if (entries.every(([, val]) => val)) return t('week-days:everyday')
+
+  return entries
+    .filter(([, val]) => val)
+    .map(([key]) => t(`week-days:${key as never}`))
+    .join()
 }
 
 const AnnouncementCard = ({ className, data }: WithClassName<AnnouncementCardProps>) => {
@@ -99,7 +124,10 @@ const AnnouncementCard = ({ className, data }: WithClassName<AnnouncementCardPro
             <div>
               <div>{t('collections:announcements:work-time')}</div>
               {/* todo: fix work time */}
-              <div className="text-xl font-medium text-success">с 9-21 ежедневно</div>
+              <div className="text-xl font-medium text-success">
+                с {printTime(data.workTime?.start)}-{printTime(data.workTime?.end)}{' '}
+                {printDays(t, data.workTime?.days)}
+              </div>
             </div>
             <div>
               <div>{t('collections:users:phone')}</div>

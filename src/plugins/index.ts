@@ -112,15 +112,17 @@ export const plugins: Plugin[] = [
     collections: {
       users: {
         exp: 60 * 10 /* min */,
-        // todo: i18n like translateLabel('mail:otpEmailSubject')
         generateOTPEmailSubject: async () => {
           const { t } = await getI18n()
           return t('mail:otpEmailSubject')
         },
         generateOTPEmailHTML: async (data) => {
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(`\n\nOTP: ${data.otp}\n\n`)
+          }
           const { t } = await getI18n()
           return `<div style="font-size: 2rem">${t('mail:otpCode')}<br/>
-<strong style="color: darkblue; font-size: 4rem; font-weight: 500">${data.otp}</strong></div>`
+            <strong style="color: darkblue; font-size: 4rem; font-weight: 500">${data.otp}</strong></div>`
         },
       },
     },

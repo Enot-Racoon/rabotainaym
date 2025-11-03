@@ -176,6 +176,49 @@ export {
   FormField,
 }
 
+export const useFormDisabled = (
+  formRef: React.RefObject<HTMLFormElement | null>,
+  disabled: boolean,
+) => {
+  React.useEffect(() => {
+    if (!formRef.current) return
+
+    type InputType = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+
+    const inputs: NodeListOf<InputType> =
+      formRef.current.querySelectorAll('input, textarea, select')
+
+    inputs.forEach((input) => {
+      input.disabled = disabled
+    })
+  }, [disabled, formRef])
+}
+
+export const useFormDisabledState = (formRef: React.RefObject<HTMLFormElement | null>) => {
+  const [disabled, setDisabled] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!formRef.current) return
+
+    type InputType = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+
+    const inputs: NodeListOf<InputType> =
+      formRef.current.querySelectorAll('input, textarea, select')
+
+    inputs.forEach((input) => {
+      if (disabled) {
+        input.disabled = true
+        input.setAttribute('data-disabled', 'disabled')
+      } else if (input.hasAttribute('data-disabled')) {
+        input.disabled = false
+        input.removeAttribute('data-disabled')
+      }
+    })
+  }, [disabled, formRef])
+
+  return [disabled, setDisabled] as const
+}
+
 export default Object.assign(Form, {
   useField: useFormField,
   Item: FormItem,

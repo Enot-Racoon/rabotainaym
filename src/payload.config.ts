@@ -16,8 +16,7 @@ import { Footer } from '@/entities/footer/config'
 import { Header } from '@/entities/header/config'
 import Regions from '@/collections/Regions/index'
 import Localities from '@/collections/Localities'
-import Specialties from '@/collections/Specialties'
-import SpecialtyCategories from '@/collections/SpecialtyCategories'
+import { Specialties, SpecialtyCategories } from '@/collections/Specialties'
 import Announcements from '@/collections/Announcements'
 import { Categories } from '@/collections/Categories'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -31,6 +30,7 @@ type SupportedLanguages = NonNullable<Config['i18n']>['supportedLanguages']
 
 export default buildConfig({
   email: nodemailerAdapter({
+    skipVerify: process.env.NODE_ENV !== 'production',
     defaultFromAddress: 'info@rabotainaym.ru',
     defaultFromName: 'Rabotainaym.ru',
     transportOptions: {

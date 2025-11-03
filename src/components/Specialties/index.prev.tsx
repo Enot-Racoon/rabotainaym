@@ -7,7 +7,7 @@ export type SpecializationGroup = {
   specializations: Specialization[]
 }
 
-export const specializations: SpecializationGroup[] = [
+export const specialties: SpecializationGroup[] = [
   {
     name: 'Репетиторы',
     specializations: [
@@ -173,10 +173,10 @@ export const specializations: SpecializationGroup[] = [
   },
 ]
 
-export const Specializations = () => {
+const Specialties = () => {
   return (
     <div className="container grid grid-cols-4 gap-x-14 gap-y-10">
-      {specializations.map(({ name, specializations }, keyGroup) => (
+      {specialties.map(({ name, specializations }, keyGroup) => (
         <section className="grid gap-2" key={keyGroup}>
           <h3 className="text-[#444] text-2xl pl-4">{name}</h3>
           <ul className="text-[#777] text-lg leading-8">
@@ -194,3 +194,5 @@ export const Specializations = () => {
     </div>
   )
 }
+
+export default Specialties

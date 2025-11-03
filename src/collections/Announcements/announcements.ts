@@ -4,8 +4,10 @@ import { translateLabel } from '@/i18n'
 import workTime from '@/fields/workTime'
 import { anyone } from '@/collections/access/anyone'
 import { admins } from '@/collections/access/admins'
-import { adminsAndUser } from '@/collections/access/adminsAndUser'
-import { Announcement } from '@/payload-types'
+import { authenticated } from '@/collections/access/authenticated'
+import { accessAdminAndAuthor } from '@/collections/access/accessAdminAndAuthor'
+
+import type { Announcement } from '@/payload-types'
 
 const Announcements: CollectionConfig = {
   slug: 'announcements',
@@ -15,10 +17,10 @@ const Announcements: CollectionConfig = {
   },
   access: {
     read: anyone,
-    create: adminsAndUser,
-    update: adminsAndUser,
-    delete: admins,
-    admin: adminsAndUser,
+    create: authenticated,
+    update: accessAdminAndAuthor,
+    delete: accessAdminAndAuthor,
+    admin: admins,
   },
   labels: {
     plural: translateLabel('collections:announcements:labels:plural'),
@@ -34,6 +36,7 @@ const Announcements: CollectionConfig = {
           fields: [
             {
               name: 'author',
+              required: true,
               type: 'relationship',
               label: translateLabel('collections:announcements:author'),
               relationTo: 'users',

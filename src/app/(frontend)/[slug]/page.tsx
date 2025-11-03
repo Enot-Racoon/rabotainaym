@@ -1,16 +1,17 @@
 import type { Metadata } from 'next'
 
+import { cache } from 'react'
+import { draftMode } from 'next/headers'
 import configPromise from '@payload-config'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
-import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
 
 import { Media } from '@/components/Media'
+import Specialties from 'src/components/Specialties'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { Specializations } from '@/collections/Specializations'
+import Home from '@/app/(frontend)/[slug]/home'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -25,13 +26,9 @@ export async function generateStaticParams() {
     },
   })
 
-  return pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== 'home'
-    })
-    .map(({ slug }) => {
-      return { slug }
-    })
+  return pages.docs //
+    ?.filter((doc) => doc.slug !== 'home')
+    ?.map(({ slug }) => ({ slug }))
 }
 
 type Args = {
@@ -41,12 +38,16 @@ type Args = {
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = 'home' } = await paramsPromise
-  const url = '/' + slug
 
   const isHome = slug === 'home'
 
+  if (isHome) {
+    return <Home />
+  }
+
   const page: RequiredDataFromCollectionSlug<'pages'> | null = await queryPageBySlug({ slug })
 
+  const url = '/' + slug
   if (!page) {
     return <PayloadRedirects url={url} />
   }
@@ -79,7 +80,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <article>
         {draft && <LivePreviewListener />}
         <RenderBlocks blocks={layout} />
-        {isHome && <Specializations />}
+        {isHome && <Specialties />}
       </article>
     </div>
   )

@@ -1,25 +1,29 @@
 'use client'
 
 import { z } from 'zod'
-import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { type ChangeEvent, useMemo, useRef, useState } from 'react'
 
 import api from '@/api'
-import useAsync from '@/hooks/useAsync'
 import useI18n from '@/i18n/useI18n'
-import Form from '@/components/ui/form'
+import useAsync from '@/hooks/useAsync'
 import Card from '@/components/ui/card'
+import Form from '@/components/ui/form'
 import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Message } from '@/components/Message'
 import { Button } from '@/components/ui/button'
-
 import type { Locality, Region, User } from '@/payload-types'
+
+import Avatar from './avatar.svg'
 
 const createFormSchema = (t: ReturnType<typeof useI18n>['t'], hasCompany = false) => {
   return z.object({
-    // avatar: // todo: avatar
+    // avatar: z
+    //   .file()
+    //   .max(1024 ** 20 * 5) // 5mb
+    //   .mime(['image/png', 'image/jpeg', 'image/jpg']), // .optional(),
     email: z.email(t('form:errors:email:invalid')),
     surname: z.string().min(2, t('form:errors:cyrillicOnly')),
     name: z.string().min(2, t('form:errors:cyrillicOnly')),
@@ -44,8 +48,15 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
       return api.update({ data, id: user.id, collection: 'users' })
     },
   )
+  const avatarRef = useRef<HTMLInputElement>(null)
+  const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    console.log(e.target.files, file)
+    // if (file) form.setValue('avatar', file)
+  }
+  const handleAvatarClick = () => avatarRef.current?.click()
 
-  const formSchema = React.useMemo(() => createFormSchema(t), [t])
+  const formSchema = useMemo(() => createFormSchema(t), [t])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: 'all',
@@ -80,11 +91,59 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
   const localityList = (regions[Number(form.getValues().region)]?.localities?.docs ??
     []) as Locality[]
 
+  // const avatar = form.watch('avatar')
+  // console.log(avatar)
+
   return (
     <Form {...form}>
       <div className="flex flex-col gap-4">
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
+            <div className="h-[230px] bg-[#eaeaea] grid justify-around items-center">
+              {typeof user.avatar === 'object' && user.avatar?.url ? (
+                <img
+                  alt={user.name}
+                  src={user.avatar.url}
+                  onClick={() => handleAvatarClick()}
+                  className="cursor-pointer block size-[158px] min-w-[158px] min-h-[158px] rounded-full bg-[pink]"
+                />
+              ) : (
+                <Avatar className="cursor-pointer" onClick={handleAvatarClick} />
+              )}{' '}
+              {/* {form.formState.errors.avatar && ( */}
+              {/*   <p className="text-red-500 text-sm">{form.formState.errors.avatar.message}</p> */}
+              {/* )} */}
+              {/* <Form.Field */}
+              {/*   name="avatar" */}
+              {/*   control={form.control} */}
+              {/*   render={({ field }) => ( */}
+              {/*     <Form.Item> */}
+              {/*       <Form.Label htmlFor="region" required> */}
+              {/*         {t('collections:regions:labels:singular')} */}
+              {/*       </Form.Label> */}
+              {/*       <Form.Control> */}
+              {/*         <input */}
+              {/*           id="avatar" */}
+              {/*           type="file" */}
+              {/*           accept="image/*" */}
+              {/*           className="hidden" */}
+              {/*           {...field} */}
+              {/*           ref={avatarRef} */}
+              {/*         // onChange={handleAvatarChange} */}
+              {/*         /> */}
+              {/*       </Form.Control> */}
+              {/*       <Form.Message /> */}
+              {/*     </Form.Item> */}
+              {/*   )} */}
+              {/* /> */}
+              <input
+                ref={avatarRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleAvatarChange}
+              />
+            </div>
             <Card.Content className="grid gap-6 p-12 pt-8">
               <Form.Field
                 name="region"
@@ -96,14 +155,18 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
                     </Form.Label>
                     <Form.Control>
                       <Select
+                        name={field.name}
+                        value={field.value}
+                        defaultValue={field.value}
                         onValueChange={(region) => {
                           field.onChange(region)
                           form.setValue('locality', '')
                         }}
-                        defaultValue={field.value}
                       >
                         <Select.Trigger
                           id="region"
+                          ref={field.ref}
+                          onBlur={field.onBlur}
                           className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                         >
                           <Select.Value placeholder={t('form:placeholders:region')} />
@@ -131,12 +194,16 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
                     </Form.Label>
                     <Form.Control>
                       <Select
-                        disabled={!form.getValues().region}
-                        onValueChange={field.onChange}
+                        name={field.name}
+                        value={field.value}
                         defaultValue={field.value}
+                        onValueChange={field.onChange}
+                        disabled={!form.getValues().region}
                       >
                         <Select.Trigger
                           id="locality"
+                          ref={field.ref}
+                          onBlur={field.onBlur}
                           className="h-14 text-lg border-none focus:ring-[transparent] focus:ring-offset-0"
                         >
                           <Select.Value placeholder={t('form:placeholders:locality')} />

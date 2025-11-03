@@ -123,6 +123,7 @@ export const Users: CollectionConfig = {
       label: translateLabel('collections:announcements:labels:plural'),
       collection: 'announcements',
       on: 'author',
+      defaultLimit: 0,
     },
   ],
   timestamps: true,

@@ -7,8 +7,7 @@ import { headers as getHeaders } from 'next/headers'
 
 import { fetchRegions } from '@/collections/Regions'
 
-import ProfileFormClient from './Profile.client'
-
+import ProfileFormClient from './profile.client'
 
 export default async function RegistrationForm() {
   const headers = await getHeaders()
@@ -18,7 +17,5 @@ export default async function RegistrationForm() {
 
   if (!user) return null
 
-  return (
-    <ProfileFormClient user={user} regions={regions} />
-  )
+  return <ProfileFormClient user={user} regions={regions} />
 }

@@ -76,6 +76,6 @@ const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
 export default AuthProvider
 
-type UseAuth<T = User> = () => AuthContext
+type UseAuth = () => AuthContext
 
 export const useAuth: UseAuth = () => React.use(Context)

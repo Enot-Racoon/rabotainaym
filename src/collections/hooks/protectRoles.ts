@@ -12,5 +12,7 @@ export const protectRoles: FieldHook<{ id: string } & User> = ({
     userRoles.add('admin') // prevent current admin become not admin
   }
 
+  console.log('protectRoles', userRoles)
+
   return [...userRoles]
 }

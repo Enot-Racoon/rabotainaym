@@ -70,7 +70,7 @@ export default function LoginByOTP() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'email', value: email }),
       })
-      if (!response.ok) {
+      if (!response.ok && process.env.NODE_ENV === 'production') {
         setError(true)
         requestForm.setError('email', {
           type: 'error',

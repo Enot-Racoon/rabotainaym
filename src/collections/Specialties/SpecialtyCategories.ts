@@ -27,6 +27,7 @@ const SpecialtyCategories: CollectionConfig = {
       collection: 'specialties',
       on: 'category',
       defaultSort: 'name',
+      defaultLimit: 0
     },
   ],
 }

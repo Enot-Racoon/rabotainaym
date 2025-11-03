@@ -1,7 +1,7 @@
-import type { CheckboxField, Field, Option } from 'payload'
+import type { CheckboxField, Field, OptionObject } from 'payload'
 import { translateLabel } from '@/i18n'
 
-const workTimeOptions: Option[] = [...Array(24).keys()].flatMap((key) => [
+export const workTimeOptions: OptionObject[] = [...Array(24).keys()].flatMap((key) => [
   {
     label: `${String(key).padStart(2, '0')}:00`,
     value: `${String(key).padStart(2, '0')}00`,
@@ -12,7 +12,8 @@ const workTimeOptions: Option[] = [...Array(24).keys()].flatMap((key) => [
   },
 ])
 
-const weekDays: CheckboxField[] = (['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const).map(
+export const weekDayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const
+export const weekDays: CheckboxField[] = (weekDayKeys).map(
   (name) => ({
     name,
     type: 'checkbox',
