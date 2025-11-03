@@ -4,6 +4,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'announcements',
     data: {
+      status: 'published',
       author: 2,
       region: 50,
       locality: 655,
@@ -21,6 +22,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'announcements',
     data: {
+      status: 'published',
       author: 2,
       region: 50,
       locality: 655,
