@@ -5,18 +5,14 @@ export const searchFields: Field[] = [
     name: 'slug',
     type: 'text',
     index: true,
-    admin: {
-      readOnly: true,
-    },
+    admin: { readOnly: true },
   },
   {
     name: 'meta',
     label: 'Meta',
     type: 'group',
     index: true,
-    admin: {
-      readOnly: true,
-    },
+    admin: { readOnly: true },
     fields: [
       {
         type: 'text',
@@ -40,9 +36,7 @@ export const searchFields: Field[] = [
     label: 'Categories',
     name: 'categories',
     type: 'array',
-    admin: {
-      readOnly: true,
-    },
+    admin: { readOnly: true },
     fields: [
       {
         name: 'relationTo',

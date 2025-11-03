@@ -25,6 +25,7 @@ export default async function AnnouncementEditPage({ params: paramsPromise }: Ar
   const announcement = await queryAnnouncementById(id)
   if (!announcement) return <PayloadRedirects url={url} />
 
+  // todo: i18n
   return (
     <div className="container">
       <PageMetaTitle>
