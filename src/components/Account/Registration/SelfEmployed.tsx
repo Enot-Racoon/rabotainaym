@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import useI18n from '@/i18n/useI18n'
 import Paths from '@/paths'
-import Form, { useFormDisabled } from '@/components/ui/form'
+import Form from '@/components/ui/form'
 import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Message } from '@/components/Message'
@@ -23,10 +23,10 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
   const { t } = useI18n()
 
   const router = useRouter()
-  const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<null | string>(null)
   const searchParams = useSearchParams()
-
+  const [error, setError] = React.useState<null | string>(null)
+  const [loading, setLoading] = React.useState(false)
+  const formRef = Form.useDisabled(loading)
   const formSchema = React.useMemo(() => createFormSchema(t), [t])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,9 +41,6 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
       agree: undefined,
     },
   })
-
-  const formRef = React.useRef<HTMLFormElement>(null)
-  useFormDisabled(formRef, loading)
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true)

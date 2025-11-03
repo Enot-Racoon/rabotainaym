@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { type ChangeEvent, useMemo, useRef, useState } from 'react'
+import { type ChangeEvent, useMemo, useRef } from 'react'
 
 import api from '@/api'
 import useI18n from '@/i18n/useI18n'
@@ -17,6 +17,8 @@ import { Button } from '@/components/ui/button'
 import type { Locality, Region, User } from '@/payload-types'
 
 import Avatar from './avatar.svg'
+import populate from '@/utilities/populate'
+import toaster from '@/utilities/toaster'
 
 const createFormSchema = (t: ReturnType<typeof useI18n>['t'], hasCompany = false) => {
   return z.object({
@@ -36,18 +38,12 @@ const createFormSchema = (t: ReturnType<typeof useI18n>['t'], hasCompany = false
 
 const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] }) => {
   const { t } = useI18n()
-  const [saved, setSaved] = useState(false)
-  const showSaved = () => {
-    setSaved(true)
-    setTimeout(() => {
-      if (setSaved) setSaved(false)
-    }, 2000)
-  }
   const { execute, loading, error } = useAsync(
     (data: Partial<Omit<User, 'id' | 'password' | 'roles' | 'email'>>) => {
       return api.update({ data, id: user.id, collection: 'users' })
     },
   )
+  const formRef = Form.useDisabled(loading)
   const avatarRef = useRef<HTMLInputElement>(null)
   const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -65,14 +61,11 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
       surname: user.surname,
       name: user.name,
       company: user.company,
-      region: String(
-        regions.findIndex(
-          ({ id }) =>
-            typeof user.region === 'object' && 'id' in user.region && id === user.region.id,
-        ),
+      region: ((region) =>
+        !region ? '' : String(regions.findIndex(({ id }) => region?.id === id)))(
+        populate(user.region),
       ),
-      locality:
-        typeof user.locality === 'object' && 'id' in user.locality ? String(user.locality.id) : '',
+      locality: String(populate(user.locality).id ?? ''),
       phone: user.phone,
     },
   })
@@ -85,7 +78,7 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
       region: regions[Number(data.region)].id,
       locality: Number(data.locality),
       company: data.company,
-    }).then(showSaved)
+    }).then(() => void toaster.success(t('message:saved-successful')))
   }
 
   const localityList = (regions[Number(form.getValues().region)]?.localities?.docs ??
@@ -97,14 +90,14 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
   return (
     <Form {...form}>
       <div className="flex flex-col gap-4">
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
             <div className="h-[230px] bg-[#eaeaea] grid justify-around items-center">
-              {typeof user.avatar === 'object' && user.avatar?.url ? (
+              {populate(user.avatar)?.url ? (
                 <img
                   alt={user.name}
-                  src={user.avatar.url}
                   onClick={() => handleAvatarClick()}
+                  src={populate(user.avatar)?.url ?? ''}
                   className="cursor-pointer block size-[158px] min-w-[158px] min-h-[158px] rounded-full bg-[pink]"
                 />
               ) : (
@@ -287,13 +280,10 @@ const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] })
                   </Form.Item>
                 )}
               />
-              {saved && (
-                <div className="mx-auto text-lg text-success">{t('message:saved-successful')}</div>
-              )}
               <Button
                 className="mt-4 mx-auto"
                 loading={loading}
-                disabled={!form.formState.isDirty || !form.formState.isValid}
+                disabled={/* !form.formState.isDirty ||  */ !form.formState.isValid}
                 type="submit"
                 variant="success"
                 size="xl"

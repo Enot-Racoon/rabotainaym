@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
-import Toaster from './Toasrer'
+import Toaster from './Toaster'
 import AuthProvider from './Auth'
 import { I18nProvider } from './i18n'
 import { ThemeProvider } from './Theme'

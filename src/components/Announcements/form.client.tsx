@@ -18,6 +18,9 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Checkbox } from '@/components/ui/checkbox'
 import { weekDayKeys, workTimeOptions } from '@/fields/workTime'
+import { useRouter } from 'next/navigation'
+import Paths from '@/paths'
+import { toast } from 'sonner'
 
 export interface AnnouncementFormProps {
   user: User
@@ -53,6 +56,7 @@ const AnnouncementFormClient = ({
   initialValues: data,
 }: AnnouncementFormProps) => {
   const { t } = useI18n()
+  const router = useRouter()
   const formSchema = useMemo(() => createFormSchema(t), [t])
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -76,7 +80,6 @@ const AnnouncementFormClient = ({
       sun: data?.workTime?.days?.sun ?? false,
     },
   })
-
   const { execute, loading, error } = useAsync(
     (data: PartialFields<Omit<Announcement, 'createdAt' | 'updatedAt'>, 'id'>) => {
       if (!data.id) {
@@ -85,6 +88,7 @@ const AnnouncementFormClient = ({
       return api.update({ collection: 'announcements', data, id: data.id })
     },
   )
+  const formRef = Form.useDisabled(loading)
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const result = await execute({
@@ -111,7 +115,11 @@ const AnnouncementFormClient = ({
       },
     })
 
-    console.log('result', result)
+    toast.success(t('message:saved-successful'))
+
+    if (!data?.id && result.id) {
+      router.push([Paths.page.account.announcements, result.id].join('/'))
+    }
   }
 
   const currentRegion = form.getValues().region
@@ -123,7 +131,7 @@ const AnnouncementFormClient = ({
   return (
     <Form {...form}>
       <div className="flex flex-col gap-4">
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
             <Card.Content className="grid gap-6 p-12 pt-8">
               <Form.Field
@@ -362,7 +370,7 @@ const AnnouncementFormClient = ({
               <Button
                 className="mt-4 mx-auto"
                 loading={loading}
-                disabled={!form.formState.isDirty || !form.formState.isValid}
+                disabled={/* !form.formState.isDirty ||  */ !form.formState.isValid}
                 type="submit"
                 variant="success"
                 size="xl"

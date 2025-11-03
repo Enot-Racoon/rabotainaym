@@ -2,10 +2,10 @@ import Link from 'next/link'
 import Paths from '@/paths'
 
 export default function Hero() {
+  // todo: i18n
   return (
     <div className="bg-card flex flex-col gap-4 items-center pt-4">
       <div className="container flex justify-start">
-        {/* <Media resource={banner} className="mt-10 w-[920px]" /> */}
         <div className="w-full pb-[138px] bg-right-bottom bg-no-repeat bg-[url('/hero.png')]">
           <div className="text-[#444] text-[40px] leading-[1.4] w-[680px]">
             Тысячи объявлений поиска работы и сотрудников

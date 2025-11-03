@@ -176,10 +176,8 @@ export {
   FormField,
 }
 
-export const useFormDisabled = (
-  formRef: React.RefObject<HTMLFormElement | null>,
-  disabled: boolean,
-) => {
+export const useFormDisabled = (disabled: boolean) => {
+  const formRef = React.useRef<HTMLFormElement>(null)
   React.useEffect(() => {
     if (!formRef.current) return
 
@@ -192,6 +190,8 @@ export const useFormDisabled = (
       input.disabled = disabled
     })
   }, [disabled, formRef])
+
+  return formRef
 }
 
 export const useFormDisabledState = (formRef: React.RefObject<HTMLFormElement | null>) => {
@@ -227,4 +227,5 @@ export default Object.assign(Form, {
   Description: FormDescription,
   Message: FormMessage,
   Field: FormField,
+  useDisabled: useFormDisabled,
 })

@@ -3,16 +3,16 @@ import { type MouseEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import Paths from '@/paths'
+import { cn } from '@/utilities/ui'
 import useI18n from '@/i18n/useI18n'
 import Tabs from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/utilities/ui'
 
 export default function SearchBar({ className }: WithClassName) {
   const { t } = useI18n()
-  const router = useRouter()
   const [query, setQuery] = useState('')
+  const router = useRouter()
 
   const search = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
