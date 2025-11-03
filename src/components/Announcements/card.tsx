@@ -63,6 +63,7 @@ const AnnouncementCard = ({ className, data }: WithClassName<AnnouncementCardPro
           })}
         >
           <div>
+            {/* eslint-disable-next-line @next/next/no-img-element,jsx-a11y/alt-text */}
             <img
               className="block size-[158px] min-w-[158px] min-h-[158px] rounded-full bg-[pink]"
               src={((data.author as User)?.avatar as Media)?.url ?? undefined}

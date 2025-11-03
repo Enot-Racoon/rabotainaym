@@ -1,12 +1,58 @@
+import { insertQuery } from '@/migrations/utils'
+
 import type { MigrateUpArgs } from '@payloadcms/db-postgres'
 
-export async function up({ payload }: MigrateUpArgs): Promise<void> {
+export async function up({ payload, db }: MigrateUpArgs): Promise<void> {
   const adminPass = process.env.ADMIN_PASS
   if (!adminPass) throw new Error(`Error migration, set env ADMIN_PASS for create default admin`)
+
+  await db.execute(
+    insertQuery('users', {
+      region_id: 77,
+      locality_id: 590,
+      email: 'rabota-i-naim@ya.ru',
+      surname: ' ',
+      name: 'Администратор',
+      patronymic: ' ',
+      company: ' ',
+      phone: '+7 926 833 30 93',
+    }),
+  )
+
+  await db.execute(
+    insertQuery('users', {
+      region_id: 77,
+      locality_id: 590,
+      email: 'enotracoon2020@gmail.com',
+      surname: 'Фамилия самозанятого',
+      name: 'Самозанятый',
+      patronymic: ' ',
+      company: ' ',
+      phone: '+7 926 833 33 32',
+    }),
+  )
+
+  await db.execute(
+    insertQuery('users', {
+      region_id: 77,
+      locality_id: 590,
+      email: 'a8333093@yandex.com',
+      surname: 'Фамилия юр.лица',
+      name: 'Юр.лицо',
+      patronymic: ' ',
+      company: ' ',
+      phone: '+7 926 833 33 33',
+    }),
+  )
+
+  return
+
+  throw new Error(';-)')
 
   await payload.create({
     collection: 'users',
     data: {
+      avatar: null,
       balance: 999999,
       region: 77,
       locality: 590,
@@ -24,6 +70,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'users',
     data: {
+      avatar: null,
       balance: 0,
       region: 77,
       locality: 590,
@@ -41,6 +88,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.create({
     collection: 'users',
     data: {
+      avatar: null,
       balance: 0,
       region: 77,
       locality: 590,

@@ -100,7 +100,7 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
         // if (bigRegionCode > -1) return -1
         return String(a.name).localeCompare(b.name)
       }),
-    [],
+    [regions],
   )
 
   const localityList = (regions[Number(form.getValues().region)]?.localities?.docs ??

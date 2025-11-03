@@ -1,5 +1,5 @@
 declare global {
-  type WithClassName<T = {}> = T & { className?: string }
+  type WithClassName<T = object> = T & { className?: string }
 }
 
 export {}

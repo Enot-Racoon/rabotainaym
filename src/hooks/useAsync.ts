@@ -6,6 +6,7 @@ type AsyncState<T> = {
   data: T | null
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useAsync = <T, Args extends any[] = []>(
   asyncFunction: (...args: Args) => Promise<T>,
   immediate?: Args,

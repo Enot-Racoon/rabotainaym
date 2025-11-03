@@ -30,6 +30,7 @@ const AnnouncementSearchCard = ({
           )}
         >
           <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt={[populate(data.author).name, populate(data.author).surname]
                 .filter(Boolean)

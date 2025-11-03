@@ -15,6 +15,7 @@ type Args = {
 }
 export default async function Page({ searchParams: searchParamsPromise }: Args) {
   const { t } = await getI18n()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { q: query } = await searchParamsPromise
   const payload = await getPayload({ config: configPromise })
   // const posts = await payload.find({

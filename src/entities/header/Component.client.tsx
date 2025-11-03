@@ -20,7 +20,9 @@ interface HeaderClientProps {
 }
 
 export const HeaderClient = ({ data, selectRegion }: HeaderClientProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t } = useI18n()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { user } = useAuth()
   const pathname = usePathname()
   /* Storing the value in a useState to avoid hydration errors */
