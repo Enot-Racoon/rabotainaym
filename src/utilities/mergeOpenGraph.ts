@@ -4,8 +4,8 @@ import { getServerSideURL } from './getURL'
 const appName = 'Работа и Найм' // todo: extract to i18n
 
 const defaultOpenGraph: Metadata['openGraph'] = {
-  type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  type: appName,
+  description: appName,
   images: [
     {
       url: `${getServerSideURL()}/website-template-OG.webp`,
