@@ -1,12 +1,12 @@
 import type { MigrateUpArgs } from '@payloadcms/db-postgres'
+import type { User } from '@/payload-types'
 
-export async function up({ payload, db }: MigrateUpArgs): Promise<void> {
+export async function up({ payload }: MigrateUpArgs): Promise<void> {
   const adminPass = process.env.ADMIN_PASS
   if (!adminPass) throw new Error(`Error migration, set env ADMIN_PASS for create default admin`)
 
-  await payload.create({
-    collection: 'users',
-    data: {
+  const users: Omit<User, 'id' | 'createdAt' | 'updatedAt'>[] = [
+    {
       avatar: null,
       balance: 999999,
       region: 77,
@@ -16,47 +16,43 @@ export async function up({ payload, db }: MigrateUpArgs): Promise<void> {
       surname: ' ',
       name: 'Администратор',
       patronymic: ' ',
-      company: ' ',
+      company: 'RabotaINyam.ru',
       phone: '+7 926 833 30 93',
       role: 'admin',
     },
-  })
-
-  await payload.create({
-    collection: 'users',
-    data: {
+    {
       avatar: null,
       balance: 0,
       region: 77,
       locality: 590,
       email: 'enotracoon2020@gmail.com',
       password: 'demo',
-      surname: 'Фамилия самозанятого',
-      name: 'Самозанятый',
-      patronymic: ' ',
+      surname: 'Трудяга',
+      name: 'Егор',
+      patronymic: 'Иванович',
       company: ' ',
-      phone: '+7 926 833 33 32',
+      phone: '+7 926 833 33 33',
       role: 'self-employed',
     },
-  })
-
-  await payload.create({
-    collection: 'users',
-    data: {
+    {
       avatar: null,
       balance: 0,
       region: 77,
       locality: 590,
       email: 'a8333093@yandex.com',
       password: 'demo',
-      surname: 'Фамилия юр.лица',
-      name: 'Юр.лицо',
-      patronymic: ' ',
-      company: ' ',
-      phone: '+7 926 833 33 33',
+      surname: 'Работа',
+      name: 'Егор',
+      patronymic: 'Юрьевич',
+      company: 'ИП Работа',
+      phone: '+7 926 833 55 55',
       role: 'legal-entity',
     },
-  })
+  ]
+
+  for (const data of users) {
+    await payload.create({ collection: 'users', data })
+  }
 }
 
 export async function down({ payload }: MigrateUpArgs): Promise<void> {
