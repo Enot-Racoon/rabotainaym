@@ -40,7 +40,7 @@ const createFormSchema = (t: ReturnType<typeof useI18n>['t'], hasCompany = false
 const ProfileFormClient = ({ user, regions }: { user: User; regions: Region[] }) => {
   const { t } = useI18n()
   const { execute, loading, error } = useAsync(
-    (data: Partial<Omit<User, 'id' | 'password' | 'roles' | 'email'>>) => {
+    (data: Partial<Omit<User, 'id' | 'password' | 'role' | 'email'>>) => {
       return api.update({ data, id: user.id, collection: 'users' })
     },
   )

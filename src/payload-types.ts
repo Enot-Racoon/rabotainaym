@@ -307,7 +307,7 @@ export interface User {
   region: number | Region;
   locality: number | Locality;
   referrer?: string | null;
-  roles: ('admin' | 'self-employed' | 'legal-entity')[];
+  role: 'admin' | 'self-employed' | 'legal-entity';
   avatar?: (number | null) | Media;
   balance: number;
   announcements?: {
@@ -1481,7 +1481,7 @@ export interface UsersSelect<T extends boolean = true> {
   region?: T;
   locality?: T;
   referrer?: T;
-  roles?: T;
+  role?: T;
   avatar?: T;
   balance?: T;
   announcements?: T;

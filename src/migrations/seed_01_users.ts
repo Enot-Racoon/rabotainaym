@@ -18,7 +18,7 @@ export async function up({ payload, db }: MigrateUpArgs): Promise<void> {
       patronymic: ' ',
       company: ' ',
       phone: '+7 926 833 30 93',
-      roles: ['admin', 'self-employed', 'legal-entity'],
+      role: 'admin',
     },
   })
 
@@ -36,7 +36,7 @@ export async function up({ payload, db }: MigrateUpArgs): Promise<void> {
       patronymic: ' ',
       company: ' ',
       phone: '+7 926 833 33 32',
-      roles: ['self-employed'],
+      role: 'self-employed',
     },
   })
 
@@ -54,7 +54,7 @@ export async function up({ payload, db }: MigrateUpArgs): Promise<void> {
       patronymic: ' ',
       company: ' ',
       phone: '+7 926 833 33 33',
-      roles: ['legal-entity'],
+      role: 'legal-entity',
     },
   })
 }

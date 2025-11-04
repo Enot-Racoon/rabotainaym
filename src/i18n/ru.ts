@@ -68,7 +68,7 @@ const ru = {
         plural: 'Пользователи',
         singular: 'Пользователь',
       },
-      roles: {
+      role: {
         plural: 'Роли',
         singular: 'Роль',
         admin: 'Администратор',

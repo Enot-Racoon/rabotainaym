@@ -52,7 +52,7 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
         phone: data.phone,
         region: regions[Number(data.region)].id,
         locality: Number(data.locality),
-        roles: ['self-employed'],
+        role: 'self-employed',
         email: data.email,
         patronymic: ' ',
         company: ' ',

@@ -11,6 +11,7 @@ import * as migration_20251104_060858_add_user_avatar from './20251104_060858_ad
 import * as migration_20251104_060914_add_user_balance from './20251104_060914_add_user_balance';
 import * as migration_20251104_062615_add_announcemets_to_search from './20251104_062615_add_announcemets_to_search';
 import * as migration_20251104_062640_remove_post_from_search from './20251104_062640_remove_post_from_search';
+import * as migration_20251104_141252_make_user_single_role from './20251104_141252_make_user_single_role';
 import * as migration_seed_01_users from './seed_01_users';
 import * as migration_seed_02_announcement from './seed_02_announcement';
 
@@ -79,6 +80,11 @@ export const migrations = [
     up: migration_20251104_062640_remove_post_from_search.up,
     down: migration_20251104_062640_remove_post_from_search.down,
     name: '20251104_062640_remove_post_from_search',
+  },
+  {
+    up: migration_20251104_141252_make_user_single_role.up,
+    down: migration_20251104_141252_make_user_single_role.down,
+    name: '20251104_141252_make_user_single_role',
   },
   {
     up: migration_seed_01_users.up,

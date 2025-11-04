@@ -1,10 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
 import { translateLabel } from '@/i18n'
-import { roles } from '@/collections/access/roles'
+import { role } from '@/collections/access/role'
 import { admins } from '@/collections/access/admins'
 import { anyone } from '@/collections/access/anyone'
-import { protectRoles } from '@/collections/hooks/protectRoles'
+import { protectRole } from '@/collections/hooks/protectRole'
 import { adminsAndUser } from '@/collections/access/adminsAndUser'
 
 export const Users: CollectionConfig = {
@@ -15,7 +15,7 @@ export const Users: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['email', 'phone', 'name', 'surname'],
+    defaultColumns: ['email', 'phone', 'name', 'surname', 'role'],
   },
   access: {
     read: adminsAndUser,
@@ -23,7 +23,7 @@ export const Users: CollectionConfig = {
     update: adminsAndUser,
     delete: admins,
     unlock: admins,
-    admin: roles('admin'),
+    admin: role('admin'),
   },
   hooks: {
     // afterChange: [loginAfterCreate], // todo: to fix
@@ -84,10 +84,9 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
-      label: translateLabel('collections:users:roles:singular'),
-      name: 'roles',
+      label: translateLabel('collections:users:role:singular'),
+      name: 'role',
       type: 'select',
-      hasMany: true,
       required: true,
       saveToJWT: true,
       access: {
@@ -96,12 +95,12 @@ export const Users: CollectionConfig = {
         // create: admins, // todo: check security
       },
       hooks: {
-        beforeChange: [protectRoles],
+        beforeChange: [protectRole],
       },
       options: [
-        { label: translateLabel('collections:users:roles:admin'), value: 'admin' },
-        { label: translateLabel('collections:users:roles:self-employed'), value: 'self-employed' },
-        { label: translateLabel('collections:users:roles:legal-entity'), value: 'legal-entity' },
+        { label: translateLabel('collections:users:role:admin'), value: 'admin' },
+        { label: translateLabel('collections:users:role:self-employed'), value: 'self-employed' },
+        { label: translateLabel('collections:users:role:legal-entity'), value: 'legal-entity' },
       ],
     },
     {

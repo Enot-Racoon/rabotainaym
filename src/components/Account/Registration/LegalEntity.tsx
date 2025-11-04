@@ -51,7 +51,7 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
         phone: data.phone,
         region: regions[Number(data.region)].id,
         locality: Number(data.locality),
-        roles: ['legal-entity'],
+        role: 'legal-entity',
         email: data.email,
         patronymic: ' ',
         company: String(data.company),
