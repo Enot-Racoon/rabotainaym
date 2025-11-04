@@ -26,9 +26,9 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
     "story": "ladle dev",
     "story:build": "ladle build",
-    "koyeb:redeploy": "koyeb services redeploy neighbouring-ericha/rabotainaym",
-    "koyeb:instances": "koyeb instances list",
-    "koyeb:logs": "koyeb instances logs --tail"
+    "koyeb:deploy": "koyeb services redeploy neighbouring-ericha/rabotainaym",
+    "koyeb:list": "koyeb instances list",
+    "koyeb:log": "koyeb instances logs --tail"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
