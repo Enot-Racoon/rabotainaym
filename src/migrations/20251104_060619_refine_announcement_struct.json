@@ -1,5 +1,5 @@
 {
-  "id": "e1f38dd3-20a6-4161-89e1-dc793340a964",
+  "id": "30cf98bd-ccc4-487c-91b9-1806795e7a61",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,6 +12,12 @@
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "author_id": {
+          "name": "author_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "title": {
@@ -43,6 +49,14 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "enum_announcements_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'unpublished'"
         },
         "work_time_start": {
           "name": "work_time_start",
@@ -94,6 +108,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "work_time_days_sun": {
+          "name": "work_time_days_sun",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp(3) with time zone",
@@ -110,6 +130,21 @@
         }
       },
       "indexes": {
+        "announcements_author_idx": {
+          "name": "announcements_author_idx",
+          "columns": [
+            {
+              "expression": "author_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "announcements_region_idx": {
           "name": "announcements_region_idx",
           "columns": [
@@ -187,6 +222,19 @@
         }
       },
       "foreignKeys": {
+        "announcements_author_id_users_id_fk": {
+          "name": "announcements_author_id_users_id_fk",
+          "tableFrom": "announcements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "author_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
         "announcements_region_id_regions_id_fk": {
           "name": "announcements_region_id_regions_id_fk",
           "tableFrom": "announcements",
@@ -9175,6 +9223,16 @@
     }
   },
   "enums": {
+    "public.enum_announcements_status": {
+      "name": "enum_announcements_status",
+      "schema": "public",
+      "values": [
+        "blocked",
+        "stopped",
+        "published",
+        "unpublished"
+      ]
+    },
     "public.enum_announcements_work_time_start": {
       "name": "enum_announcements_work_time_start",
       "schema": "public",

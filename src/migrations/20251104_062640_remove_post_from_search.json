@@ -1,5 +1,5 @@
 {
-  "id": "56ecf7d8-88dd-4000-bcfa-22699a3fed28",
+  "id": "a2eb8303-43a4-4519-99f4-b02928c8da0c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -18,7 +18,7 @@
           "name": "author_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "title": {
           "name": "title",
@@ -49,6 +49,14 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "enum_announcements_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'unpublished'"
         },
         "work_time_start": {
           "name": "work_time_start",
@@ -4784,6 +4792,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "balance": {
+          "name": "balance",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
         "_otp": {
           "name": "_otp",
           "type": "varchar",
@@ -7204,8 +7219,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "posts_id": {
-          "name": "posts_id",
+        "announcements_id": {
+          "name": "announcements_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -7257,11 +7272,11 @@
           "method": "btree",
           "with": {}
         },
-        "search_rels_posts_id_idx": {
-          "name": "search_rels_posts_id_idx",
+        "search_rels_announcements_id_idx": {
+          "name": "search_rels_announcements_id_idx",
           "columns": [
             {
-              "expression": "posts_id",
+              "expression": "announcements_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -7287,12 +7302,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "search_rels_posts_fk": {
-          "name": "search_rels_posts_fk",
+        "search_rels_announcements_fk": {
+          "name": "search_rels_announcements_fk",
           "tableFrom": "search_rels",
-          "tableTo": "posts",
+          "tableTo": "announcements",
           "columnsFrom": [
-            "posts_id"
+            "announcements_id"
           ],
           "columnsTo": [
             "id"
@@ -9249,6 +9264,16 @@
     }
   },
   "enums": {
+    "public.enum_announcements_status": {
+      "name": "enum_announcements_status",
+      "schema": "public",
+      "values": [
+        "blocked",
+        "stopped",
+        "published",
+        "unpublished"
+      ]
+    },
     "public.enum_announcements_work_time_start": {
       "name": "enum_announcements_work_time_start",
       "schema": "public",
