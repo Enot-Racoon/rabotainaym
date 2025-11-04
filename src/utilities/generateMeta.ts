@@ -4,6 +4,7 @@ import type { Config, Media, Page, Post } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
+import getI18n from '@/i18n/getI18n'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
@@ -22,13 +23,13 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
 }): Promise<Metadata> => {
+  const { t } = await getI18n()
+  const appName = t('general:appName')
   const { doc } = args
 
   const ogImage = getImageURL(doc?.meta?.image)
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Payload Website Template'
-    : (doc?.title ?? 'Payload Website Template')
+  const title = doc?.meta?.title ? [doc?.meta?.title, appName].join(' | ') : (doc?.title ?? appName)
 
   return {
     description: doc?.meta?.description,
