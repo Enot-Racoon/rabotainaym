@@ -31,7 +31,7 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ['.next/', './migrations/*'],
+    ignores: ['.next/**', 'node_modules/**', 'src/migrations/**'],
   },
 ]
 

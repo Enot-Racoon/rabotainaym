@@ -28,9 +28,12 @@ const dirname = path.dirname(filename)
 
 type SupportedLanguages = NonNullable<Config['i18n']>['supportedLanguages']
 
+const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build'
+const isProductionMode = process.env.NODE_ENV === 'production'
+
 export default buildConfig({
   email: nodemailerAdapter({
-    skipVerify: process.env.NODE_ENV !== 'production',
+    skipVerify: isBuildPhase || !isProductionMode,
     defaultFromAddress: 'info@rabotainaym.ru',
     defaultFromName: 'Rabotainaym.ru',
     transportOptions: {
