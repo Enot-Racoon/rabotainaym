@@ -8,3 +8,12 @@ export function insertQuery(table: string, data: object): string {
   return `INSERT INTO "${table}" (${columns})
           VALUES (${values});`
 }
+
+export function progressBar(current: number, total = 100, barLength = 40) {
+  const progress = Math.round((current / total) * 100)
+  const filledLength = Math.round((progress / 100) * barLength)
+  const bar = '█'.repeat(filledLength) + '-'.repeat(barLength - filledLength)
+  process.stdout.clearLine(0)
+  process.stdout.cursorTo(0)
+  process.stdout.write(`[${bar}] ${progress}%`)
+}

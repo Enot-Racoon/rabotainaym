@@ -1,9 +1,12 @@
-import { MigrateUpArgs } from '@payloadcms/db-postgres'
+import type { MigrateUpArgs } from '@payloadcms/db-postgres'
+import { progressBar } from '@/migrations/utils'
 
 import cities from './data/locations/cities'
 
 export async function up({ payload }: MigrateUpArgs): Promise<void> {
-  for (const city of cities) {
+  progressBar(0)
+  for (const key in cities) {
+    const city = cities[key]
     const response = await payload.find({
       collection: 'regions',
       where: {
@@ -32,6 +35,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
         timezone: city.timezone,
       },
     })
+    progressBar(Number(key), cities.length)
   }
 }
 

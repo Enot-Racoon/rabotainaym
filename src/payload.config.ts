@@ -92,6 +92,7 @@ export default buildConfig({
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
+      ssl: `${process.env.DATABASE_SSL}`.toLowerCase() === 'true',
       host: process.env.DATABASE_HOST,
       user: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASS,

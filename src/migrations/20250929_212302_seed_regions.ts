@@ -1,9 +1,12 @@
 import { type MigrateUpArgs, sql } from '@payloadcms/db-postgres'
 
 import regions from './data/locations/regions'
+import { progressBar } from '@/migrations/utils'
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
-  for (const region of regions) {
+  progressBar(0)
+  for (const key in regions) {
+    const region = regions[key]
     await db.execute(sql`
       INSERT INTO public.regions (district, "type", type_short, code, name, fullname, "label", name_en,
                                   namecase_nominative, namecase_genitive, namecase_dative, namecase_accusative,
@@ -13,6 +16,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
               ${region.namecase.genitive}, ${region.namecase.dative}, ${region.namecase.accusative},
               ${region.namecase.ablative}, ${region.namecase.prepositional}, ${region.namecase.locative});
     `)
+    progressBar(Number(key), regions.length)
   }
 }
 
