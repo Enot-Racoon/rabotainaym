@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import useI18n from '@/i18n/useI18n'
 import Paths from '@/paths'
+import useI18n from '@/i18n/useI18n'
 import Form from '@/components/ui/form'
 import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
@@ -18,14 +18,16 @@ import type { Locality, Region, User } from '@/payload-types'
 
 import CustomCard from './card'
 import { createFormSchema } from './formSchema'
+import getApiErrorMessage from '@/utilities/getApiErrorMessage'
 
 const LegalEntity = ({ regions }: { regions: Region[] }) => {
   const { t } = useI18n()
 
   const router = useRouter()
   const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<null | string>(null)
   const searchParams = useSearchParams()
+  const [error, setError] = React.useState<null | string>(null)
+  const formRef = Form.useDisabled(loading)
 
   const formSchema = React.useMemo(() => createFormSchema(t, true), [t])
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +46,8 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
   })
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setLoading(true)
+
     const response = await fetch(Paths.api.user.create, {
       body: JSON.stringify({
         surname: data.surname,
@@ -63,34 +67,17 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
     })
 
     if (!response.ok) {
-      const { errors } = (await response.json()) ?? {}
       const message =
-        (errors ?? []).map((err: Error) => err?.message).join(', ') ||
-        response.statusText ||
-        'There was an error creating the account.'
+        getApiErrorMessage(await response.json()) || t('form:errors:registration-error')
       setError(message)
+      setLoading(false)
       return
     }
 
-    const redirect = searchParams.get('redirect')
-
-    const timer = setTimeout(() => {
-      setLoading(true)
-    }, 1000)
-
-    try {
-      clearTimeout(timer)
-      if (redirect) {
-        router.push(redirect)
-      } else {
-        router.push(
-          `${Paths.page.account}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
-        )
-      }
-    } catch (_) {
-      clearTimeout(timer)
-      setError('There was an error with the credentials provided. Please try again.')
-    }
+    router.push(
+      searchParams.get('redirect') ??
+        `${Paths.page.login}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
+    )
   }
 
   const regionsList = React.useMemo(
@@ -109,7 +96,7 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
   return (
     <Form {...form}>
       <div className="grid gap-4">
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
           <CustomCard
             footer={
               <Button loading={loading} type="submit" variant="success" size="xl">

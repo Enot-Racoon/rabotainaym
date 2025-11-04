@@ -1,4 +1,4 @@
-const isDark = () => !!window?.matchMedia('(prefers-color-scheme: dark)').matches
+// const isDark = () => !!window?.matchMedia('(prefers-color-scheme: dark)').matches
 
 /** @type {import('@ladle/react').UserConfig} */
 const config = {

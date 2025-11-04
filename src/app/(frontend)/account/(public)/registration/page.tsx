@@ -5,6 +5,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { redirect } from 'next/navigation'
 import Paths from '@/paths'
+import PageMetaTitle from '@/components/PageMetaTitle'
+import React from 'react'
 
 export default async function RegistrationPage() {
   const { t } = await getI18n()
@@ -21,6 +23,9 @@ export default async function RegistrationPage() {
 
   return (
     <div className="container gap-10 grid mt-8 mb-48">
+      <PageMetaTitle>
+        {t('pages:registration:header')} - {t('general:appName')}
+      </PageMetaTitle>
       <h1 className="font-medium text-3xl tracking-wider text-center">
         {t('pages:registration:header')}
       </h1>

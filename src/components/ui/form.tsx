@@ -176,47 +176,34 @@ export {
   FormField,
 }
 
-export const useFormDisabled = (disabled: boolean) => {
-  const formRef = React.useRef<HTMLFormElement>(null)
-  React.useEffect(() => {
-    if (!formRef.current) return
-
-    type InputType = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-
-    const inputs: NodeListOf<InputType> =
-      formRef.current.querySelectorAll('input, textarea, select')
-
-    inputs.forEach((input) => {
-      input.disabled = disabled
-    })
-  }, [disabled, formRef])
-
-  return formRef
-}
-
-export const useFormDisabledState = (formRef: React.RefObject<HTMLFormElement | null>) => {
-  const [disabled, setDisabled] = React.useState(false)
+export const useFormDisabled = <T extends HTMLElement = HTMLFormElement>(
+  disabled: boolean,
+  selector = 'input, select, textarea, button',
+) => {
+  const ref = React.useRef<T>(null)
+  const initiallyEnabled = React.useRef<Set<HTMLElement>>(new Set())
 
   React.useEffect(() => {
-    if (!formRef.current) return
+    if (!ref.current) return
 
-    type InputType = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    const elements = ref.current.querySelectorAll<HTMLElement & { disabled?: boolean }>(selector)
 
-    const inputs: NodeListOf<InputType> =
-      formRef.current.querySelectorAll('input, textarea, select')
-
-    inputs.forEach((input) => {
+    elements.forEach((el) => {
       if (disabled) {
-        input.disabled = true
-        input.setAttribute('data-disabled', 'disabled')
-      } else if (input.hasAttribute('data-disabled')) {
-        input.disabled = false
-        input.removeAttribute('data-disabled')
+        if (!el.disabled) {
+          initiallyEnabled.current.add(el)
+          el.disabled = true
+        }
+      } else {
+        if (initiallyEnabled.current.has(el)) {
+          el.disabled = false
+          initiallyEnabled.current.delete(el)
+        }
       }
     })
-  }, [disabled, formRef])
+  }, [disabled, ref, selector])
 
-  return [disabled, setDisabled] as const
+  return ref
 }
 
 export default Object.assign(Form, {

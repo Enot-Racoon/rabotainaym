@@ -5,6 +5,7 @@ import 'src/app/(frontend)/globals.css'
 
 import './styles.scss'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Provider: GlobalProvider = ({ children, globalState, storyMeta }) => {
   return (
     <AppRouterContext

@@ -6,13 +6,14 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import useI18n from '@/i18n/useI18n'
 import Paths from '@/paths'
+import useI18n from '@/i18n/useI18n'
 import Form from '@/components/ui/form'
 import Select from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Message } from '@/components/Message'
 import { Button } from '@/components/ui/button'
+import getApiErrorMessage from '@/utilities/getApiErrorMessage'
 
 import type { Locality, Region, User } from '@/payload-types'
 
@@ -23,9 +24,9 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
   const { t } = useI18n()
 
   const router = useRouter()
+  const [loading, setLoading] = React.useState(false)
   const searchParams = useSearchParams()
   const [error, setError] = React.useState<null | string>(null)
-  const [loading, setLoading] = React.useState(false)
   const formRef = Form.useDisabled(loading)
   const formSchema = React.useMemo(() => createFormSchema(t), [t])
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,19 +65,16 @@ const SelfEmployed = ({ regions }: { regions: Region[] }) => {
     })
 
     if (!response.ok) {
-      const { errors } = (await response.json()) ?? {}
       const message =
-        (errors ?? []).map((err: Error) => err?.message).join(', ') ||
-        response.statusText ||
-        'There was an error creating the account.'
-      setLoading(false)
+        getApiErrorMessage(await response.json()) || t('form:errors:registration-error')
       setError(message)
+      setLoading(false)
       return
     }
 
     router.push(
       searchParams.get('redirect') ??
-        `${Paths.page.account}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
+        `${Paths.page.login}?success=${encodeURIComponent(t('message:account:createdSuccess'))}`,
     )
   }
 
