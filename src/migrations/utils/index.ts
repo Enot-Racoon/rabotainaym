@@ -1,3 +1,5 @@
+import readline from 'readline'
+
 export function insertQuery(table: string, data: object): string {
   const keys = Object.keys(data)
   const values = Object.values(data)
@@ -9,11 +11,18 @@ export function insertQuery(table: string, data: object): string {
           VALUES (${values});`
 }
 
-export function progressBar(current: number, total = 100, barLength = 40) {
-  const progress = Math.round((current / total) * 100)
-  const filledLength = Math.round((progress / 100) * barLength)
+export function progressBar(index: number, total = 100, barLength = 40) {
+  const current = index + 1
+  const pct = Math.round((current / total) * 100)
+  const filledLength = Math.round((pct / 100) * barLength)
   const bar = '█'.repeat(filledLength) + '-'.repeat(barLength - filledLength)
-  process.stdout.clearLine(0)
-  process.stdout.cursorTo(0)
-  process.stdout.write(`[${bar}] ${progress}%`)
+  const text = `[${bar}] ${pct}% (${current}/${total}) `
+
+  if (!process.stdout.isTTY) {
+    console.log(text)
+  } else {
+    readline.clearLine(process.stdout, 0)
+    readline.cursorTo(process.stdout, 0)
+    process.stdout.write(text)
+  }
 }
