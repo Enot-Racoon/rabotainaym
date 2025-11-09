@@ -177,6 +177,8 @@ const ru = {
     sat: 'сб',
     sun: 'вс',
     everyday: 'ежедневно',
+    workdays: 'рабочие дни',
+    holidays: 'выходные дни',
   },
   coords: {
     label: 'Координаты',

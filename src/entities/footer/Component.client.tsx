@@ -22,7 +22,7 @@ export const FooterClient = ({ data }: FooterClientProps) => {
           <Logo />
         </Link>
 
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
+        <div className="hidden md:flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
           {process.env.NODE_ENV !== 'production' && <ThemeSelector />}
           <nav className="flex flex-col md:flex-row gap-4">
             {navItems.map(({ link }, i) => {

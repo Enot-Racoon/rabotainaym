@@ -8,11 +8,12 @@ import type { Header } from '@/payload-types'
 
 import useI18n from '@/i18n/useI18n'
 import { Logo } from '@/components/Logo'
+import UserBar from '@/components/UserBar'
+import { useAuth } from '@/providers/Auth'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 
 import { HeaderNav } from './Nav'
-import { useAuth } from '@/providers/Auth'
-import UserBar from '@/components/UserBar'
+import Drawer from '@/components/Drawer'
 
 interface HeaderClientProps {
   data: Header
@@ -41,8 +42,8 @@ export const HeaderClient = ({ data, selectRegion }: HeaderClientProps) => {
 
   return (
     <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-3 flex justify-between">
-        <div className="flex gap-6 items-center">
+      <div className="py-3 flex justify-between gap-4 flex-1">
+        <div className="order-2 flex gap-6 items-center flex-1 justify-between md:justify-start">
           <Link href="/">
             <Logo loading="eager" priority="high" />
           </Link>
@@ -51,7 +52,9 @@ export const HeaderClient = ({ data, selectRegion }: HeaderClientProps) => {
 
         <HeaderNav data={data} />
 
-        <UserBar />
+        <Drawer className="order-1 md:order-3">
+          <UserBar className="flex-col md:flex-row items-start" />
+        </Drawer>
       </div>
     </header>
   )

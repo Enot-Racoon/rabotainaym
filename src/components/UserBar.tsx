@@ -2,27 +2,27 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import useI18n from '@/i18n/useI18n'
 import paths from '@/paths'
+import useI18n from '@/i18n/useI18n'
 import { useAuth } from '@/providers/Auth'
 import { Button } from '@/components/ui/button'
 
-const UserBar = () => {
+const UserBar = ({ className }: WithClassName) => {
   const { t } = useI18n()
   const { user } = useAuth()
   const path = usePathname()
 
   return (
-    <div className="flex gap-6 items-center">
+    <div className={['flex gap-6 md:items-center', className].filter(Boolean).join(' ')}>
       {!user ? (
         <>
           <Link href={paths.page.login}>
-            <Button size="lg" variant="success">
+            <Button size="lg" variant="success" className="h-10 px-4 py-2 text-base">
               {t('pages:login:action')}
             </Button>
           </Link>
           <Link href={paths.page.registration}>
-            <Button size="lg" variant="default">
+            <Button size="lg" variant="default" className="h-10 px-4 py-2 text-base">
               {t('pages:registration:action')}
             </Button>
           </Link>

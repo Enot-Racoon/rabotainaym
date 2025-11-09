@@ -24,8 +24,8 @@ export default function SearchBar({ className }: WithClassName) {
       <div className="container">
         <div className="flex w-full gap-5">
           <Tabs defaultValue="self-employed" className="w-full">
-            <Tabs.List className="inline-grid grid-cols-2 gap-x-[1px]">
-              <Tabs.Trigger className="px-[78px] bg-success" value="self-employed">
+            <Tabs.List className="flex hidden flex-col items-stretch md:inline-grid grid-cols-2 gap-x-[1px] *:px-2 md:*:px-10">
+              <Tabs.Trigger className="md:px-[78px] bg-success" value="self-employed">
                 {t('actions:find-work')}
               </Tabs.Trigger>
               <Tabs.Trigger className="!bg-primary" value="legal-entity">
@@ -33,7 +33,7 @@ export default function SearchBar({ className }: WithClassName) {
               </Tabs.Trigger>
             </Tabs.List>
             <Tabs.Content value="self-employed">
-              <form className="flex w-full gap-5" onSubmit={search}>
+              <form className="flex flex-col md:flex-row w-full gap-5" onSubmit={search}>
                 <Input
                   value={query}
                   className="w-full"
@@ -46,7 +46,7 @@ export default function SearchBar({ className }: WithClassName) {
               </form>
             </Tabs.Content>
             <Tabs.Content value="legal-entity">
-              <form className="flex w-full gap-5" onSubmit={search}>
+              <form className="flex flex-col md:flex-row w-full gap-5" onSubmit={search}>
                 <Input
                   value={query}
                   className="w-full"
