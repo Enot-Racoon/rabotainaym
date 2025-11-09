@@ -7,11 +7,11 @@ const MenuButton = () => {
   return (
     <label
       htmlFor="drawer-toggle"
-      className="flex flex-col justify-between size-[3em] px-[0.5em] py-[0.75em] cursor-pointer md:hidden z-30 *:block *:bg-foreground *:h-[0.125em] *:rounded *:duration-300"
+      className="flex flex-col justify-between size-[3em] px-[0.5em] py-[0.75em] cursor-pointer md:hidden z-30 *:block *:h-[0.125em] *:rounded *:duration-300"
     >
-      <span className="transition-transform group-has-[.peer:checked]:translate-y-[calc(0.75em-0.0625em)] group-has-[.peer:checked]:rotate-45"></span>
-      <span className="transition-opacity group-has-[.peer:checked]:opacity-0"></span>
-      <span className="transition-transform group-has-[.peer:checked]:-translate-y-[calc(0.75em-0.0625em)] group-has-[.peer:checked]:-rotate-45"></span>
+      <span className="bg-foreground transition-transform group-has-[.peer:checked]:translate-y-[calc(0.75em-0.0625em)] group-has-[.peer:checked]:rotate-45"></span>
+      <span className="bg-foreground transition-opacity group-has-[.peer:checked]:opacity-0"></span>
+      <span className="bg-foreground transition-transform group-has-[.peer:checked]:-translate-y-[calc(0.75em-0.0625em)] group-has-[.peer:checked]:-rotate-45"></span>
     </label>
   )
 }
@@ -38,7 +38,7 @@ const Drawer = ({ children, className }: WithClassName<DrawerProps>) => {
 
       <MenuButton />
 
-      <div className="fixed top-0 left-0 h-[100svh] w-64 bg-card p-6 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 z-20 md:static md:translate-x-0 md:flex md:flex-row md:gap-3 md:bg-transparent md:p-0 shadow-2xl">
+      <div className="fixed top-0 left-0 h-full group-has-[.peer:checked]:h-[100svh] w-64 bg-card p-6 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 z-20 md:static md:translate-x-0 md:flex md:flex-row md:gap-3 md:bg-transparent md:p-0 shadow-2xl">
         {children}
       </div>
 
