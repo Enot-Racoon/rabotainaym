@@ -100,7 +100,6 @@ const AnnouncementCard = ({ className, data }: WithClassName<AnnouncementCardPro
             </div>
             <div>
               <div>{t('collections:announcements:work-time')}</div>
-              {/* todo: fix work time */}
               <div className="text-xl font-medium text-success">
                 с {printTime(data.workTime?.start)}-{printTime(data.workTime?.end)}{' '}
                 {printDays(t, data.workTime?.days)}
