@@ -17,13 +17,13 @@ export const FooterClient = ({ data }: FooterClientProps) => {
 
   return (
     <footer className="mt-auto bg-[#eee] text-[#444] dark:invert">
-      <div className="container py-3 gap-4 flex flex-col md:flex-row md:justify-between">
+      <div className="container py-3 gap-4 flex items-center justify-between md:flex-row md:justify-between">
         <Link className="flex items-center" href="/">
           <Logo />
         </Link>
 
-        <div className="hidden md:flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          {process.env.NODE_ENV !== 'production' && <ThemeSelector />}
+        <div className="md:flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
+          {(process.env.NODE_ENV !== 'production' || 1) && <ThemeSelector />}
           <nav className="flex flex-col md:flex-row gap-4">
             {navItems.map(({ link }, i) => {
               return <CMSLink key={i} {...link} />
