@@ -23,7 +23,7 @@ export const FooterClient = ({ data }: FooterClientProps) => {
         </Link>
 
         <div className="md:flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          {(process.env.NODE_ENV !== 'production' || 1) && <ThemeSelector />}
+          {process.env.NODE_ENV !== 'production' && <ThemeSelector />}
           <nav className="flex flex-col md:flex-row gap-4">
             {navItems.map(({ link }, i) => {
               return <CMSLink key={i} {...link} />
