@@ -38,13 +38,13 @@ const Drawer = ({ children, className }: WithClassName<DrawerProps>) => {
 
       <MenuButton />
 
-      <div className="fixed top-0 left-0 h-full group-has-[.peer:checked]:h-[100svh] w-64 bg-card p-6 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 z-20 md:static md:translate-x-0 md:flex md:flex-row md:gap-3 md:bg-transparent md:p-0 shadow-2xl">
+      <div className="fixed top-0 left-0 md:h-full h-[calc(100vh+calc(100lvh-100svh))] mb-[calc(100lvh-100svh)] w-64 bg-card p-6 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 z-20 md:static md:translate-x-0 md:flex md:flex-row md:gap-3 md:bg-transparent md:p-0 shadow-2xl">
         {children}
       </div>
 
       <label
         htmlFor="drawer-toggle"
-        className="fixed inset-0 bg-black/50 opacity-0 pointer-events-none peer-checked:opacity-100 peer-checked:pointer-events-auto transition-opacity duration-300 z-10 md:hidden"
+        className="fixed inset-0 h-[calc(100vh+calc(100lvh-100svh))] bg-black/50 opacity-0 pointer-events-none peer-checked:opacity-100 peer-checked:pointer-events-auto transition-opacity duration-300 z-10 md:hidden"
       ></label>
     </div>
   )
