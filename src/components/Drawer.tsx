@@ -38,7 +38,7 @@ const Drawer = ({ children, className }: WithClassName<DrawerProps>) => {
 
       <MenuButton />
 
-      <div className="fixed top-0 left-0 md:h-full h-[calc(100vh+calc(100lvh-100svh))] mb-[calc(100lvh-100svh)] w-64 bg-card p-6 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 z-20 md:static md:translate-x-0 md:flex md:flex-row md:gap-3 md:bg-transparent md:p-0 shadow-2xl">
+      <div className="fixed top-0 left-0 sm:shadow-none sm:h-full h-[calc(100vh+calc(100lvh-100svh))] mb-[calc(100lvh-100svh)] w-64 bg-card p-6 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 z-20 md:static md:translate-x-0 md:flex md:flex-row md:gap-3 sm:bg-transparent md:p-0 shadow-2xl">
         {children}
       </div>
 
