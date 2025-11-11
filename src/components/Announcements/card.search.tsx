@@ -52,9 +52,16 @@ const AnnouncementSearchCard = ({
             </div>
             <div className="grid gap-2">
               <div className="text-md font-medium">{t('collections:announcements:images')}</div>
-              <div className="overflow-scroll grid gap-4 grid-flow-col">
-                {[...Array(5).keys()].map((key) => (
-                  <div key={key} className="w-[172px] h-[124px] bg-[pink]" />
+              <div className="overflow-scroll scrollbar-hidden snap-y snap-mandatory grid gap-4 grid-flow-col">
+                {(data.images ?? []).map(populate).map((image) => (
+                  <div key={image.id} className="w-[172px] h-[124px]">
+                    <img
+                      key={image.id}
+                      alt={image.alt ?? ''}
+                      src={image.url ?? ''}
+                      className="block w-[172px] h-[124px] bg-foreground/40 cursor-pointer"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
