@@ -1,6 +1,6 @@
 import type { MigrateDownArgs, MigrateUpArgs } from '@payloadcms/db-postgres'
 
-import specialties from './data/locations/specialties'
+import specialties from './data/specialties'
 
 export async function up({ payload }: MigrateUpArgs): Promise<void> {
   for (const category of specialties.categories) {

@@ -1,4 +1,13 @@
-const specialty_categories = {
+type Specialty = {
+  name: string
+}
+
+type Category = {
+  name: string
+  specialties: Specialty[]
+}
+
+const specialty_categories: { categories: Category[] } = {
   categories: [
     {
       name: 'Автомобильный бизнес',

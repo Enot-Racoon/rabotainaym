@@ -1,4 +1,9 @@
+import path from 'path'
 import readline from 'readline'
+import { fileURLToPath } from 'url'
+
+import type { Payload } from 'payload'
+import type { Media } from '@/payload-types'
 
 export function insertQuery(table: string, data: object): string {
   const keys = Object.keys(data)
@@ -25,4 +30,22 @@ export function progressBar(index: number, total = 100, barLength = 40) {
     readline.cursorTo(process.stdout, 0)
     process.stdout.write(text)
   }
+}
+
+export const seedImages = async (payload: Payload, images: Record<'path' | 'alt', string>[]) => {
+  const filename = fileURLToPath(import.meta.url)
+  const dirname = path.dirname(filename)
+  const createImageData = (alt: string): Omit<Media, 'createdAt' | 'id' | 'updatedAt'> => ({
+    alt,
+  })
+
+  return Promise.all(
+    images.map(async (image) => {
+      return await payload.create({
+        collection: 'media',
+        data: createImageData(image.alt),
+        filePath: path.resolve(dirname, '..', image.path),
+      })
+    }),
+  )
 }

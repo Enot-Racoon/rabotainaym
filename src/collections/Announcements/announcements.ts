@@ -114,6 +114,7 @@ const Announcements: CollectionConfig = {
               type: 'upload',
               hasMany: true,
               relationTo: 'media',
+              filterOptions: { mimeType: { contains: 'image' } },
             },
           ],
         },
