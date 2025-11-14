@@ -17,11 +17,10 @@ export function insertQuery(table: string, data: object): string {
 }
 
 export function progressBar(index: number, total = 100, barLength = 40) {
-  const current = index + 1
-  const pct = Math.round((current / total) * 100)
-  const filledLength = Math.round((pct / 100) * barLength)
+  const pct = (index + 1) / total // дробное число 0..1
+  const filledLength = Math.floor(pct * barLength)
   const bar = '█'.repeat(filledLength) + '-'.repeat(barLength - filledLength)
-  const text = `[${bar}] ${pct}% (${current}/${total}) `
+  const text = `[${bar}] ${Math.floor(pct * 100)}% (${index + 1}/${total}) `
 
   if (!process.stdout.isTTY) {
     console.log(text)

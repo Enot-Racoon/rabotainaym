@@ -4,7 +4,7 @@ import { progressBar } from '@/migrations/utils'
 import cities from './data/locations/cities'
 
 export async function up({ payload }: MigrateUpArgs): Promise<void> {
-  progressBar(0)
+  progressBar(0, cities.length)
   for (const key in cities) {
     const city = cities[key]
     const response = await payload.find({

@@ -4,7 +4,7 @@ import regions from './data/locations/regions'
 import { progressBar } from '@/migrations/utils'
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
-  progressBar(0)
+  progressBar(0, regions.length)
   for (const key in regions) {
     const region = regions[key]
     await db.execute(sql`
