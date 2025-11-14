@@ -19,7 +19,7 @@ type Args = {
 export default async function AnnouncementEditPage({ params: paramsPromise }: Args) {
   const { t } = await getI18n()
   const { id = '' } = await paramsPromise
-  const url = [paths.page.account.announcements, id].join('/')
+  const url = [paths.page.account.announcement, id].join('/')
 
   if (!id) return <PayloadRedirects url={url} />
   const announcement = await queryAnnouncementById(id)
@@ -28,9 +28,7 @@ export default async function AnnouncementEditPage({ params: paramsPromise }: Ar
   // todo: i18n
   return (
     <div className="container">
-      <PageMetaTitle>
-        Мои объявления / Редактировать объявление - {t('general:appName')}
-      </PageMetaTitle>
+      <PageMetaTitle>Мои объявления / Редактировать объявление - {t('app:appName')}</PageMetaTitle>
       <PageHeader>Мои объявления / Редактировать объявление</PageHeader>
 
       <AnnouncementForm initialValues={announcement} />

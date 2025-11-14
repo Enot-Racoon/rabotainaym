@@ -118,7 +118,7 @@ const AnnouncementFormClient = ({
     toast.success(t('message:saved-successful'))
 
     if (!data?.id && result.id) {
-      router.push([Paths.page.account.announcements, result.id].join('/'))
+      router.push([Paths.page.account.announcement, result.id].join('/'))
     }
   }
 

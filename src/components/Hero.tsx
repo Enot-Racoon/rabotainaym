@@ -12,7 +12,7 @@ export default function Hero() {
             Тысячи объявлений поиска работы и сотрудников
             <br /> в России
           </div>
-          <Link href={Paths.page.account.announcements.create}>
+          <Link href={Paths.page.account.announcement.create}>
             <Button
               size="xl"
               variant="danger"

@@ -51,7 +51,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   // todo: i18n
   return (
     <div className="pt-14 pb-24">
-      <PageMetaTitle>Поиск - {t('general:appName')}</PageMetaTitle>
+      <PageMetaTitle>Поиск - {t('app:appName')}</PageMetaTitle>
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none text-center">
@@ -84,6 +84,6 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getI18n()
   return {
-    title: `Поиск - ${t('general:appName')}`,
+    title: `Поиск - ${t('app:appName')}`,
   }
 }

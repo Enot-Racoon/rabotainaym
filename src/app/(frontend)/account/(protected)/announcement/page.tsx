@@ -35,7 +35,7 @@ export default async function AnnouncementsPage() {
       <HydrateClientUser permissions={permissions} user={user} />
       <div className="container">
         <PageMetaTitle>
-          {t('pages:announcement:title')} - {t('general:appName')}
+          {t('pages:announcement:title')} - {t('app:appName')}
         </PageMetaTitle>
         <PageHeader>{t('pages:announcement:header')}</PageHeader>
 
@@ -47,7 +47,7 @@ export default async function AnnouncementsPage() {
               {announcements.map((announcement) => (
                 <AnnouncementCard key={announcement.id} data={announcement} />
               ))}
-              <Link className="mx-auto" href={`${paths.page.account.announcements.create}`}>
+              <Link className="mx-auto" href={`${paths.page.account.announcement.create}`}>
                 <Button variant="success" appearance="outlined" size="xl">
                   + Создать объявление
                 </Button>

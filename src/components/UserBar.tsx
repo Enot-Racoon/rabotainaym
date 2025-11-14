@@ -31,9 +31,7 @@ const UserBar = ({ className }: WithClassName) => {
         <>
           {path.startsWith(`${paths.page.account}`) ? (
             <div className="flex items-center gap-4">
-              <Link href={`${paths.page.account.announcements}`}>
-                {t('user-bar:announcements')}
-              </Link>
+              <Link href={`${paths.page.account.announcement}`}>{t('user-bar:announcements')}</Link>
               <Link href={`${paths.page.account.profile}`}>{t('user-bar:account')}</Link>
               <div className="bg-card rounded-md p-2 pl-3 flex gap-8">
                 <div>
@@ -59,7 +57,7 @@ const UserBar = ({ className }: WithClassName) => {
           ) : (
             <Link href={String(paths.page.account)}>
               <Button className="xl:px-16" size="lg" variant="success">
-                {t('general:accountDashboard')}
+                {t('app:accountDashboard')}
               </Button>
             </Link>
           )}

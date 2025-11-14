@@ -22,9 +22,9 @@ export default async function AccountPage() {
       <HydrateClientUser permissions={permissions} user={user} />
       <div className="container">
         <PageMetaTitle>
-          {t('general:accountDashboard')} - {t('general:appName')}
+          {t('app:accountDashboard')} - {t('app:appName')}
         </PageMetaTitle>
-        <PageHeader>{t('general:accountDashboard')}</PageHeader>
+        <PageHeader>{t('app:accountDashboard')}</PageHeader>
 
         <Account />
       </div>

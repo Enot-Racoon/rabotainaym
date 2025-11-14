@@ -10,7 +10,7 @@ const EmptyAnnouncements = () => {
       <Empty />
       {/* todo: i18n */}
       <div className="text-secondary">Вы еще не создали ни одного объявления</div>
-      <Link href={`${paths.page.account.announcements.create}`}>
+      <Link href={`${paths.page.account.announcement.create}`}>
         <Button variant="success" appearance="outlined" size="xl">
           + Создать объявление
         </Button>

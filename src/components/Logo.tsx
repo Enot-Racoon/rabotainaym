@@ -18,7 +18,7 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt={t('general:appName')}
+      alt={t('app:appName')}
       width={144}
       height={48}
       loading={loading}

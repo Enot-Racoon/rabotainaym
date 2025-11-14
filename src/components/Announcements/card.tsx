@@ -30,7 +30,7 @@ const AnnouncementCard = ({ className, data }: WithClassName<AnnouncementCardPro
           {!!data.status && t(`collections:announcements:status:${data.status}`)}
         </div>
         <div className="flex items-center gap-2">
-          <Link href={`${paths.page.account.announcements}/${data.id}`}>
+          <Link href={`${paths.page.account.announcement}/${data.id}`}>
             <Button size="xs" appearance="outlined">
               {t('actions:edit')}
             </Button>

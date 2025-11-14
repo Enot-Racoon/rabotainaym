@@ -127,7 +127,7 @@ export default function LoginByOTP() {
         {!waitingOTP
           ? t('pages:login-by-otp:header:request')
           : `${t('pages:login-by-otp:header:login')} ${requestForm.getValues().email}`}{' '}
-        - {t('general:appName')}
+        - {t('app:appName')}
       </PageMetaTitle>
       <PageHeader>
         {!waitingOTP

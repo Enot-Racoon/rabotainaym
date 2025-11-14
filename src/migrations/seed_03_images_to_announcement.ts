@@ -59,6 +59,93 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
       ]),
     },
   })
+
+  await payload.update({
+    id: 3,
+    collection: 'announcements',
+    data: {
+      images: await seedImages(payload, [
+        {
+          path: './data/announcement/g1.jpeg',
+          alt: 'Фото услуги грузчика',
+        },
+        {
+          path: './data/announcement/g2.jpeg',
+          alt: 'Фото услуги грузчика',
+        },
+        {
+          path: './data/announcement/g3.jpeg',
+          alt: 'Фото услуги грузчика',
+        },
+        {
+          path: './data/announcement/g4.jpeg',
+          alt: 'Фото услуги грузчика',
+        },
+        {
+          path: './data/announcement/g5.jpeg',
+          alt: 'Фото услуги грузчика',
+        },
+      ]),
+    },
+  })
+
+  await payload.update({
+    id: 4,
+    collection: 'announcements',
+    data: {
+      images: await seedImages(payload, [
+        {
+          path: './data/announcement/b1.jpeg',
+          alt: 'Фото услуги бухгалтера',
+        },
+        {
+          path: './data/announcement/b2.jpeg',
+          alt: 'Фото услуги бухгалтера',
+        },
+        {
+          path: './data/announcement/b3.jpeg',
+          alt: 'Фото услуги бухгалтера',
+        },
+        {
+          path: './data/announcement/b4.jpeg',
+          alt: 'Фото услуги бухгалтера',
+        },
+        {
+          path: './data/announcement/b5.jpeg',
+          alt: 'Фото услуги бухгалтера',
+        },
+      ]),
+    },
+  })
+
+  await payload.update({
+    id: 5,
+    collection: 'announcements',
+    data: {
+      images: await seedImages(payload, [
+        {
+          path: './data/announcement/k1.jpeg',
+          alt: 'Фото услуги косметолога',
+        },
+        {
+          path: './data/announcement/k2.jpeg',
+          alt: 'Фото услуги косметолога',
+        },
+        {
+          path: './data/announcement/k3.jpeg',
+          alt: 'Фото услуги косметолога',
+        },
+        {
+          path: './data/announcement/k4.jpeg',
+          alt: 'Фото услуги косметолога',
+        },
+        {
+          path: './data/announcement/k5.jpeg',
+          alt: 'Фото услуги косметолога',
+        },
+      ]),
+    },
+  })
 }
 
 export async function down({}: MigrateDownArgs): Promise<void> {

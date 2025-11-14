@@ -34,32 +34,32 @@ export const Users: CollectionConfig = {
   },
   fields: [
     {
-      label: translateLabel('general:surname'),
+      label: translateLabel('app:surname'),
       required: true,
       name: 'surname',
       type: 'text',
     },
     {
-      label: translateLabel('general:name'),
+      label: translateLabel('app:name'),
       required: true,
       name: 'name',
       type: 'text',
     },
     {
-      label: translateLabel('general:patronymic'),
+      label: translateLabel('app:patronymic'),
       required: true,
       name: 'patronymic',
       type: 'text',
     },
     {
-      label: translateLabel('general:company'),
+      label: translateLabel('app:company'),
       required: true,
       name: 'company',
       type: 'text',
       defaultValue: '',
     },
     {
-      label: translateLabel('general:phone'),
+      label: translateLabel('app:phone'),
       required: true,
       name: 'phone',
       type: 'text',
@@ -79,7 +79,7 @@ export const Users: CollectionConfig = {
       relationTo: 'localities',
     },
     {
-      label: translateLabel('general:referrer'),
+      label: translateLabel('app:referrer'),
       name: 'referrer',
       type: 'text',
     },

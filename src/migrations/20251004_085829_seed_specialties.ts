@@ -47,7 +47,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   for (const spec of normalizedSpecialties.values()) {
     const categoryIdList = spec.categories.map((name) => categoryIds.get(name)!)
 
-    const c = await payload.create({
+    await payload.create({
       collection: 'specialties',
       data: {
         name: spec.name,

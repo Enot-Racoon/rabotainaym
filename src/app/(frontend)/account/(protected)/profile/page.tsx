@@ -9,9 +9,9 @@ export default async function AccountProfilePage() {
   return (
     <div className="container">
       <PageMetaTitle>
-        {t('general:my-profile')} - {t('general:appName')}
+        {t('app:my-profile')} - {t('app:appName')}
       </PageMetaTitle>
-      <PageHeader>{t('general:my-profile')}</PageHeader>
+      <PageHeader>{t('app:my-profile')}</PageHeader>
 
       <div className="max-w-[880px] w-full mx-auto">
         <ProfileForm />

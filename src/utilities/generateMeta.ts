@@ -24,7 +24,7 @@ export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
 }): Promise<Metadata> => {
   const { t } = await getI18n()
-  const appName = t('general:appName')
+  const appName = t('app:appName')
   const { doc } = args
 
   const ogImage = getImageURL(doc?.meta?.image)

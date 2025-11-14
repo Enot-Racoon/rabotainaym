@@ -15,7 +15,7 @@ const Account = () => {
       <div className="text-center grid gap-4">
         <Link href={paths.page.account.profile}>
           <Button variant="success" appearance="outlined" className="px-8" size="lg">
-            {t('general:my-profile')}
+            {t('app:my-profile')}
           </Button>
         </Link>
         <Link href={paths.page.logout}>

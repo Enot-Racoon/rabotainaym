@@ -186,7 +186,7 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
               render={({ field }) => (
                 <Form.Item>
                   <Form.Label htmlFor="surname" required>
-                    {t('general:surname')}
+                    {t('app:surname')}
                   </Form.Label>
                   <Form.Control>
                     <Input id="surname" placeholder={t('form:placeholders:surname')} {...field} />
@@ -201,7 +201,7 @@ const LegalEntity = ({ regions }: { regions: Region[] }) => {
               render={({ field }) => (
                 <Form.Item>
                   <Form.Label htmlFor="name" required>
-                    {t('general:name')}
+                    {t('app:name')}
                   </Form.Label>
                   <Form.Control>
                     <Input id="name" placeholder={t('form:placeholders:name')} {...field} />

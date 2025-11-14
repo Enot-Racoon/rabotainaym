@@ -13,11 +13,13 @@ export default {
   },
 
   page: {
+    category: '/category',
+    specialty: '/specialty',
     account: {
       toString: () => '/account',
-      announcements: {
-        toString: () => '/account/announcements',
-        create: '/account/announcements/create',
+      announcement: {
+        toString: () => '/account/announcement',
+        create: '/account/announcement/create',
       },
       profile: '/account/profile',
     },

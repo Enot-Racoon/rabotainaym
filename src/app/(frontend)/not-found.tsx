@@ -13,7 +13,7 @@ export default async function NotFound() {
         <p className="mb-4">Страница не найдена.</p>
       </div>
       <Link href="/">
-        <Button variant="success">{t('general:goHome')}</Button>
+        <Button variant="success">{t('app:goHome')}</Button>
       </Link>
     </div>
   )

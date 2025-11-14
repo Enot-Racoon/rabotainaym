@@ -39,7 +39,7 @@ const AnnouncementSearchCard = ({
               src={((data.author as User)?.avatar as Media)?.url ?? '/avatar.svg'}
             />
           </div>
-          <div className="grid gap-2 relative">
+          <div className="grid gap-2 relative items-start">
             <div className="absolute -right-1 -top-4 grid text-right">
               <div>{t('version:published')}</div>
               <div className="text-lg">{formatDateTime(data.createdAt)}</div>
@@ -51,7 +51,9 @@ const AnnouncementSearchCard = ({
               <div>{data.skills}</div>
             </div>
             <div className="grid gap-2">
-              <div className="text-md font-medium">{t('collections:announcements:images')}</div>
+              {!!data.images?.length && (
+                <div className="text-md font-medium">{t('collections:announcements:images')}</div>
+              )}
               <div className="overflow-scroll scrollbar-hidden snap-y snap-mandatory grid gap-4 grid-flow-col">
                 {(data.images ?? []).map(populate).map((image) => (
                   <div key={image.id} className="w-[172px] h-[124px]">

@@ -9,7 +9,7 @@ export default async function CreateAnnouncementPage() {
   // todo: i18n
   return (
     <div className="container">
-      <PageMetaTitle>Мои объявления / Новое объявление - {t('general:appName')}</PageMetaTitle>
+      <PageMetaTitle>Мои объявления / Новое объявление - {t('app:appName')}</PageMetaTitle>
       <PageHeader>Мои объявления / Новое объявление</PageHeader>
 
       <AnnouncementForm />

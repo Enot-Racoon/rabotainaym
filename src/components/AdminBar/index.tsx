@@ -68,7 +68,7 @@ export const AdminBar: React.FC<{
             plural: collectionLabels[collection]?.plural || 'Pages',
             singular: collectionLabels[collection]?.singular || 'Page',
           }}
-          logo={<span>{t('general:dashboard')}</span>}
+          logo={<span>{t('app:dashboard')}</span>}
           onAuthChange={onAuthChange}
           onPreviewExit={() => {
             fetch('/next/exit-preview').then(() => {

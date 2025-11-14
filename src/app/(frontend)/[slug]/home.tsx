@@ -10,7 +10,7 @@ export default async function Home() {
   const { t } = await getI18n()
   return (
     <>
-      <PageMetaTitle>{t('general:appName')}</PageMetaTitle>
+      <PageMetaTitle>{t('app:appName')}</PageMetaTitle>
       <Hero />
       <SearchBar />
       <div className="flex flex-col gap-4 items-center pt-5">
