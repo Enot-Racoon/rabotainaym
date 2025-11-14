@@ -5,6 +5,7 @@ import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
 
 import { cn } from '@/utilities/ui'
+import useI18n from '@/i18n/useI18n'
 import { getClientSideURL } from '@/utilities/getURL'
 import { checkRole } from '@/collections/access/checkRole'
 import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
@@ -33,6 +34,7 @@ export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps
 }> = (props) => {
   const { adminBarProps } = props || {}
+  const { t } = useI18n()
   const segments = useSelectedLayoutSegments()
   const [show, setShow] = React.useState(false)
   const collection = (
@@ -66,7 +68,7 @@ export const AdminBar: React.FC<{
             plural: collectionLabels[collection]?.plural || 'Pages',
             singular: collectionLabels[collection]?.singular || 'Page',
           }}
-          logo={<span>Админка</span>}
+          logo={<span>{t('general:dashboard')}</span>}
           onAuthChange={onAuthChange}
           onPreviewExit={() => {
             fetch('/next/exit-preview').then(() => {

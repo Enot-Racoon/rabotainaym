@@ -201,6 +201,7 @@ const ru = {
     appName: 'Работа и найм',
     goHome: 'На главную',
     accountDashboard: 'Личный кабинет',
+    dashboard: 'Панель управления',
     globals: 'Управление',
     country: 'Страна',
     latitude: 'Широта',
